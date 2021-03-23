@@ -6,19 +6,21 @@ public abstract class Empleado {
 	protected String nombre;
 	protected String apellido;
 	protected String direccion;
+	protected String telefono;
 	protected String sexo;
 	protected float salario;
 	protected String nombreProyecto;
 	protected String evaluacion;
 	protected float precioHora;
 	
-	public Empleado(String cedula, String nombre, String apellido, String direccion, String sexo, float salario,
+	public Empleado(String cedula, String nombre, String apellido, String direccion,String telefono, String sexo, float salario,
 			String nombreProyecto, String evaluacion, float precioHora) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.direccion = direccion;
+		this.telefono = telefono;
 		this.sexo = sexo;
 		this.salario = salario;
 		this.nombreProyecto = nombreProyecto;
@@ -56,6 +58,14 @@ public abstract class Empleado {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
+	}
+	
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 	public String getSexo() {

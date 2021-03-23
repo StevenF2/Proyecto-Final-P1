@@ -6,13 +6,15 @@ public class Cliente {
 	private String cedula;
 	private String nombre;
 	private String direccion;
+	private String telefono;
 	private ArrayList<Contrato> contratos;
 	private static int cantidadCliente = 1;
-	public Cliente(String cedula, String nombre, String direccion) {
+	public Cliente(String cedula, String nombre, String direccion, String telefono) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
 		this.direccion = direccion;
+		this.telefono = telefono;
 		this.contratos = new ArrayList<Contrato>();
 		Cliente.cantidadCliente++;
 	}
@@ -45,6 +47,12 @@ public class Cliente {
 	}
 	public static void setCantidadCliente(int cantidadCliente) {
 		Cliente.cantidadCliente = cantidadCliente;
+	}
+	public String getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 	
 }
