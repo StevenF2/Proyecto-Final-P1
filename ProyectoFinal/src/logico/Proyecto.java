@@ -14,10 +14,10 @@ public class Proyecto {
 	private Date fechaEntrega;
 	private Date fechaTerminacionReal;
 	
-	public Proyecto(ArrayList<Empleado> empleados, String nombre, String tipo, Boolean estado, Boolean extendido,
+	public Proyecto(String nombre, String tipo, Boolean estado, Boolean extendido,
 			Date fechaInicio, Date fechaEntrega, Date fechaTerminacionReal) {
 		super();
-		this.empleados = empleados;
+		this.empleados = new ArrayList <Empleado>();
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.estado = estado;
