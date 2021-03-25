@@ -114,6 +114,16 @@ public class Empresa {
 		}
 		return cli;
 	}
+	public Contrato buscarContrato(String codigo) {
+		Contrato cont = null;
+		for(Contrato aux: this.contratos) {
+			if(aux.getNumeroContrato().equalsIgnoreCase(codigo)) {
+				cont = aux;
+				return cont;
+			}
+		}
+		return cont;
+	}
 	
 	
 }
