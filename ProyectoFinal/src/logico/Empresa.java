@@ -103,7 +103,10 @@ public class Empresa {
 	public static void setNumProyectos(int numProyectos) {
 		Empresa.numProyectos = numProyectos;
 	}
-	
+	/**
+	 * Debo de probar las funciones de buscar y modificarNombreProyecto lo haré mañana 26/3/21
+	 * Att: Tu compañera :3
+	 * */
 	public Cliente buscarCliente(String cedula) {
 		Cliente cli = null;
 		for(Cliente aux: this.clientes) {
@@ -144,5 +147,12 @@ public class Empresa {
 			}
 		}
 		return emp;
+	}
+	
+	public void modificarNombreProyecto(Proyecto pro) {
+		String nombre = pro.getNombre();
+		for(Empleado aux: pro.getEmpleados()) {
+			aux.setNombreProyecto(nombre);
+		}
 	}
 }
