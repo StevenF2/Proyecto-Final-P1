@@ -104,8 +104,16 @@ public class Empresa {
 		Empresa.numProyectos = numProyectos;
 	}
 	
-	
-	
+	public Cliente buscarCliente(String cedula) {
+		Cliente cli = null;
+		for(Cliente aux: this.clientes) {
+			if(aux.getCedula().equalsIgnoreCase(cedula)) {
+				cli = aux;
+				return cli;
+			}
+		}
+		return cli;
+	}
 	
 	
 }
