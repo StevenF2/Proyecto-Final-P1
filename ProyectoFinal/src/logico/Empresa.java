@@ -124,6 +124,15 @@ public class Empresa {
 		}
 		return cont;
 	}
-	
+	public Proyecto buscarProyecto(String nombre) {
+		Proyecto pro = null;
+		for(Proyecto aux: this.proyectos) {
+			if(aux.getNombre().equalsIgnoreCase(nombre)) {
+				pro = aux;
+				return pro;
+			}
+		}
+		return pro;
+	}
 	
 }
