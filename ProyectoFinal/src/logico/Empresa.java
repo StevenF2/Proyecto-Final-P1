@@ -135,4 +135,14 @@ public class Empresa {
 		return pro;
 	}
 	
+	public Empleado buscarEmpleado(String cedula) {
+		Empleado emp = null;
+		for(Empleado aux: this.empleados) {
+			if(aux.getCedula().equalsIgnoreCase(cedula)) {
+				emp = aux;
+				return emp;
+			}
+		}
+		return emp;
+	}
 }
