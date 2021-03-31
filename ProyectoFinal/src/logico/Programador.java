@@ -7,10 +7,10 @@ public class Programador extends Empleado {
 	private ArrayList<String> lenguaje;
 
 	public Programador(String cedula, String nombre, String apellido, String direccion, String telefono, String sexo, float salario,
-			String nombreProyecto, String evaluacion, float precioHora, String lenguaje) {
+			String nombreProyecto, String evaluacion, float precioHora,ArrayList<String> lenguajes) {
 		super(cedula, nombre, apellido, direccion, telefono,sexo, salario, nombreProyecto, evaluacion, precioHora);
 		
-		this.lenguaje = new ArrayList<String>();
+		this.lenguaje = lenguajes;
 	}
 	
 	public ArrayList<String> getLenguaje() {
