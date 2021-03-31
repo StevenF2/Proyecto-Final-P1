@@ -58,7 +58,7 @@ public class Empleado extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Informacion Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)), "Informacion Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(10, 11, 648, 240);
 		contentPanel.add(panel);
 		panel.setLayout(null);
@@ -77,26 +77,26 @@ public class Empleado extends JDialog {
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_3 = new JLabel("Direccion");
-		lblNewLabel_3.setFont(new Font("Kartika", Font.PLAIN, 9));
+		lblNewLabel_3.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
 		lblNewLabel_3.setBounds(249, 74, 62, 14);
 		panel.add(lblNewLabel_3);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 255, 255));
-		panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)), "Informacion Personal", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 102, 153)));
+		panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)), "Informacion Personal", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_1.setBounds(66, 115, 208, 113);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Masculino");
 		rdbtnNewRadioButton.setBackground(new Color(255, 255, 255));
-		rdbtnNewRadioButton.setForeground(new Color(51, 102, 153));
+		rdbtnNewRadioButton.setForeground(new Color(0, 0, 0));
 		rdbtnNewRadioButton.setBounds(50, 25, 109, 23);
 		panel_1.add(rdbtnNewRadioButton);
 		
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Femenino");
 		rdbtnNewRadioButton_1.setBackground(new Color(255, 255, 255));
-		rdbtnNewRadioButton_1.setForeground(new Color(51, 102, 153));
+		rdbtnNewRadioButton_1.setForeground(new Color(0, 0, 0));
 		rdbtnNewRadioButton_1.setBounds(50, 70, 109, 23);
 		panel_1.add(rdbtnNewRadioButton_1);
 		
@@ -154,7 +154,7 @@ public class Empleado extends JDialog {
 		panel_3.add(lblPagoXHora);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Tipo Empleado", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)), "Tipo Empleado", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_2.setBackground(new Color(255, 255, 255));
 		panel_2.setBounds(10, 262, 648, 141);
 		contentPanel.add(panel_2);
