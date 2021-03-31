@@ -74,6 +74,13 @@ public class Principal extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Mostrar Empleado");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MostrarEmpleado emp = new MostrarEmpleado();
+				emp.setModal(true);
+				emp.setVisible(true);
+			}
+		});
 		mntmNewMenuItem_1.setForeground(new Color(51, 102, 153));
 		mntmNewMenuItem_1.setBackground(new Color(255, 255, 255));
 		mnNewMenu.add(mntmNewMenuItem_1);
