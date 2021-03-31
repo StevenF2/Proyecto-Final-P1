@@ -104,6 +104,25 @@ public class Empresa {
 		Empresa.numProyectos = numProyectos;
 	}
 	/**
+	 * Funciones insertar
+	 * */
+	public void insertarEmpleado(Empleado emp) {
+		this.empleados.add(emp);
+	}
+	
+	public void insertarContrato(Contrato cont) {
+		this.contratos.add(cont);
+	}
+	
+	public void insertarProyecto(Proyecto pro) {
+		this.proyectos.add(pro);
+	}
+	
+	public void insertarCliente(Cliente cli) {
+		this.clientes.add(cli);
+	}
+	
+	/**
 	 * Debo de probar las funciones de buscar y modificarNombreProyecto lo haré mañana 26/3/21
 	 * Att: Tu compañera :3
 	 * */
