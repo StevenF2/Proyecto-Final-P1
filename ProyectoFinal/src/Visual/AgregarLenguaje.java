@@ -44,7 +44,7 @@ public class AgregarLenguaje extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			AgregarLenguaje dialog = new AgregarLenguaje();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -52,7 +52,7 @@ public class AgregarLenguaje extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Create the dialog.
@@ -149,7 +149,10 @@ public class AgregarLenguaje extends JDialog {
 					public void actionPerformed(ActionEvent arg0) {
 						rowsAceptados = new Object[modelAceptado.getColumnCount()];
 						rowsAceptados[0]= lenguajeSN;
-						modelAceptado.addRow(rowsAceptados);
+						if(checkElements(lenguajeSN)) {
+							rowsAceptados[0]= lenguajeSN;
+							modelAceptado.addRow(rowsAceptados);
+						}
 						btnInsertar.setEnabled(false);
 					}
 				});
@@ -195,6 +198,13 @@ public class AgregarLenguaje extends JDialog {
 		panel.add(btnCancelar);
 		
 		btnInsertarL = new JButton("Insertar");
+		btnInsertarL.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Empleado.agregarLenguajeProgramador(modelAceptado);
+				tblAceptados.removeAll();
+				dispose();
+			}
+		});
 		btnInsertarL.setBorderPainted(false);
 		btnInsertarL.setForeground(new Color(255, 255, 255));
 		btnInsertarL.setBackground(new Color(51, 102, 153));
@@ -222,5 +232,17 @@ public class AgregarLenguaje extends JDialog {
 			rows[0] = lenguaje.get(i).toString();
 			model.addRow(rows);
 		}
+	}
+	
+	private static boolean checkElements(String elemento) {
+		if(modelAceptado.getRowCount() < 0) {
+			return true;
+		}
+		for(int i = 0; i < modelAceptado.getRowCount(); i++) {
+			 if(modelAceptado.getValueAt(i, 0).toString().equalsIgnoreCase(elemento)) {
+				 return false;
+			 }
+		}
+		return true;
 	}
 }
