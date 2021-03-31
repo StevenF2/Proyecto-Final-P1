@@ -1,21 +1,23 @@
 package logico;
 
+import java.util.ArrayList;
+
 public class Programador extends Empleado {
 	
-	private String lenguaje;
+	private ArrayList<String> lenguaje;
 
 	public Programador(String cedula, String nombre, String apellido, String direccion, String telefono, String sexo, float salario,
 			String nombreProyecto, String evaluacion, float precioHora, String lenguaje) {
 		super(cedula, nombre, apellido, direccion, telefono,sexo, salario, nombreProyecto, evaluacion, precioHora);
 		
-		this.lenguaje = lenguaje;
+		this.lenguaje = new ArrayList<String>();
 	}
 	
-	public String getLenguaje() {
+	public ArrayList<String> getLenguaje() {
 		return lenguaje;
 	}
 
-	public void setLenguaje(String lenguaje) {
+	public void setLenguaje(ArrayList<String> lenguaje) {
 		this.lenguaje = lenguaje;
 	}
 
