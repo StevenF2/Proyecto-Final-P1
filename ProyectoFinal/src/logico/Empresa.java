@@ -2,6 +2,8 @@ package logico;
 
 import java.util.ArrayList;
 
+import javax.swing.table.DefaultTableModel;
+
 public class Empresa {
 
 	private ArrayList <Cliente> clientes;
@@ -22,7 +24,7 @@ public class Empresa {
 		this.proyectos = new ArrayList <Proyecto>();
 	}
 	
-	public Empresa getInstance() {
+	public static Empresa getInstance() {
 		if(empresa == null) {
 			
 			empresa = new Empresa();
@@ -174,4 +176,5 @@ public class Empresa {
 			aux.setNombreProyecto(nombre);
 		}
 	}
+	
 }
