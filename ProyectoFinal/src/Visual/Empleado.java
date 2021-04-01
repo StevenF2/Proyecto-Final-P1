@@ -16,6 +16,7 @@ import logico.Empresa;
 import logico.Jefe;
 import logico.Planificador;
 import logico.Programador;
+import logico.Secretario;
 
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
@@ -325,6 +326,7 @@ public class Empleado extends JDialog {
 				Programador emp2;
 				Disenador emp3;
 				Planificador emp4;
+				Secretario emp5;
 				int aux = 0, auxText = 0;
 				String auxRadio = "";
 				ArrayList<String> lenguajeProg = new ArrayList<String>();
@@ -346,12 +348,15 @@ public class Empleado extends JDialog {
 					auxText = Integer.valueOf(txtReunionEmp.getText().toString());
 					emp4 = new Planificador(txtCedulaEmp.getText(), txtNombreEmp.getText(), txtApellido.getText(), txtDireccionEmp.getText(), txtTelefonoEmp.getText(), auxRadio, Float.valueOf(spnSalarioHora.getValue().toString()), "","",Float.valueOf(0), auxText);
 					Empresa.getInstance().insertarEmpleado(emp4);
-				} else {
-					emp3 = new Disenador(txtCedulaEmp.getText(), txtNombreEmp.getText(), txtApellido.getText(), txtDireccionEmp.getText(), txtTelefonoEmp.getText(), auxRadio, Float.valueOf(spnSalarioHora.getValue().toString()), "","",Float.valueOf(0));
+				} else if(tabbedPane.getSelectedIndex() == 3){
+					emp3 = new Disenador(txtCedulaEmp.getText(), txtNombreEmp.getText(), txtApellido.getText(), txtDireccionEmp.getText(), txtTelefonoEmp.getText(), auxRadio, Float.valueOf(spnSalarioHora.getValue().toString()), "","",Float.valueOf(0), Integer.valueOf(spnAnExperiencia.getValue().toString()));
 					Empresa.getInstance().insertarEmpleado(emp3);
+				} else if(tabbedPane.getSelectedIndex() == 4) {
+					emp5 = new Secretario(txtCedulaEmp.getText(), txtNombreEmp.getText(), txtApellido.getText(), txtDireccionEmp.getText(), txtTelefonoEmp.getText(), auxRadio, Float.valueOf(spnSalarioHora.getValue().toString()), "","",Float.valueOf(0), Integer.valueOf(spnAnExperienciaS.getValue().toString()));
+					Empresa.getInstance().insertarEmpleado(emp5);
 				}
 				
-				System.out.println("Okay");
+				JOptionPane.showMessageDialog(null, "Operacion Satisfactoria", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 				/**
 				 * Agregar JOption Pane y Try Catch
 				 * */
