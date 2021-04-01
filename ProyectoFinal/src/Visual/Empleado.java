@@ -54,6 +54,8 @@ public class Empleado extends JDialog {
 	private JButton btnInsertar;
 	private JButton btnCancelar;
 	private JTextField txtApellido;
+	private JSpinner spnAnExperiencia;
+	private JSpinner spnAnExperienciaS;
 
 	/**
 	 * Launch the application.
@@ -154,6 +156,8 @@ public class Empleado extends JDialog {
 		panel_3.setLayout(null);
 		
 		spnSalarioHora = new JSpinner();
+		spnSalarioHora.setBackground(new Color(255, 255, 255));
+		spnSalarioHora.setForeground(new Color(0, 0, 0));
 		spnSalarioHora.setModel(new SpinnerNumberModel(new Integer(100), new Integer(100), null, new Integer(1)));
 		spnSalarioHora.setBounds(70, 28, 153, 20);
 		panel_3.add(spnSalarioHora);
@@ -185,6 +189,7 @@ public class Empleado extends JDialog {
 		panel_5.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)));
 		panel_5.setBackground(new Color(255, 255, 255));
 		tabbedPane.addTab("Jefe", null, panel_5, null);
+		tabbedPane.setBackgroundAt(0, new Color(255, 255, 255));
 		panel_5.setLayout(null);
 		
 		JLabel lblNewLabel_4 = new JLabel("Cantidad de Trabajadores");
@@ -248,6 +253,52 @@ public class Empleado extends JDialog {
 		txtReunionEmp.setBounds(346, 48, 86, 20);
 		panel_8.add(txtReunionEmp);
 		txtReunionEmp.setColumns(10);
+		
+		JPanel panel_9 = new JPanel();
+		panel_9.setBackground(new Color(255, 255, 255));
+		tabbedPane.addTab("Dise\u00F1ador", null, panel_9, null);
+		tabbedPane.setBackgroundAt(3, new Color(255, 255, 255));
+		panel_9.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_11 = new JPanel();
+		panel_11.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)));
+		panel_11.setBackground(new Color(255, 255, 255));
+		panel_9.add(panel_11, BorderLayout.CENTER);
+		panel_11.setLayout(null);
+		
+		JLabel lblNewLabel_8 = new JLabel("A\u00F1os de Experiencia");
+		lblNewLabel_8.setBounds(183, 48, 155, 14);
+		panel_11.add(lblNewLabel_8);
+		
+		spnAnExperiencia = new JSpinner();
+		spnAnExperiencia.setBackground(new Color(255, 255, 255));
+		spnAnExperiencia.setModel(new SpinnerNumberModel(0, 0, 40, 1));
+		spnAnExperiencia.setForeground(new Color(0, 0, 0));
+		spnAnExperiencia.setBounds(303, 45, 70, 20);
+		panel_11.add(spnAnExperiencia);
+		
+		JPanel panel_10 = new JPanel();
+		panel_10.setBackground(new Color(255, 255, 255));
+		tabbedPane.addTab("Secretaria/o", null, panel_10, null);
+		tabbedPane.setBackgroundAt(4, new Color(255, 255, 255));
+		panel_10.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_12 = new JPanel();
+		panel_12.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)));
+		panel_12.setBackground(new Color(255, 255, 255));
+		panel_10.add(panel_12, BorderLayout.CENTER);
+		panel_12.setLayout(null);
+		
+		JLabel label = new JLabel("A\u00F1os de Experiencia");
+		label.setBounds(194, 48, 155, 14);
+		panel_12.add(label);
+		
+		spnAnExperienciaS = new JSpinner();
+		spnAnExperienciaS.setModel(new SpinnerNumberModel(0, 0, 40, 1));
+		spnAnExperienciaS.setForeground(new Color(0, 0, 0));
+		spnAnExperienciaS.setBackground(new Color(255, 255, 255));
+		spnAnExperienciaS.setBounds(312, 45, 70, 20);
+		panel_12.add(spnAnExperienciaS);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(new Color(51, 102, 153));
