@@ -4,8 +4,9 @@ public class Disenador extends Empleado {
 	
 	private int experiencia;
 	public Disenador(String cedula, String nombre, String apellido, String direccion,String telefono, String sexo, float salario,
-			String nombreProyecto, String evaluacion, float precioHora) {
+			String nombreProyecto, String evaluacion, float precioHora, int experiencia) {
 		super(cedula, nombre, apellido, direccion,telefono, sexo, salario, nombreProyecto, evaluacion, precioHora);
+		this.experiencia = experiencia;
 		
 	}
 	
