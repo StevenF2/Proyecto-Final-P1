@@ -44,6 +44,8 @@ public class AgregarLenguaje extends JDialog {
 	/**
 	 * Launch the application.
 	 */
+	//hola
+	
 	/*public static void main(String[] args) {
 		try {
 			AgregarLenguaje dialog = new AgregarLenguaje();

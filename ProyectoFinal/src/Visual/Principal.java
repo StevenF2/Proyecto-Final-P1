@@ -18,6 +18,7 @@ import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class Principal extends JFrame {
 
@@ -62,6 +63,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Insertar Empleado");
+		mntmNewMenuItem.setIcon(new ImageIcon(Principal.class.getResource("/icons/add.png")));
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Empleado emp = new Empleado();

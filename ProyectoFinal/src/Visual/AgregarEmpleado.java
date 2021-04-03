@@ -1,7 +1,10 @@
 package Visual;
 
 import java.awt.BorderLayout;
+
 import java.awt.FlowLayout;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -11,19 +14,38 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import logico.Empresa;
+import logico.Empleado;
+
 import javax.swing.JLabel;
 import javax.swing.UIManager;
+import javax.swing.ScrollPaneConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AgregarEmpleado extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;
-	private JTable table_1;
-
+	private JTable tblListaEmpleados;
+	private JTable tblEmpleadosProyecto;
+	private JLabel lblLenguajeProyecto;
+	private String nombreLenguaje;
+	private static DefaultTableModel model, modelAceptado;
+	private static Object[] rows, rowsAceptados;
+	private String empleados;
+	private JButton btnInsertarEmpleado;
+	private JButton btnRegresarEmpleado;
+	private int empleadosIndex;
+	private JButton btnInsertarEmpleados;
+	private JButton btnCancelar;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	//hola
+	/*public static void main(String[] args) {
 		try {
 			AgregarEmpleado dialog = new AgregarEmpleado();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -31,12 +53,21 @@ public class AgregarEmpleado extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Create the dialog.
+	 * @param string 
 	 */
-	public AgregarEmpleado() {
+	public AgregarEmpleado(String string) {
+		this.nombreLenguaje = string;
+		this.empleados = "";
+		this.empleadosIndex = 0;
+		String columnas[] = {"Nombre", "Puesto"};
+		model = new DefaultTableModel();
+		modelAceptado = new DefaultTableModel();
+		model.setColumnIdentifiers(columnas);
+		modelAceptado.setColumnIdentifiers(columnas);
 		setBounds(100, 100, 648, 426);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
@@ -58,20 +89,23 @@ public class AgregarEmpleado extends JDialog {
 				panel_1.setLayout(new BorderLayout(0, 0));
 				{
 					JScrollPane scrollPane = new JScrollPane();
+					scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 					panel_1.add(scrollPane, BorderLayout.CENTER);
 					{
-						table = new JTable();
-						table.setModel(new DefaultTableModel(
-							new Object[][] {
-								{null, null},
-								{null, null},
-								{null, null},
-							},
-							new String[] {
-								"Nombre", "Puesto"
+						tblListaEmpleados = new JTable();
+						tblListaEmpleados.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent arg0) {
+								int seleccion = -1;
+								seleccion = tblListaEmpleados.getSelectedRow();
+								if(seleccion > -1) {
+									empleados = tblListaEmpleados.getValueAt(seleccion, 0).toString();
+									btnInsertarEmpleado.setEnabled(true);
+								}
 							}
-						));
-						scrollPane.setViewportView(table);
+						});
+						tblListaEmpleados.setModel(model);
+						scrollPane.setViewportView(tblListaEmpleados);
 					}
 				}
 			}
@@ -83,35 +117,55 @@ public class AgregarEmpleado extends JDialog {
 				panel_1.setLayout(new BorderLayout(0, 0));
 				{
 					JScrollPane scrollPane = new JScrollPane();
+					scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 					panel_1.add(scrollPane, BorderLayout.CENTER);
 					{
-						table_1 = new JTable();
-						table_1.setModel(new DefaultTableModel(
-							new Object[][] {
-								{null, null},
-								{null, null},
-							},
-							new String[] {
-								"Nombre", "Puesto"
+						tblEmpleadosProyecto = new JTable();
+						tblEmpleadosProyecto.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								int seleccion = -1;
+								seleccion = tblEmpleadosProyecto.getSelectedRow();
+								if(seleccion > -1) {
+									empleadosIndex = seleccion;
+									btnRegresarEmpleado.setEnabled(true);
+								}
 							}
-						));
-						scrollPane.setViewportView(table_1);
+						});
+						tblEmpleadosProyecto.setModel(modelAceptado);
+						scrollPane.setViewportView(tblEmpleadosProyecto);
 					}
 				}
 			}
 			{
-				JButton btnNewButton = new JButton(">");
-				btnNewButton.setBorderPainted(false);
-				btnNewButton.setBackground(new Color(204, 204, 204));
-				btnNewButton.setBounds(285, 110, 58, 39);
-				panel.add(btnNewButton);
+				btnInsertarEmpleado = new JButton(">");
+				btnInsertarEmpleado.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						rowsAceptados = new Object[modelAceptado.getColumnCount()];
+						if(checkElements(empleados)) {
+							rowsAceptados[0]= empleados;
+							modelAceptado.addRow(rowsAceptados);
+						}
+						btnInsertarEmpleado.setEnabled(false);
+					}
+				});
+				btnInsertarEmpleado.setBorderPainted(false);
+				btnInsertarEmpleado.setBackground(new Color(204, 204, 204));
+				btnInsertarEmpleado.setBounds(285, 110, 58, 39);
+				panel.add(btnInsertarEmpleado);
 			}
 			{
-				JButton button = new JButton("<");
-				button.setBorderPainted(false);
-				button.setBackground(new Color(204, 204, 204));
-				button.setBounds(284, 160, 58, 39);
-				panel.add(button);
+				btnRegresarEmpleado = new JButton("<");
+				btnRegresarEmpleado.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						modelAceptado.removeRow(empleadosIndex);
+						btnRegresarEmpleado.setEnabled(false);
+					}
+				});
+				btnRegresarEmpleado.setBorderPainted(false);
+				btnRegresarEmpleado.setBackground(new Color(204, 204, 204));
+				btnRegresarEmpleado.setBounds(284, 160, 58, 39);
+				panel.add(btnRegresarEmpleado);
 			}
 		}
 		{
@@ -121,25 +175,32 @@ public class AgregarEmpleado extends JDialog {
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			{
-				JButton btnNewButton_1 = new JButton("Cancelar");
-				btnNewButton_1.setForeground(new Color(255, 255, 255));
-				btnNewButton_1.setBackground(new Color(51, 102, 153));
-				btnNewButton_1.setBorderPainted(false);
-				btnNewButton_1.setBounds(533, 0, 89, 47);
-				panel.add(btnNewButton_1);
+				btnCancelar = new JButton("Cancelar");
+				btnCancelar.setForeground(new Color(255, 255, 255));
+				btnCancelar.setBackground(new Color(51, 102, 153));
+				btnCancelar.setBorderPainted(false);
+				btnCancelar.setBounds(533, 0, 89, 47);
+				panel.add(btnCancelar);
 			}
 			{
-				JButton btnNewButton_2 = new JButton("Insertar");
-				btnNewButton_2.setForeground(new Color(255, 255, 255));
-				btnNewButton_2.setBackground(new Color(51, 102, 153));
-				btnNewButton_2.setBorderPainted(false);
-				btnNewButton_2.setBounds(434, 0, 89, 47);
-				panel.add(btnNewButton_2);
+				btnInsertarEmpleados = new JButton("Insertar");
+				btnInsertarEmpleados.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Proyecto.agregarLenguajeProgramador(modelAceptado);
+						tblEmpleadosProyecto.removeAll();
+						dispose();
+					}
+				});
+				btnInsertarEmpleados.setForeground(new Color(255, 255, 255));
+				btnInsertarEmpleados.setBackground(new Color(51, 102, 153));
+				btnInsertarEmpleados.setBorderPainted(false);
+				btnInsertarEmpleados.setBounds(434, 0, 89, 47);
+				panel.add(btnInsertarEmpleados);
 			}
 		}
 		{
 			JLabel lblNewLabel = new JLabel("Lista Empleados");
-			lblNewLabel.setBounds(10, 16, 168, 14);
+			lblNewLabel.setBounds(10, 16, 121, 14);
 			contentPanel.add(lblNewLabel);
 		}
 		{
@@ -147,6 +208,39 @@ public class AgregarEmpleado extends JDialog {
 			lblNewLabel_1.setBounds(363, 16, 168, 14);
 			contentPanel.add(lblNewLabel_1);
 		}
+		
+		JLabel lblNewLabel_2 = new JLabel("Lenguaje:");
+		lblNewLabel_2.setBounds(141, 16, 76, 14);
+		contentPanel.add(lblNewLabel_2);
+		
+		lblLenguajeProyecto = new JLabel("...");
+		lblLenguajeProyecto.setText(nombreLenguaje);
+		lblLenguajeProyecto.setBounds(197, 16, 76, 14);
+		contentPanel.add(lblLenguajeProyecto);
+		
+		cargarEmpleados(nombreLenguaje);
 	}
-
+	
+	public static void cargarEmpleados(String nombreLenguaje) {
+		ArrayList<Empleado> emp2 = new ArrayList<Empleado>();
+		emp2.addAll(Empresa.getInstance().buscarEmpleadoPorLenguaje(nombreLenguaje));
+		rows = new Object[model.getColumnCount()];
+		model.setRowCount(0);
+		for(int i = 0; i < emp2.size() ; i++) {
+			rows[0] = emp2.get(i).getNombre().toString();
+			rows[1] = emp2.get(i).getClass().getSimpleName().toString();
+			model.addRow(rows);
+		}
+	}
+	private static boolean checkElements(String elemento) {
+		if(modelAceptado.getRowCount() < 0) {
+			return true;
+		}
+		for(int i = 0; i < modelAceptado.getRowCount(); i++) {
+			 if(modelAceptado.getValueAt(i, 0).toString().equalsIgnoreCase(elemento)) {
+				 return false;
+			 }
+		}
+		return true;
+	}
 }

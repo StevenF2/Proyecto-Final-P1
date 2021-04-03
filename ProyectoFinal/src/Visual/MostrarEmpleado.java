@@ -42,6 +42,7 @@ public class MostrarEmpleado extends JDialog {
 	/**
 	 * Launch the application.
 	 */
+	//hola
 	/*public static void main(String[] args) {
 		try {
 			MostrarEmpleado dialog = new MostrarEmpleado();

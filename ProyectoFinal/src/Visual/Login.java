@@ -22,6 +22,7 @@ public class Login extends JDialog {
 	/**
 	 * Launch the application.
 	 */
+	//hola
 	public static void main(String[] args) {
 		try {
 			Login dialog = new Login();
