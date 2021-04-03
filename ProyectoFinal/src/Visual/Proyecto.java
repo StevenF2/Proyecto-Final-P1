@@ -38,7 +38,7 @@ public class Proyecto extends JDialog {
 	 * Launch the application.
 	 */
 	//hola
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			Proyecto dialog = new Proyecto();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -46,7 +46,7 @@ public class Proyecto extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Create the dialog.
@@ -54,6 +54,7 @@ public class Proyecto extends JDialog {
 	public Proyecto() {
 		setBounds(100, 100, 584, 451);
 		setLocationRelativeTo(null);
+		model = new DefaultTableModel();
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(255, 255, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -209,13 +210,14 @@ public class Proyecto extends JDialog {
 		}
 	}
 	
-	public static void agregarLenguajeProgramador(DefaultTableModel model) {
+	public static void agregarLenguajeProgramador(DefaultTableModel modelProyecto) {
 		String[] empleados = {"Nombre", "Puesto"};
 		model.setColumnIdentifiers(empleados);
 		rows = new Object[model.getColumnCount()];
-		for(int i = 0; i < model.getRowCount(); i++) {
-			if(checkElements(model.getValueAt(i, 0).toString())) {
-				rows[0] = model.getValueAt(i, 0).toString();
+		for(int i = 0; i < modelProyecto.getRowCount(); i++) {
+			if(checkElements(modelProyecto.getValueAt(i, 0).toString())) {
+				rows[0] = modelProyecto.getValueAt(i, 0).toString();
+				rows[1] = modelProyecto.getValueAt(i, 1).toString();
 				model.addRow(rows);
 			}
 		}

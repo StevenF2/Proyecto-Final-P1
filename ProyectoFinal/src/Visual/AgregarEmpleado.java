@@ -35,7 +35,7 @@ public class AgregarEmpleado extends JDialog {
 	private String nombreLenguaje;
 	private static DefaultTableModel model, modelAceptado;
 	private static Object[] rows, rowsAceptados;
-	private String empleados;
+	private String[] empleados;
 	private JButton btnInsertarEmpleado;
 	private JButton btnRegresarEmpleado;
 	private int empleadosIndex;
@@ -61,7 +61,7 @@ public class AgregarEmpleado extends JDialog {
 	 */
 	public AgregarEmpleado(String string) {
 		this.nombreLenguaje = string;
-		this.empleados = "";
+		this.empleados = new String[2];
 		this.empleadosIndex = 0;
 		String columnas[] = {"Nombre", "Puesto"};
 		model = new DefaultTableModel();
@@ -99,7 +99,8 @@ public class AgregarEmpleado extends JDialog {
 								int seleccion = -1;
 								seleccion = tblListaEmpleados.getSelectedRow();
 								if(seleccion > -1) {
-									empleados = tblListaEmpleados.getValueAt(seleccion, 0).toString();
+									empleados[0] = tblListaEmpleados.getValueAt(seleccion, 0).toString();
+									empleados[1] = tblListaEmpleados.getValueAt(seleccion, 1).toString();
 									btnInsertarEmpleado.setEnabled(true);
 								}
 							}
@@ -139,11 +140,13 @@ public class AgregarEmpleado extends JDialog {
 			}
 			{
 				btnInsertarEmpleado = new JButton(">");
+				btnInsertarEmpleado.setEnabled(false);
 				btnInsertarEmpleado.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						rowsAceptados = new Object[modelAceptado.getColumnCount()];
-						if(checkElements(empleados)) {
-							rowsAceptados[0]= empleados;
+						if(checkElements(empleados[0])) {
+							rowsAceptados[0]= empleados[0];
+							rowsAceptados[1] = empleados[1];
 							modelAceptado.addRow(rowsAceptados);
 						}
 						btnInsertarEmpleado.setEnabled(false);
@@ -156,6 +159,7 @@ public class AgregarEmpleado extends JDialog {
 			}
 			{
 				btnRegresarEmpleado = new JButton("<");
+				btnRegresarEmpleado.setEnabled(false);
 				btnRegresarEmpleado.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						modelAceptado.removeRow(empleadosIndex);
@@ -176,6 +180,11 @@ public class AgregarEmpleado extends JDialog {
 			panel.setLayout(null);
 			{
 				btnCancelar = new JButton("Cancelar");
+				btnCancelar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				btnCancelar.setForeground(new Color(255, 255, 255));
 				btnCancelar.setBackground(new Color(51, 102, 153));
 				btnCancelar.setBorderPainted(false);

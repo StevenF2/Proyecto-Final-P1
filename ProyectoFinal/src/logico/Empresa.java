@@ -180,8 +180,9 @@ public class Empresa {
 				if(pro.getLenguaje().contains(lenguaje)) {
 					empA.add(pro);
 				}
+			} else if(!(aux instanceof Programador)) {
+				empA.add(aux);
 			}
-			empA.add(emp);
 		}
 		return empA;
 	}
