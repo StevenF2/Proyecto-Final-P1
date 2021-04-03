@@ -91,7 +91,16 @@ public class Principal extends JFrame {
 		mnNewMenu_1.setForeground(new Color(255, 255, 255));
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Crear Proyecto");
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Nuevo Proyecto");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Proyecto p = new Proyecto();
+				p.setVisible(true);
+				p.setLocationRelativeTo(null);
+			}
+		});
+		mntmNewMenuItem_2.setIcon(new ImageIcon(Principal.class.getResource("/icons/add.png")));
 		mntmNewMenuItem_2.setForeground(new Color(51, 102, 153));
 		mntmNewMenuItem_2.setBackground(new Color(255, 255, 255));
 		mnNewMenu_1.add(mntmNewMenuItem_2);

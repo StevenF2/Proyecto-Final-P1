@@ -114,14 +114,17 @@ public class Empresa {
 	
 	public void insertarContrato(Contrato cont) {
 		this.contratos.add(cont);
+		numContratos++;
 	}
 	
 	public void insertarProyecto(Proyecto pro) {
 		this.proyectos.add(pro);
+		numProyectos++;
 	}
 	
 	public void insertarCliente(Cliente cli) {
 		this.clientes.add(cli);
+		numClientes++;
 	}
 	
 	/**
