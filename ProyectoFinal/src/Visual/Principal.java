@@ -99,6 +99,7 @@ public class Principal extends JFrame {
 				pro.setVisible(true);
 			}
 		});
+		mntmNewMenuItem_2.setIcon(new ImageIcon(Principal.class.getResource("/icons/add.png")));
 		mntmNewMenuItem_2.setForeground(new Color(51, 102, 153));
 		mntmNewMenuItem_2.setBackground(new Color(255, 255, 255));
 		mnNewMenu_1.add(mntmNewMenuItem_2);
