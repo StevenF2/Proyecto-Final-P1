@@ -10,6 +10,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.NumberFormatter;
+
+import com.sun.glass.ui.Pixels.Format;
 
 import logico.Disenador;
 import logico.Empresa;
@@ -31,9 +34,11 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.ImageIcon;
 
 public class Empleado extends JDialog {
 
@@ -57,6 +62,12 @@ public class Empleado extends JDialog {
 	private JTextField txtApellido;
 	private JSpinner spnAnExperiencia;
 	private JSpinner spnAnExperienciaS;
+	private JScrollPane scrollPane;
+	private JPanel panel_8;
+	private JPanel panel_9;
+	private JPanel panel_10;
+	private JPanel panel_7;
+	private JFormattedTextField formattedTextField;
 
 	/**
 	 * Launch the application.
@@ -202,7 +213,17 @@ public class Empleado extends JDialog {
 		panel_5.add(txtTrabajadoresEmp);
 		txtTrabajadoresEmp.setColumns(10);
 		
-		JPanel panel_7 = new JPanel();
+		NumberFormat longFormat = NumberFormat.getIntegerInstance();
+
+		NumberFormatter numberFormatter = new NumberFormatter(longFormat);
+		numberFormatter.setValueClass(Long.class); //optional, ensures you will always get a long value
+		numberFormatter.setAllowsInvalid(false); //this is the key!!
+
+		formattedTextField = new JFormattedTextField(numberFormatter);
+		formattedTextField.setBounds(503, 38, 57, 20);
+		panel_5.add(formattedTextField);
+		
+		panel_7 = new JPanel();
 		panel_7.setBackground(new Color(255, 255, 255));
 		panel_7.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)));
 		tabbedPane.addTab("Programador", null, panel_7, null);
@@ -219,7 +240,7 @@ public class Empleado extends JDialog {
 		panel_7.add(panel_6);
 		panel_6.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		panel_6.add(scrollPane, BorderLayout.CENTER);
 		
 		tblLenguajesEmp = new JTable();
@@ -239,7 +260,7 @@ public class Empleado extends JDialog {
 		btnBuscar.setBackground(new Color(204, 204, 204));
 		btnBuscar.setBounds(408, 11, 78, 41);
 		panel_7.add(btnBuscar);
-		JPanel panel_8 = new JPanel();
+		panel_8 = new JPanel();
 		panel_8.setBackground(new Color(255, 255, 255));
 		panel_8.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)));
 		tabbedPane.addTab("Planificador", null, panel_8, null);
@@ -255,7 +276,7 @@ public class Empleado extends JDialog {
 		panel_8.add(txtReunionEmp);
 		txtReunionEmp.setColumns(10);
 		
-		JPanel panel_9 = new JPanel();
+		panel_9 = new JPanel();
 		panel_9.setBackground(new Color(255, 255, 255));
 		tabbedPane.addTab("Dise\u00F1ador", null, panel_9, null);
 		tabbedPane.setBackgroundAt(3, new Color(255, 255, 255));
@@ -278,7 +299,7 @@ public class Empleado extends JDialog {
 		spnAnExperiencia.setBounds(303, 45, 70, 20);
 		panel_11.add(spnAnExperiencia);
 		
-		JPanel panel_10 = new JPanel();
+		panel_10 = new JPanel();
 		panel_10.setBackground(new Color(255, 255, 255));
 		tabbedPane.addTab("Secretaria/o", null, panel_10, null);
 		tabbedPane.setBackgroundAt(4, new Color(255, 255, 255));
@@ -311,6 +332,7 @@ public class Empleado extends JDialog {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
+				clean();
 			}
 		});
 		btnCancelar.setBorderPainted(false);
@@ -319,7 +341,8 @@ public class Empleado extends JDialog {
 		btnCancelar.setBounds(569, 0, 89, 44);
 		panel_4.add(btnCancelar);
 		
-		btnInsertar = new JButton("Insertar");
+		btnInsertar = new JButton("");
+		btnInsertar.setIcon(new ImageIcon(Empleado.class.getResource("/icons/floppy-disk.png")));
 		btnInsertar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Jefe emp;
@@ -357,6 +380,7 @@ public class Empleado extends JDialog {
 				}
 				
 				JOptionPane.showMessageDialog(null, "Operacion Satisfactoria", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+				clean();
 				/**
 				 * Agregar JOption Pane y Try Catch
 				 * */
@@ -404,5 +428,25 @@ public class Empleado extends JDialog {
 			lenguajesProg.add(modelProg.getValueAt(i, 0).toString());
 		}
 		return lenguajesProg;
+	}
+	private void clean() {
+		txtCedulaEmp.setText("");
+		txtNombreEmp.setText("");
+		txtTelefonoEmp.setText("");
+		txtDireccionEmp.setText("");
+		txtTrabajadoresEmp.setText("");
+		txtReunionEmp.setText("");
+		
+		tblLenguajesEmp.removeAll();
+		
+		if(rdbFemenino.isSelected()) {
+			rdbFemenino.setSelected(false);
+			rdbMasculino.setSelected(true);
+		}
+		spnSalarioHora.setValue(0);
+		txtApellido.setText("");
+		spnAnExperiencia.setValue(0);
+		spnAnExperienciaS.setValue(0);
+
 	}
 }
