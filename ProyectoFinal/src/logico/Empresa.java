@@ -170,6 +170,22 @@ public class Empresa {
 		return emp;
 	}
 	
+	public ArrayList<Empleado> buscarEmpleadoPorLenguaje(String lenguaje) {
+		Empleado emp = null;
+		ArrayList<Empleado> empA = new ArrayList<Empleado>();
+		Programador pro = null;
+		for(Empleado aux: this.empleados) {
+			if(aux instanceof Programador) {
+				pro = (Programador) aux; 
+				if(pro.getLenguaje().contains(lenguaje)) {
+					empA.add(pro);
+				}
+			}
+			empA.add(emp);
+		}
+		return empA;
+	}
+	
 	public void modificarNombreProyecto(Proyecto pro) {
 		String nombre = pro.getNombre();
 		for(Empleado aux: pro.getEmpleados()) {
