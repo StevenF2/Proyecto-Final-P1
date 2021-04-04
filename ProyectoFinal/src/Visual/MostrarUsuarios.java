@@ -12,6 +12,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+
+import logico.Disenador;
+import logico.Empresa;
+import logico.Jefe;
+import logico.Planificador;
+import logico.Programador;
+import logico.Secretario;
+
 import javax.swing.border.EtchedBorder;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JTable;
@@ -20,6 +29,8 @@ import java.awt.event.ActionEvent;
 
 public class MostrarUsuarios extends JDialog {
 	private JTable tblMostrarUsuarios;
+	private static DefaultTableModel model;
+	private static Object[] rows;
 
 	/**
 	 * Launch the application.
@@ -40,6 +51,8 @@ public class MostrarUsuarios extends JDialog {
 	public MostrarUsuarios() {
 		setBounds(100, 100, 494, 361);
 		setLocationRelativeTo(null);
+		String columns[] = {"Nombre Usuario", "Tipo Usuario"};
+		model.setColumnIdentifiers(columns);
 		getContentPane().setLayout(null);
 		{
 			JPanel buttonPane = new JPanel();
@@ -86,11 +99,25 @@ public class MostrarUsuarios extends JDialog {
 						panel_2.add(scrollPane, BorderLayout.CENTER);
 						
 						tblMostrarUsuarios = new JTable();
+						tblMostrarUsuarios.setModel(model);
 						tblMostrarUsuarios.setBackground(new Color(255, 255, 255));
+						tblMostrarUsuarios.getTableHeader().setReorderingAllowed(false);
 						scrollPane.setViewportView(tblMostrarUsuarios);
 					}
 				}
 			}
 		}
+		cargarUsuarios();
 	}
+	private static void cargarUsuarios() {
+		model.setRowCount(0);
+		rows = new Object[model.getColumnCount()];
+		for(int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
+			rows[0] = Empresa.getInstance().getUsuarios().get(i).getNombreUsuario();
+			rows[1] = Empresa.getInstance().getUsuarios().get(i).getTipo();
+			model.addRow(rows);
+		}
+		
+	}
+	
 }
