@@ -18,6 +18,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import logico.Cliente;
 import logico.Contrato;
 import logico.Empresa;
 import logico.Proyecto;
@@ -203,7 +204,9 @@ public class NuevoContrato extends JDialog {
 				String direccion = txtDireccion.getText();
 				int cantidad = Integer.parseInt(txtCantidad.getText());
 				
-				Contrato c = new Contrato(direccion, direccion, direccion);
+				Cliente cli = new Cliente(cedula, nombre, direccion, telefono);
+				
+				Contrato c = new Contrato(idContrato, cedula, nombreP, cli);
 				Proyecto p = new Proyecto(direccion, direccion, rootPaneCheckingEnabled, rootPaneCheckingEnabled, null, null, null);
 				
 			}
