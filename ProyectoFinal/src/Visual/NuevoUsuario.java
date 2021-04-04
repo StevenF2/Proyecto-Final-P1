@@ -109,12 +109,21 @@ public class NuevoUsuario extends JDialog {
 				User nuevoUsuario = null;
 				nuevoUsuario = new User("User " +String.valueOf(User.getCodigoUsuario() + 1), txtNombreUsuario.getText(), txtPassword.getText());
 				if(!(Empresa.getInstance().insetarUsuario(nuevoUsuario))) {
-					JOptionPane.showMessageDialog(null, "Usuario ya insertado", "Informacion", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Usuario no insertado", "Informacion", JOptionPane.ERROR_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Usuario insertado con éxito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 				}
+				clean();
 			}
 		});
 		btnInsertarUsuario.setBackground(new Color(51, 102, 153));
 		btnInsertarUsuario.setBounds(240, 0, 89, 43);
 		panel_1.add(btnInsertarUsuario);
+	}
+	
+	private void clean() {
+		txtNombreUsuario.setText("");
+		txtPassword.setText("");
+		
 	}
 }
