@@ -9,8 +9,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
+
+import logico.Empresa;
+import logico.User;
+
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -99,6 +104,15 @@ public class NuevoUsuario extends JDialog {
 		panel_1.add(btnCancelar);
 		
 		btnInsertarUsuario = new JButton("Insertar");
+		btnInsertarUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				User nuevoUsuario = null;
+				nuevoUsuario = new User("User " +String.valueOf(User.getCodigoUsuario() + 1), txtNombreUsuario.getText(), txtPassword.getText());
+				if(!(Empresa.getInstance().insetarUsuario(nuevoUsuario))) {
+					JOptionPane.showMessageDialog(null, "Usuario ya insertado", "Informacion", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		btnInsertarUsuario.setBackground(new Color(51, 102, 153));
 		btnInsertarUsuario.setBounds(240, 0, 89, 43);
 		panel_1.add(btnInsertarUsuario);
