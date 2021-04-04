@@ -24,6 +24,15 @@ public class Principal extends JFrame {
 
 	private JPanel contentPane;
 	private Dimension dimension;
+	private JMenuItem menuCEmpleado;
+	private JMenuItem menuMEmpleado;
+	private JMenuItem menuCProyecto;
+	private JMenuItem menuMProyecto;
+	private JMenuItem menuMContrato;
+	private JMenuItem menuMCliente;
+	private JMenuItem menuCUsuarios;
+	private JMenuItem menuMUsuarios;
+	private JMenu menuAdministrador;
 	/**
 	 * Launch the application.
 	 */
@@ -62,90 +71,90 @@ public class Principal extends JFrame {
 		mnNewMenu.setForeground(new Color(255, 255, 255));
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Insertar Empleado");
-		mntmNewMenuItem.setIcon(new ImageIcon(Principal.class.getResource("/icons/add.png")));
-		mntmNewMenuItem.addActionListener(new ActionListener() {
+		menuCEmpleado = new JMenuItem("Insertar Empleado");
+		menuCEmpleado.setIcon(new ImageIcon(Principal.class.getResource("/icons/add.png")));
+		menuCEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Empleado emp = new Empleado();
 				emp.setModal(true);
 				emp.setVisible(true);
 			}
 		});
-		mntmNewMenuItem.setForeground(new Color(51, 102, 153));
-		mntmNewMenuItem.setBackground(new Color(255, 255, 255));
-		mnNewMenu.add(mntmNewMenuItem);
+		menuCEmpleado.setForeground(new Color(51, 102, 153));
+		menuCEmpleado.setBackground(new Color(255, 255, 255));
+		mnNewMenu.add(menuCEmpleado);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Mostrar Empleado");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+		menuMEmpleado = new JMenuItem("Mostrar Empleado");
+		menuMEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MostrarEmpleado emp = new MostrarEmpleado();
 				emp.setModal(true);
 				emp.setVisible(true);
 			}
 		});
-		mntmNewMenuItem_1.setForeground(new Color(51, 102, 153));
-		mntmNewMenuItem_1.setBackground(new Color(255, 255, 255));
-		mnNewMenu.add(mntmNewMenuItem_1);
+		menuMEmpleado.setForeground(new Color(51, 102, 153));
+		menuMEmpleado.setBackground(new Color(255, 255, 255));
+		mnNewMenu.add(menuMEmpleado);
 		
 		JMenu mnNewMenu_1 = new JMenu("Proyecto & Contrato");
 		mnNewMenu_1.setForeground(new Color(255, 255, 255));
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Crear Proyecto");
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+		menuCProyecto = new JMenuItem("Crear Proyecto");
+		menuCProyecto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NuevoProyecto pro = new NuevoProyecto();
 				pro.setModal(true);
 				pro.setVisible(true);
 			}
 		});
-		mntmNewMenuItem_2.setIcon(new ImageIcon(Principal.class.getResource("/icons/add.png")));
-		mntmNewMenuItem_2.setForeground(new Color(51, 102, 153));
-		mntmNewMenuItem_2.setBackground(new Color(255, 255, 255));
-		mnNewMenu_1.add(mntmNewMenuItem_2);
+		menuCProyecto.setIcon(new ImageIcon(Principal.class.getResource("/icons/add.png")));
+		menuCProyecto.setForeground(new Color(51, 102, 153));
+		menuCProyecto.setBackground(new Color(255, 255, 255));
+		mnNewMenu_1.add(menuCProyecto);
 		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Mostrar Proyectos");
-		mntmNewMenuItem_3.setForeground(new Color(51, 102, 153));
-		mntmNewMenuItem_3.setBackground(new Color(255, 255, 255));
-		mnNewMenu_1.add(mntmNewMenuItem_3);
+		menuMProyecto = new JMenuItem("Mostrar Proyectos");
+		menuMProyecto.setForeground(new Color(51, 102, 153));
+		menuMProyecto.setBackground(new Color(255, 255, 255));
+		mnNewMenu_1.add(menuMProyecto);
 		
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Mostrar Contratos");
-		mntmNewMenuItem_4.setForeground(new Color(51, 102, 153));
-		mntmNewMenuItem_4.setBackground(new Color(255, 255, 255));
-		mnNewMenu_1.add(mntmNewMenuItem_4);
+		menuMContrato = new JMenuItem("Mostrar Contratos");
+		menuMContrato.setForeground(new Color(51, 102, 153));
+		menuMContrato.setBackground(new Color(255, 255, 255));
+		mnNewMenu_1.add(menuMContrato);
 		
 		JMenu mnNewMenu_2 = new JMenu("Cliente");
 		mnNewMenu_2.setForeground(new Color(255, 255, 255));
 		menuBar.add(mnNewMenu_2);
 		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Mostrar Cliente");
-		mntmNewMenuItem_5.setForeground(new Color(51, 102, 153));
-		mntmNewMenuItem_5.setBackground(new Color(255, 255, 255));
-		mnNewMenu_2.add(mntmNewMenuItem_5);
+		menuMCliente = new JMenuItem("Mostrar Cliente");
+		menuMCliente.setForeground(new Color(51, 102, 153));
+		menuMCliente.setBackground(new Color(255, 255, 255));
+		mnNewMenu_2.add(menuMCliente);
 		
-		JMenu mnNewMenu_3 = new JMenu("Administrador");
-		mnNewMenu_3.setForeground(new Color(255, 255, 255));
-		menuBar.add(mnNewMenu_3);
+		menuAdministrador = new JMenu("Administrador");
+		menuAdministrador.setForeground(new Color(255, 255, 255));
+		menuBar.add(menuAdministrador);
 		
-		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Crear Usuarios");
-		mntmNewMenuItem_6.addActionListener(new ActionListener() {
+		menuCUsuarios = new JMenuItem("Crear Usuarios");
+		menuCUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				NuevoUsuario user = new NuevoUsuario();
 				user.setModal(true);
 				user.setVisible(true);
 			}
 		});
-		mnNewMenu_3.add(mntmNewMenuItem_6);
+		menuAdministrador.add(menuCUsuarios);
 		
-		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Mostrar Usuarios");
-		mntmNewMenuItem_7.addActionListener(new ActionListener() {
+		menuMUsuarios = new JMenuItem("Mostrar Usuarios");
+		menuMUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MostrarUsuarios userMostrar = new MostrarUsuarios();
 				userMostrar.setModal(true);
 				userMostrar.setVisible(true);
 			}
 		});
-		mnNewMenu_3.add(mntmNewMenuItem_7);
+		menuAdministrador.add(menuMUsuarios);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.window);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
