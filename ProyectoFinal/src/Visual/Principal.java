@@ -126,6 +126,19 @@ public class Principal extends JFrame {
 		JMenu mnNewMenu_3 = new JMenu("Administrador");
 		mnNewMenu_3.setForeground(new Color(255, 255, 255));
 		menuBar.add(mnNewMenu_3);
+		
+		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Crear Usuarios");
+		mntmNewMenuItem_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				NuevoUsuario user = new NuevoUsuario();
+				user.setModal(true);
+				user.setVisible(true);
+			}
+		});
+		mnNewMenu_3.add(mntmNewMenuItem_6);
+		
+		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Mostrar Usuarios");
+		mnNewMenu_3.add(mntmNewMenuItem_7);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.window);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -35,7 +35,7 @@ public class NuevoUsuario extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			NuevoUsuario dialog = new NuevoUsuario();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -43,13 +43,14 @@ public class NuevoUsuario extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Create the dialog.
 	 */
 	public NuevoUsuario() {
 		setBounds(100, 100, 454, 330);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(255, 255, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
