@@ -35,7 +35,7 @@ public class MostrarUsuarios extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			MostrarUsuarios dialog = new MostrarUsuarios();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -43,7 +43,7 @@ public class MostrarUsuarios extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Create the dialog.
@@ -113,7 +113,7 @@ public class MostrarUsuarios extends JDialog {
 	private static void cargarUsuarios() {
 		model.setRowCount(0);
 		rows = new Object[model.getColumnCount()];
-		for(int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
+		for(int i = 0; i < Empresa.getInstance().getUsuarios().size(); i++) {
 			rows[0] = Empresa.getInstance().getUsuarios().get(i).getNombreUsuario();
 			rows[1] = Empresa.getInstance().getUsuarios().get(i).getTipo();
 			model.addRow(rows);
