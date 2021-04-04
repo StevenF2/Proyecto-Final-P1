@@ -94,7 +94,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Crear Proyecto");
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Proyecto pro = new Proyecto();
+				NuevoProyecto pro = new NuevoProyecto();
 				pro.setModal(true);
 				pro.setVisible(true);
 			}

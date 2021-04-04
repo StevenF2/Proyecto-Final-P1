@@ -392,6 +392,9 @@ public class Empleado extends JDialog {
 		btnInsertar.setBackground(new Color(51, 102, 153));
 		btnInsertar.setBounds(480, 0, 89, 44);
 		panel_4.add(btnInsertar);
+		
+		
+		
 	}
 	public static void agregarLenguajeProgramador(DefaultTableModel model) {
 		String[] lenguaje = {"Lenguaje"};

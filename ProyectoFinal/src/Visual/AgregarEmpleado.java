@@ -195,7 +195,7 @@ public class AgregarEmpleado extends JDialog {
 				btnInsertarEmpleados = new JButton("Insertar");
 				btnInsertarEmpleados.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Proyecto.agregarLenguajeProgramador(modelAceptado);
+						NuevoProyecto.agregarLenguajeProgramador(modelAceptado);
 						tblEmpleadosProyecto.removeAll();
 						dispose();
 					}
