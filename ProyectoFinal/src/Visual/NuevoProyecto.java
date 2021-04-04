@@ -10,6 +10,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+
+import logico.Empresa;
+
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,37 +28,40 @@ import javax.swing.SpinnerDateModel;
 import java.util.Date;
 import java.util.Calendar;
 
-public class Proyecto extends JDialog {
+public class NuevoProyecto extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private static JTextField txtNombre;
+	private static JTextField txtCodigo;
 	private static DefaultTableModel model;
 	private static Object[] rows;
-	private JComboBox cmbLenguajes;
+	private static JComboBox cmbLenguajes;
 	private JButton btnAgregarEmpleado;
 	private JTable tblEmpleadosProyecto;
+	private static JSpinner spnFentrega;
+	private static JSpinner spnFinicio;
+	private static JComboBox cbxTipo;
 
 	/**
 	 * Launch the application.
 	 */
 	//hola
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		try {
-			Proyecto dialog = new Proyecto();
+			NuevoProyecto dialog = new NuevoProyecto();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public Proyecto() {
+	public NuevoProyecto() {
+		
+		datosAnteriores();
 		setBounds(100, 100, 584, 451);
 		setLocationRelativeTo(null);
 		model = new DefaultTableModel();
@@ -80,29 +86,40 @@ public class Proyecto extends JDialog {
 		btnNewButton.setBorderPainted(false);
 		btnNewButton.setBackground(new Color(51, 102, 153));
 		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setBounds(469, 0, 89, 44);
+		btnNewButton.setBounds(370, 0, 89, 44);
 		panel_3.add(btnNewButton);
 		
 		JButton btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//JOptionPane.showMessageDialog(null, "Operacion Satisfactoria", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-				 int input = JOptionPane.showConfirmDialog(null, "Desea continuar?", "Eliga una opción ...",JOptionPane.YES_NO_OPTION);
+				//] int input = JOptionPane.showConfirmDialog(null, "Desea continuar?", "Eliga una opción ...",JOptionPane.YES_NO_OPTION);
 
 			    // 0=yes, 1=no, 2=cancel
-			    System.out.println(input);
-			    if(input == 0) {
+			 //   System.out.println(input);
+			 //   if(input == 0) {
+				
+				Empresa.setCodigo(Integer.parseInt(txtCodigo.getText()));
+				Empresa.setNombre(txtNombre.getText());
+				Empresa.setInicio((Date) spnFinicio.getValue());
+				Empresa.setFin((Date) spnFentrega.getValue());
+				Empresa.setTipo(cbxTipo.getSelectedIndex());
+				Empresa.setLenguaje(cmbLenguajes.getSelectedIndex());
+				
+				
+				
 					setVisible(false);
-					Contrato cont = new Contrato();
+					NuevoContrato cont = new NuevoContrato();
 					cont.setModal(true);
 					cont.setVisible(true);
-			    } 
+					
+			    //} 
 			}
 		});
 		btnSiguiente.setBorderPainted(false);
 		btnSiguiente.setBackground(new Color(51, 102, 153));
 		btnSiguiente.setForeground(new Color(255, 255, 255));
-		btnSiguiente.setBounds(370, 0, 89, 44);
+		btnSiguiente.setBounds(469, 0, 89, 44);
 		panel_3.add(btnSiguiente);
 		{
 			JPanel panel = new JPanel();
@@ -117,10 +134,10 @@ public class Proyecto extends JDialog {
 				panel.add(label);
 			}
 			{
-				textField = new JTextField();
-				textField.setColumns(10);
-				textField.setBounds(264, 25, 278, 20);
-				panel.add(textField);
+				txtNombre = new JTextField();
+				txtNombre.setColumns(10);
+				txtNombre.setBounds(264, 25, 278, 20);
+				panel.add(txtNombre);
 			}
 			{
 				JPanel panel_1 = new JPanel();
@@ -164,21 +181,9 @@ public class Proyecto extends JDialog {
 				panel.add(label);
 			}
 			{
-				textField_1 = new JTextField();
-				textField_1.setColumns(10);
-				textField_1.setBounds(168, 69, 86, 20);
-				panel.add(textField_1);
-			}
-			{
 				JLabel label = new JLabel("Fecha Entrega");
 				label.setBounds(264, 72, 87, 14);
 				panel.add(label);
-			}
-			{
-				textField_2 = new JTextField();
-				textField_2.setColumns(10);
-				textField_2.setBounds(361, 69, 86, 20);
-				panel.add(textField_2);
 			}
 			{
 				JLabel label = new JLabel("Tipo");
@@ -186,11 +191,11 @@ public class Proyecto extends JDialog {
 				panel.add(label);
 			}
 			{
-				JComboBox comboBox = new JComboBox();
-				comboBox.setModel(new DefaultComboBoxModel(new String[] {"Web", "Desktop", "M\u00F3vil"}));
-				comboBox.setBackground(new Color(255, 255, 255));
-				comboBox.setBounds(168, 116, 86, 20);
-				panel.add(comboBox);
+				cbxTipo = new JComboBox();
+				cbxTipo.setModel(new DefaultComboBoxModel(new String[] {"Web", "Desktop", "M\u00F3vil"}));
+				cbxTipo.setBackground(new Color(255, 255, 255));
+				cbxTipo.setBounds(168, 116, 86, 20);
+				panel.add(cbxTipo);
 			}
 			
 			JLabel lblNewLabel = new JLabel("Lenguaje");
@@ -206,13 +211,23 @@ public class Proyecto extends JDialog {
 			JLabel lblNewLabel_1 = new JLabel("Codigo");
 			lblNewLabel_1.setBounds(10, 28, 46, 14);
 			panel.add(lblNewLabel_1);
+			txtCodigo = new JTextField();
+			txtCodigo.setBounds(52, 25, 150, 20);
+			panel.add(txtCodigo);
+			txtCodigo.setColumns(10);
 			
-			textField_3 = new JTextField();
-			textField_3.setBounds(52, 25, 150, 20);
-			panel.add(textField_3);
-			textField_3.setColumns(10);
+			spnFinicio = new JSpinner();
+			spnFinicio.setModel(new SpinnerDateModel(new Date(1617436800000L), new Date(1617436800000L), null, Calendar.DAY_OF_YEAR));
+			spnFinicio.setBounds(162, 69, 92, 20);
+			panel.add(spnFinicio);
 			
+			spnFentrega = new JSpinner();
+			spnFentrega.setModel(new SpinnerDateModel(new Date(1617523200000L), new Date(1617523200000L), null, Calendar.DAY_OF_YEAR));
+			spnFentrega.setBounds(345, 69, 92, 20);
+			panel.add(spnFentrega);
 		}
+		
+
 	}
 	public static void reOpen() {
 		//Proyecto.class.getClass().setVisible(true);
@@ -240,4 +255,22 @@ public class Proyecto extends JDialog {
 		}
 		return true;
 	}
+	
+	public static void datosAnteriores() {
+		
+		if(Empresa.getEnable() == true) {
+			
+			txtCodigo.setText(""+Empresa.getCodigo());
+			txtNombre.setText(""+Empresa.getNombre());
+			spnFinicio.setValue(Empresa.getInicio());
+			cbxTipo.setSelectedIndex(Empresa.getTipo());
+			cmbLenguajes.setSelectedIndex(Empresa.getLenguaje());
+			spnFentrega.setValue(Empresa.getFin());
+			Empresa.setEnable(false);
+			
+			
+		
+	}
+		
+	} 
 }

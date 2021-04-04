@@ -2,23 +2,28 @@ package logico;
 
 
 public class Contrato {
-	private String numeroContrato;
+	private int numeroContrato;
 	private String cedulaCliente;
 	private String nombreProyecto; //se puede cambiar a tipo proyecto, a espera de la siguiente clase
 	private float montoTotal;
 	private float penalidad;
-	private static int cantidadContrato = 1;
-	public Contrato(String numeroContrato, String cedulaCliente, String nombreProyecto) {
+	private Cliente cliente;
+	
+	public Contrato(int numeroContrato, String cedulaCliente, String nombreProyecto, Cliente cliente) {
 		super();
 		this.numeroContrato = numeroContrato;
 		this.cedulaCliente = cedulaCliente;
 		this.nombreProyecto = nombreProyecto;
-		Contrato.cantidadContrato++;
+		this.cliente = cliente; 
 	}
-	public String getNumeroContrato() {
+//	private static int cantidadContrato = 1;
+
+	
+	
+	public int getNumeroContrato() {
 		return numeroContrato;
 	}
-	public void setNumeroContrato(String numeroContrato) {
+	public void setNumeroContrato(int numeroContrato) {
 		this.numeroContrato = numeroContrato;
 	}
 	public String getCedulaCliente() {
@@ -33,12 +38,12 @@ public class Contrato {
 	public void setNombreProyecto(String nombreProyecto) {
 		this.nombreProyecto = nombreProyecto;
 	}
-	public static int getCantidadContrato() {
+/*	public static int getCantidadContrato() {
 		return cantidadContrato;
 	}
 	public static void setCantidadContrato(int cantidadContrato) {
 		Contrato.cantidadContrato = cantidadContrato;
-	}
+	} */
 	public float getMontoTotal() {
 		return montoTotal;
 	}
@@ -50,6 +55,18 @@ public class Contrato {
 	}
 	public void setPenalidad(float penalidad) {
 		this.penalidad = penalidad;
+	}
+
+
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 }

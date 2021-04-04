@@ -1,6 +1,7 @@
 package logico;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -16,6 +17,15 @@ public class Empresa {
 	private static int numContratos = 1;
 	private static int numEmpleados = 1;
 	private static int numProyectos = 1;
+	private static int codigo = 0;
+	private static int tipo = 0;
+	private static int lenguaje = 0;
+	private static String nombre = null;
+	private static Date inicio = null;
+	private static Date fin = null;
+	private static ArrayList <Empleado> temp = null;
+	private static Proyecto ptemp = null;
+	private static Boolean enable = false;
 	
 	public Empresa() {
 		super();
@@ -107,6 +117,78 @@ public class Empresa {
 	public static void setNumProyectos(int numProyectos) {
 		Empresa.numProyectos = numProyectos;
 	}
+	public static int getCodigo() {
+		return codigo;
+	}
+
+	public static void setCodigo(int codigo) {
+		Empresa.codigo = codigo;
+	}
+
+	public static String getNombre() {
+		return nombre;
+	}
+
+	public static void setNombre(String nombre) {
+		Empresa.nombre = nombre;
+	}
+
+	public static Date getInicio() {
+		return inicio;
+	}
+
+	public static void setInicio(Date inicio) {
+		Empresa.inicio = inicio;
+	}
+
+	public static Date getFin() {
+		return fin;
+	}
+
+	public static void setFin(Date fin) {
+		Empresa.fin = fin;
+	}
+
+	public static ArrayList<Empleado> getTemp() {
+		return temp;
+	}
+
+	public static void setTemp(ArrayList<Empleado> temp) {
+		Empresa.temp = temp;
+	}
+
+	public static Proyecto getPtemp() {
+		return ptemp;
+	}
+
+	public static void setPtemp(Proyecto ptemp) {
+		Empresa.ptemp = ptemp;
+	}
+
+	public static int getTipo() {
+		return tipo;
+	}
+
+	public static void setTipo(int tipo) {
+		Empresa.tipo = tipo;
+	}
+
+	public static int getLenguaje() {
+		return lenguaje;
+	}
+
+	public static void setLenguaje(int lenguaje) {
+		Empresa.lenguaje = lenguaje;
+	}
+
+	public static Boolean getEnable() {
+		return enable;
+	}
+
+	public static void setEnable(Boolean enable) {
+		Empresa.enable = enable;
+	}
+
 	/**
 	 * Funciones insertar
 	 * */
@@ -153,7 +235,7 @@ public class Empresa {
 	public Contrato buscarContrato(String codigo) {
 		Contrato cont = null;
 		for(Contrato aux: this.contratos) {
-			if(aux.getNumeroContrato().equalsIgnoreCase(codigo)) {
+			if((""+aux.getNumeroContrato()).equalsIgnoreCase(codigo)) {
 				cont = aux;
 				return cont;
 			}
