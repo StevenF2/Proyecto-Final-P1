@@ -122,11 +122,12 @@ public class NuevoUsuario extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				User nuevoUsuario = null;
 				nuevoUsuario = new User("User " +String.valueOf(User.getCodigoUsuario() + 1), txtNombreUsuario.getText(), txtPassword.getText(), cmbTipoUsuario.getSelectedItem().toString());
-				if(!(Empresa.getInstance().insetarUsuario(nuevoUsuario))) {
+				if(!(Empresa.getInstance().checkSiExisteUser(txtNombreUsuario.getText()))) {
 					JOptionPane.showMessageDialog(null, "Usuario no insertado", "Informacion", JOptionPane.ERROR_MESSAGE);
 				} else if (!(txtPasswordRepetir.getText().equalsIgnoreCase(txtPassword.getText()))) {
 					JOptionPane.showMessageDialog(null, "Usuario no insertado", "Informacion", JOptionPane.ERROR_MESSAGE);
 				} else {
+					Empresa.getInstance().insetarUsuario(nuevoUsuario);
 					JOptionPane.showMessageDialog(null, "Usuario insertado con éxito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 				}
 				clean();
