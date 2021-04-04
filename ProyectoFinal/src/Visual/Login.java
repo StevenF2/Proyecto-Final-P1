@@ -9,14 +9,21 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
+
+import logico.Empresa;
+import logico.User;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Login extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtNombreUsuario;
+	private JTextField txtPassword;
 	private JButton btnIngresar;
 
 	/**
@@ -61,16 +68,16 @@ public class Login extends JDialog {
 				panel.add(lblNewLabel_1);
 			}
 			{
-				textField = new JTextField();
-				textField.setBounds(170, 72, 169, 20);
-				panel.add(textField);
-				textField.setColumns(10);
+				txtNombreUsuario = new JTextField();
+				txtNombreUsuario.setBounds(170, 72, 169, 20);
+				panel.add(txtNombreUsuario);
+				txtNombreUsuario.setColumns(10);
 			}
 			{
-				textField_1 = new JTextField();
-				textField_1.setBounds(170, 123, 169, 20);
-				panel.add(textField_1);
-				textField_1.setColumns(10);
+				txtPassword = new JTextField();
+				txtPassword.setBounds(170, 123, 169, 20);
+				panel.add(txtPassword);
+				txtPassword.setColumns(10);
 			}
 		}
 		{
@@ -80,6 +87,20 @@ public class Login extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnIngresar = new JButton("Ingresar");
+				btnIngresar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						if(!(Empresa.getInstance().checkUserData(txtNombreUsuario.getText(), txtPassword.getText()))) {
+							JOptionPane.showMessageDialog(null, "Usuario no encontrado", "Informacion", JOptionPane.ERROR_MESSAGE);
+						} else {
+							Principal ventanaPrincipal = new Principal();
+							ventanaPrincipal.setVisible(true);
+							setVisible(false);
+							
+						}
+						
+						
+					}
+				});
 				btnIngresar.setBorderPainted(false);
 				btnIngresar.setBackground(new Color(0, 51, 102));
 				btnIngresar.setForeground(new Color(255, 255, 255));
