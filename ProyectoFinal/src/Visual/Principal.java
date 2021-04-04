@@ -138,6 +138,13 @@ public class Principal extends JFrame {
 		mnNewMenu_3.add(mntmNewMenuItem_6);
 		
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Mostrar Usuarios");
+		mntmNewMenuItem_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MostrarUsuarios userMostrar = new MostrarUsuarios();
+				userMostrar.setModal(true);
+				userMostrar.setVisible(true);
+			}
+		});
 		mnNewMenu_3.add(mntmNewMenuItem_7);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.window);
