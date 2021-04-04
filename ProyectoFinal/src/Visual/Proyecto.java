@@ -20,6 +20,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import java.util.Date;
+import java.util.Calendar;
 
 public class Proyecto extends JDialog {
 
@@ -207,9 +211,12 @@ public class Proyecto extends JDialog {
 			textField_3.setBounds(52, 25, 150, 20);
 			panel.add(textField_3);
 			textField_3.setColumns(10);
+			
 		}
 	}
-	
+	public static void reOpen() {
+		//Proyecto.class.getClass().setVisible(true);
+	}
 	public static void agregarLenguajeProgramador(DefaultTableModel modelProyecto) {
 		String[] empleados = {"Nombre", "Puesto"};
 		model.setColumnIdentifiers(empleados);

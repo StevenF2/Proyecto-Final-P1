@@ -195,12 +195,12 @@ public class Contrato extends JDialog {
 		button_1.setBounds(436, 0, 89, 45);
 		panel.add(button_1);
 		
-		/*JButton button_2 = new JButton("Atr\u00E1s");
+		JButton button_2 = new JButton("Atr\u00E1s");
 		button_2.setForeground(Color.WHITE);
 		button_2.setBorderPainted(false);
 		button_2.setBackground(new Color(51, 102, 153));
 		button_2.setBounds(337, 0, 89, 45);
-		panel.add(button_2);*/
+		panel.add(button_2);
 	}
 
 }
