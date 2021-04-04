@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class NuevoUsuario extends JDialog {
 
@@ -28,6 +30,7 @@ public class NuevoUsuario extends JDialog {
 	private JTextField txtPasswordRepetir;
 	private JButton btnInsertarUsuario;
 	private JButton btnCancelar;
+	private JComboBox cmbTipoUsuario;
 
 	/**
 	 * Launch the application.
@@ -46,7 +49,7 @@ public class NuevoUsuario extends JDialog {
 	 * Create the dialog.
 	 */
 	public NuevoUsuario() {
-		setBounds(100, 100, 454, 299);
+		setBounds(100, 100, 454, 330);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(255, 255, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -56,7 +59,7 @@ public class NuevoUsuario extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)), "Crear Nuevo Usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(10, 11, 418, 195);
+		panel.setBounds(10, 11, 418, 231);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
@@ -65,31 +68,41 @@ public class NuevoUsuario extends JDialog {
 		panel.add(lblNewLabel);
 		
 		txtNombreUsuario = new JTextField();
-		txtNombreUsuario.setBounds(144, 36, 206, 20);
+		txtNombreUsuario.setBounds(144, 30, 206, 20);
 		panel.add(txtNombreUsuario);
 		txtNombreUsuario.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Contrase\u00F1a:");
-		lblNewLabel_1.setBounds(20, 95, 99, 14);
+		lblNewLabel_1.setBounds(20, 83, 99, 14);
 		panel.add(lblNewLabel_1);
 		
 		txtPassword = new JTextField();
-		txtPassword.setBounds(144, 92, 206, 20);
+		txtPassword.setBounds(144, 80, 206, 20);
 		panel.add(txtPassword);
 		txtPassword.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Repetir Contrase\u00F1a:");
-		lblNewLabel_2.setBounds(20, 151, 123, 14);
+		lblNewLabel_2.setBounds(20, 133, 123, 14);
 		panel.add(lblNewLabel_2);
 		
 		txtPasswordRepetir = new JTextField();
-		txtPasswordRepetir.setBounds(144, 148, 206, 20);
+		txtPasswordRepetir.setBounds(144, 130, 206, 20);
 		panel.add(txtPasswordRepetir);
 		txtPasswordRepetir.setColumns(10);
 		
+		cmbTipoUsuario = new JComboBox();
+		cmbTipoUsuario.setModel(new DefaultComboBoxModel(new String[] {"Administrador", "Secretario"}));
+		cmbTipoUsuario.setBackground(new Color(255, 255, 255));
+		cmbTipoUsuario.setBounds(144, 180, 128, 20);
+		panel.add(cmbTipoUsuario);
+		
+		JLabel lblNewLabel_3 = new JLabel("Tipo Usuario:");
+		lblNewLabel_3.setBounds(20, 183, 99, 14);
+		panel.add(lblNewLabel_3);
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(51, 102, 153));
-		panel_1.setBounds(0, 217, 438, 43);
+		panel_1.setBounds(0, 248, 438, 43);
 		contentPanel.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -107,7 +120,7 @@ public class NuevoUsuario extends JDialog {
 		btnInsertarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				User nuevoUsuario = null;
-				nuevoUsuario = new User("User " +String.valueOf(User.getCodigoUsuario() + 1), txtNombreUsuario.getText(), txtPassword.getText());
+				nuevoUsuario = new User("User " +String.valueOf(User.getCodigoUsuario() + 1), txtNombreUsuario.getText(), txtPassword.getText(), cmbTipoUsuario.getSelectedItem().toString());
 				if(!(Empresa.getInstance().insetarUsuario(nuevoUsuario))) {
 					JOptionPane.showMessageDialog(null, "Usuario no insertado", "Informacion", JOptionPane.ERROR_MESSAGE);
 				} else {
