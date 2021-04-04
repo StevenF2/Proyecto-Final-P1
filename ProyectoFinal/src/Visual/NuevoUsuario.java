@@ -124,6 +124,8 @@ public class NuevoUsuario extends JDialog {
 				nuevoUsuario = new User("User " +String.valueOf(User.getCodigoUsuario() + 1), txtNombreUsuario.getText(), txtPassword.getText(), cmbTipoUsuario.getSelectedItem().toString());
 				if(!(Empresa.getInstance().insetarUsuario(nuevoUsuario))) {
 					JOptionPane.showMessageDialog(null, "Usuario no insertado", "Informacion", JOptionPane.ERROR_MESSAGE);
+				} else if (!(txtPasswordRepetir.getText().equalsIgnoreCase(txtPassword.getText()))) {
+					JOptionPane.showMessageDialog(null, "Usuario no insertado", "Informacion", JOptionPane.ERROR_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "Usuario insertado con éxito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 				}
@@ -138,6 +140,7 @@ public class NuevoUsuario extends JDialog {
 	private void clean() {
 		txtNombreUsuario.setText("");
 		txtPassword.setText("");
+		txtPasswordRepetir.setText("");
 		
 	}
 }
