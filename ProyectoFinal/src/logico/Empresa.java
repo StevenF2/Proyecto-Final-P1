@@ -215,4 +215,13 @@ public class Empresa {
 		return true;
 	}
 	
+	public boolean checkUserData(String nombreUsuario, String passwordUsuario) {
+		for(User aux: this.usuarios) {
+			if(aux.getNombreUsuario().equalsIgnoreCase(nombreUsuario) && aux.getPasswordUsuario().equalsIgnoreCase(passwordUsuario)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }
