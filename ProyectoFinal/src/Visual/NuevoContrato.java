@@ -28,6 +28,7 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class NuevoContrato extends JDialog {
@@ -41,6 +42,7 @@ public class NuevoContrato extends JDialog {
 	private JTextField txtNombreP;
 	private JTextField txtBusqueda;
 	private JTextField txtCedula;
+	private static Boolean cExiste = false;
 
 	/**
 	 * Launch the application.
@@ -132,6 +134,7 @@ public class NuevoContrato extends JDialog {
 			txtCantidad.setBounds(443, 81, 37, 20);
 			panel_3.add(txtCantidad);
 			txtCantidad.setColumns(10);
+			txtCantidad.setText(""+1);
 			
 			txtCedula = new JTextField();
 			txtCedula.setColumns(10);
@@ -162,6 +165,39 @@ public class NuevoContrato extends JDialog {
 			panel_1.add(txtBusqueda);
 			
 			JButton btnNewButton = new JButton("Buscar");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					
+					String cedula = txtBusqueda.getText();
+					Cliente c = buscarCliente(cedula);
+					System.out.println(cedula);
+					if(txtBusqueda.getText().isEmpty()) {
+						
+						JOptionPane.showMessageDialog(null,  "Favor introducir el identificador del cliente deseado", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+						
+					} 
+					
+					if(c == null && !txtBusqueda.getText().isEmpty()) {
+						
+						JOptionPane.showMessageDialog(null,  "No se ha encontrado un cliente con el identificador introducido", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+
+					}else {
+						
+						txtNombre.setText(""+c.getNombre());
+						txtNombre.setEditable(false);
+						txtCedula.setText(""+c.getCedula());
+						txtCedula.setEditable(false);
+						txtTelefono.setText(""+c.getTelefono());
+						txtTelefono.setEditable(false);
+						txtDireccion.setText(""+c.getDireccion());
+						txtDireccion.setEditable(false);
+						txtCantidad.setText(""+c.getCantiProyectos());						
+						
+					}
+					
+					
+				}
+			});
 			btnNewButton.setBounds(375, 84, 96, 31);
 			panel_1.add(btnNewButton);
 			btnNewButton.setBorderPainted(false);
@@ -206,6 +242,7 @@ public class NuevoContrato extends JDialog {
 				String direccion = txtDireccion.getText();
 				int cantidad = Integer.parseInt(txtCantidad.getText());
 				
+				
 				String tipo = null;
 				String lenguaje = null;
 				
@@ -248,6 +285,8 @@ public class NuevoContrato extends JDialog {
 					break;
 		}
 				
+				//Si el cliente ya existe, no se puede agregar un nuevo cliente
+				
 				Cliente cli = new Cliente(cedula, nombre, direccion, telefono);
 				Contrato c = new Contrato(idContrato, cedula, nombreP, cli);
 				Proyecto p = new Proyecto(nombreP, tipo, true, lenguaje, false, Empresa.getInicio(), Empresa.getFin(), Empresa.getFin());
@@ -256,8 +295,12 @@ public class NuevoContrato extends JDialog {
 				Empresa.getInstance().insertarContrato(c);
 				Empresa.getInstance().insertarProyecto(p);
 				
+				
+				
 				JOptionPane.showMessageDialog(null,  "Se ha agregado un nuevo proyecto satisfactoriamente ", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 				dispose();
+				
+				System.out.println(Empresa.getInstance().getClientes().get(0).getNombre());
 				
 			}
 		});
@@ -274,4 +317,18 @@ public class NuevoContrato extends JDialog {
 		button_2.setBounds(337, 0, 89, 45);
 		panel.add(button_2);*/
 	}
+
+	protected Cliente buscarCliente(String cedula) {
+		Cliente c = null;
+		ArrayList <Cliente> aux = Empresa.getInstance().getClientes();
+		
+		for(Cliente cl: aux) {
+			if(cl.getCedula().equalsIgnoreCase(cedula)) {
+				c = cl;
+				return c;
+			}
+		}
+		return c;
+		
+			}
 }
