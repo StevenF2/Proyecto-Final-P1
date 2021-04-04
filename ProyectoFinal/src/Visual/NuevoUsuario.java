@@ -12,13 +12,17 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class NuevoUsuario extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtNombreUsuario;
+	private JTextField txtPassword;
+	private JTextField txtPasswordRepetir;
+	private JButton btnInsertarUsuario;
+	private JButton btnCancelar;
 
 	/**
 	 * Launch the application.
@@ -47,7 +51,7 @@ public class NuevoUsuario extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)), "Crear Nuevo Usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(10, 11, 418, 206);
+		panel.setBounds(10, 11, 418, 195);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
@@ -55,44 +59,48 @@ public class NuevoUsuario extends JDialog {
 		lblNewLabel.setBounds(20, 34, 114, 14);
 		panel.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(144, 36, 206, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtNombreUsuario = new JTextField();
+		txtNombreUsuario.setBounds(144, 36, 206, 20);
+		panel.add(txtNombreUsuario);
+		txtNombreUsuario.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Contrase\u00F1a:");
 		lblNewLabel_1.setBounds(20, 95, 99, 14);
 		panel.add(lblNewLabel_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(144, 92, 206, 20);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		txtPassword = new JTextField();
+		txtPassword.setBounds(144, 92, 206, 20);
+		panel.add(txtPassword);
+		txtPassword.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Repetir Contrase\u00F1a:");
 		lblNewLabel_2.setBounds(20, 151, 123, 14);
 		panel.add(lblNewLabel_2);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(144, 148, 206, 20);
-		panel.add(textField_2);
-		textField_2.setColumns(10);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(new Color(51, 102, 153));
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+		txtPasswordRepetir = new JTextField();
+		txtPasswordRepetir.setBounds(144, 148, 206, 20);
+		panel.add(txtPasswordRepetir);
+		txtPasswordRepetir.setColumns(10);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(51, 102, 153));
+		panel_1.setBounds(0, 217, 438, 43);
+		contentPanel.add(panel_1);
+		panel_1.setLayout(null);
+		
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
 			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
+		});
+		btnCancelar.setBackground(new Color(51, 102, 153));
+		btnCancelar.setBounds(339, 0, 89, 43);
+		panel_1.add(btnCancelar);
+		
+		btnInsertarUsuario = new JButton("Insertar");
+		btnInsertarUsuario.setBackground(new Color(51, 102, 153));
+		btnInsertarUsuario.setBounds(240, 0, 89, 43);
+		panel_1.add(btnInsertarUsuario);
 	}
 }
