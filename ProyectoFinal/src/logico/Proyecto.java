@@ -9,18 +9,20 @@ public class Proyecto {
 	private String nombre;
 	private String tipo;
 	private Boolean estado;
+	private String lenguaje;
 	private Boolean extendido;
 	private Date fechaInicio;
 	private Date fechaEntrega;
 	private Date fechaTerminacionReal;
 	
-	public Proyecto(String nombre, String tipo, Boolean estado, Boolean extendido,
+	public Proyecto(String nombre, String tipo, Boolean estado, String lenguaje, Boolean extendido,
 			Date fechaInicio, Date fechaEntrega, Date fechaTerminacionReal) {
 		super();
 		this.empleados = new ArrayList <Empleado>();
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.estado = estado;
+		this.lenguaje = lenguaje;
 		this.extendido = extendido;
 		this.fechaInicio = fechaInicio;
 		this.fechaEntrega = fechaEntrega;
@@ -57,6 +59,14 @@ public class Proyecto {
 
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
+	}
+
+	public String getLenguaje() {
+		return lenguaje;
+	}
+
+	public void setLenguaje(String lenguaje) {
+		this.lenguaje = lenguaje;
 	}
 
 	public Boolean getExtendido() {

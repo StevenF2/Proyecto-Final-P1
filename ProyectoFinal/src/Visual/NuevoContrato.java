@@ -12,6 +12,7 @@ import java.awt.Color;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.BoxLayout;
@@ -127,6 +128,7 @@ public class NuevoContrato extends JDialog {
 			txtNombre.setColumns(10);
 			
 			txtCantidad = new JTextField();
+			txtCantidad.setEditable(false);
 			txtCantidad.setBounds(443, 81, 37, 20);
 			panel_3.add(txtCantidad);
 			txtCantidad.setColumns(10);
@@ -204,10 +206,58 @@ public class NuevoContrato extends JDialog {
 				String direccion = txtDireccion.getText();
 				int cantidad = Integer.parseInt(txtCantidad.getText());
 				
-				Cliente cli = new Cliente(cedula, nombre, direccion, telefono);
+				String tipo = null;
+				String lenguaje = null;
 				
+				switch (Empresa.getTipo()) {
+				
+				case 0: tipo = "Web";
+					break;
+					
+				case 1: tipo = "Desktop";
+					break;
+					
+				case 2: tipo = "Movil";
+					break;
+				}
+				
+				switch (Empresa.getLenguaje()) {
+				
+				case 0: lenguaje = "Python";
+					break;
+					
+				case 1: lenguaje = "C#";
+					break;
+					
+				case 2: lenguaje = "JavaScrypt";
+					break;
+				
+				case 3: lenguaje = "Ruby";
+					break;
+			
+				case 4: lenguaje = "C++";
+					break;
+			
+				case 5: lenguaje = "C";
+					break;
+						
+				case 6: lenguaje = "Java";
+					break;
+		
+				case 7: lenguaje = "Angular";
+					break;
+		}
+				
+				Cliente cli = new Cliente(cedula, nombre, direccion, telefono);
 				Contrato c = new Contrato(idContrato, cedula, nombreP, cli);
-				Proyecto p = new Proyecto(direccion, direccion, rootPaneCheckingEnabled, rootPaneCheckingEnabled, null, null, null);
+				Proyecto p = new Proyecto(nombreP, tipo, true, lenguaje, false, Empresa.getInicio(), Empresa.getFin(), Empresa.getFin());
+				
+				Empresa.getInstance().insertarCliente(cli);
+				Empresa.getInstance().insertarContrato(c);
+				Empresa.getInstance().insertarProyecto(p);
+				
+				JOptionPane.showMessageDialog(null,  "Se ha agregado un nuevo proyecto satisfactoriamente ", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+				dispose();
 				
 			}
 		});

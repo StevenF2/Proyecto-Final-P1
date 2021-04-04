@@ -226,7 +226,7 @@ public class Empresa {
 	public Contrato buscarContrato(String codigo) {
 		Contrato cont = null;
 		for(Contrato aux: this.contratos) {
-			if(aux.getNumeroContrato().equalsIgnoreCase(codigo)) {
+			if((""+aux.getNumeroContrato()).equalsIgnoreCase(codigo)) {
 				cont = aux;
 				return cont;
 			}
