@@ -77,6 +77,14 @@ public class Empresa {
 	public void setProyectos(ArrayList<Proyecto> proyectos) {
 		this.proyectos = proyectos;
 	}
+	
+	public ArrayList<User> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(ArrayList<User> usuarios) {
+		this.usuarios = usuarios;
+	}
 
 	public static Empresa getEmpresa() {
 		return empresa;
