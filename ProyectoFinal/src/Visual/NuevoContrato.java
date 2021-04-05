@@ -32,6 +32,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class NuevoContrato extends JDialog {
 
@@ -46,7 +47,9 @@ public class NuevoContrato extends JDialog {
 	private JTextField txtCedula;
 	private static Boolean cExiste = false;
 	private Cliente cExistente = null;
-
+	private JTextField txtTotal;
+	private static float total = 0;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -58,14 +61,14 @@ public class NuevoContrato extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-	}*/
+	} */
 
 	/**
 	 * Create the dialog.
 	 * @param actionListener 
 	 */
 	public NuevoContrato() {
-		setBounds(100, 100, 650, 360);
+		setBounds(100, 100, 650, 420);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(255, 255, 255));
@@ -74,7 +77,7 @@ public class NuevoContrato extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JPanel panel = new JPanel();
-			panel.setBounds(5, 5, 624, 272);
+			panel.setBounds(5, 5, 624, 321);
 			panel.setBackground(new Color(255, 255, 255));
 			contentPanel.add(panel);
 			panel.setLayout(null);
@@ -82,7 +85,7 @@ public class NuevoContrato extends JDialog {
 			JPanel panel_1 = new JPanel();
 			panel_1.setBackground(new Color(255, 255, 255));
 			panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)), "Informacion Contrato", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel_1.setBounds(10, 0, 599, 261);
+			panel_1.setBounds(10, 0, 599, 321);
 			panel.add(panel_1);
 			panel_1.setLayout(null);
 			
@@ -93,12 +96,12 @@ public class NuevoContrato extends JDialog {
 			JPanel panel_3 = new JPanel();
 			panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)), "Informacion Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			panel_3.setBackground(new Color(255, 255, 255));
-			panel_3.setBounds(62, 115, 490, 134);
+			panel_3.setBounds(62, 115, 490, 145);
 			panel_1.add(panel_3);
 			panel_3.setLayout(null);
 			
 			JLabel lblNewLabel_2 = new JLabel("Cedula");
-			lblNewLabel_2.setBounds(220, 36, 61, 14);
+			lblNewLabel_2.setBounds(251, 36, 61, 14);
 			panel_3.add(lblNewLabel_2);
 			
 			JLabel lblNewLabel_3 = new JLabel("Nombre");
@@ -110,11 +113,11 @@ public class NuevoContrato extends JDialog {
 			panel_3.add(lblNewLabel_4);
 			
 			JLabel lblNewLabel_5 = new JLabel("Direccion");
-			lblNewLabel_5.setBounds(199, 84, 61, 14);
+			lblNewLabel_5.setBounds(251, 84, 61, 14);
 			panel_3.add(lblNewLabel_5);
 			
-			JLabel lblNewLabel_6 = new JLabel("Cant. P");
-			lblNewLabel_6.setBounds(391, 83, 55, 17);
+			JLabel lblNewLabel_6 = new JLabel("Proyectos Activos");
+			lblNewLabel_6.setBounds(126, 117, 125, 17);
 			panel_3.add(lblNewLabel_6);
 			
 			txtTelefono = new JTextField();
@@ -123,7 +126,7 @@ public class NuevoContrato extends JDialog {
 			txtTelefono.setColumns(10);
 			
 			txtDireccion = new JTextField();
-			txtDireccion.setBounds(270, 81, 111, 20);
+			txtDireccion.setBounds(312, 81, 123, 20);
 			panel_3.add(txtDireccion);
 			txtDireccion.setColumns(10);
 			
@@ -134,14 +137,14 @@ public class NuevoContrato extends JDialog {
 			
 			txtCantidad = new JTextField();
 			txtCantidad.setEditable(false);
-			txtCantidad.setBounds(443, 81, 37, 20);
+			txtCantidad.setBounds(230, 115, 37, 20);
 			panel_3.add(txtCantidad);
 			txtCantidad.setColumns(10);
 			txtCantidad.setText("");
 			
 			txtCedula = new JTextField();
 			txtCedula.setColumns(10);
-			txtCedula.setBounds(270, 33, 125, 20);
+			txtCedula.setBounds(310, 33, 125, 20);
 			panel_3.add(txtCedula);
 			
 			txtId = new JTextField();
@@ -208,12 +211,24 @@ public class NuevoContrato extends JDialog {
 			panel_1.add(btnNewButton);
 			btnNewButton.setBorderPainted(false);
 			btnNewButton.setBackground(new Color(204, 204, 204));
+			
+			JLabel lblNewLabel_7 = new JLabel("Monto Total");
+			lblNewLabel_7.setBounds(355, 281, 90, 14);
+			panel_1.add(lblNewLabel_7);
+			
+			txtTotal = new JTextField();
+			txtTotal.setEditable(false);
+			txtTotal.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			txtTotal.setBounds(440, 271, 129, 35);
+			panel_1.add(txtTotal);
+			txtTotal.setColumns(10);
+			txtTotal.setText(""+calcularTotal()+"$RD");
 		}
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(new Color(51, 102, 153));
-		panel.setBounds(0, 277, 634, 45);
+		panel.setBounds(0, 337, 634, 45);
 		contentPanel.add(panel);
 		
 		JButton btnAtras = new JButton("Atras");
@@ -236,8 +251,8 @@ public class NuevoContrato extends JDialog {
 		btnAtras.setBounds(423, 0, 89, 45);
 		panel.add(btnAtras);
 		
-		JButton button_1 = new JButton("Insertar");
-		button_1.addActionListener(new ActionListener() {
+		JButton btnFinalizar = new JButton("Finalizar");
+		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				int idContrato = Integer.parseInt(txtId.getText());
@@ -352,11 +367,11 @@ public class NuevoContrato extends JDialog {
 				
 			}
 		});
-		button_1.setForeground(Color.WHITE);
-		button_1.setBorderPainted(false);
-		button_1.setBackground(new Color(51, 102, 153));
-		button_1.setBounds(522, 0, 89, 45);
-		panel.add(button_1);
+		btnFinalizar.setForeground(Color.WHITE);
+		btnFinalizar.setBorderPainted(false);
+		btnFinalizar.setBackground(new Color(51, 102, 153));
+		btnFinalizar.setBounds(522, 0, 89, 45);
+		panel.add(btnFinalizar);
 		
 		/*JButton button_2 = new JButton("Atr\u00E1s");
 		button_2.setForeground(Color.WHITE);
@@ -393,5 +408,16 @@ public class NuevoContrato extends JDialog {
 				
 			}
 		}		
+	}
+	
+	public double calcularTotal() {
+		double total = 0;
+		
+		for(Empleado e : Empresa.getTemp()) {			
+			
+			total += Math.round(e.getSalario()*100)/100;						
+		}				
+		
+		return total;
 	}
 }
