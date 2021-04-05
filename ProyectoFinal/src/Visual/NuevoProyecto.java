@@ -21,6 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -148,6 +150,14 @@ public class NuevoProyecto extends JDialog {
 			}
 			{
 				txtNombre = new JTextField();
+				txtNombre.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyTyped(KeyEvent e) {
+						if (prevenirDigitos(e)) {
+							e.consume();
+				      }
+					}
+				});
 				txtNombre.setColumns(10);
 				txtNombre.setBounds(264, 25, 278, 20);
 				panel.add(txtNombre);
@@ -328,5 +338,20 @@ public class NuevoProyecto extends JDialog {
 				rows[2] = Empresa.getTemp().get(i).getClass().getSimpleName().toString();
 				model.addRow(rows);
 		}
+	}
+	
+	private boolean prevenirDigitos(KeyEvent arg0) {
+		if (!Character.isLetter(arg0.getKeyChar()) && !(arg0.getKeyChar() == KeyEvent.VK_SPACE) && !(arg0.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+			JOptionPane.showMessageDialog(null, "Solo debe insertar Letras", "Informacion", JOptionPane.WARNING_MESSAGE);
+			return true;
+      }
+		return false;
+	}
+	private boolean prevenirLetras(KeyEvent arg0) {
+		if (!Character.isDigit(arg0.getKeyChar()) && !(arg0.getKeyChar() == KeyEvent.VK_SPACE) && !(arg0.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+			JOptionPane.showMessageDialog(null, "Solo debe insertar numeros", "Informacion", JOptionPane.WARNING_MESSAGE);
+			return true;
+      }
+		return false;
 	}
 }

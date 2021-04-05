@@ -29,6 +29,8 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.awt.event.ActionEvent;
@@ -121,16 +123,40 @@ public class NuevoContrato extends JDialog {
 			panel_3.add(lblNewLabel_6);
 			
 			txtTelefono = new JTextField();
+			txtTelefono.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					if (prevenirLetras(e)) {
+						e.consume();
+			      }
+				}
+			});
 			txtTelefono.setBounds(68, 81, 121, 20);
 			panel_3.add(txtTelefono);
 			txtTelefono.setColumns(10);
 			
 			txtDireccion = new JTextField();
+			txtDireccion.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					if (prevenirDigitos(e)) {
+						e.consume();
+			      }
+				}
+			});
 			txtDireccion.setBounds(312, 81, 123, 20);
 			panel_3.add(txtDireccion);
 			txtDireccion.setColumns(10);
 			
 			txtNombre = new JTextField();
+			txtNombre.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					if (prevenirDigitos(e)) {
+						e.consume();
+			      }
+				}
+			});
 			txtNombre.setBounds(68, 33, 125, 20);
 			panel_3.add(txtNombre);
 			txtNombre.setColumns(10);
@@ -143,6 +169,14 @@ public class NuevoContrato extends JDialog {
 			txtCantidad.setText("");
 			
 			txtCedula = new JTextField();
+			txtCedula.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					if (prevenirLetras(e)) {
+						e.consume();
+			      }
+				}
+			});
 			txtCedula.setColumns(10);
 			txtCedula.setBounds(310, 33, 125, 20);
 			panel_3.add(txtCedula);
@@ -157,6 +191,14 @@ public class NuevoContrato extends JDialog {
 			panel_1.add(lblIdCliente);
 			
 			txtNombreP = new JTextField();
+			txtNombreP.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					if (prevenirDigitos(e)) {
+						e.consume();
+			      }
+				}
+			});
 			txtNombreP.setColumns(10);
 			txtNombreP.setBounds(409, 39, 160, 20);
 			panel_1.add(txtNombreP);
@@ -419,5 +461,20 @@ public class NuevoContrato extends JDialog {
 		}				
 		
 		return total;
+	}
+	
+	private boolean prevenirDigitos(KeyEvent arg0) {
+		if (!Character.isLetter(arg0.getKeyChar()) && !(arg0.getKeyChar() == KeyEvent.VK_SPACE) && !(arg0.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+			JOptionPane.showMessageDialog(null, "Solo debe insertar Letras", "Informacion", JOptionPane.WARNING_MESSAGE);
+			return true;
+      }
+		return false;
+	}
+	private boolean prevenirLetras(KeyEvent arg0) {
+		if (!Character.isDigit(arg0.getKeyChar()) && !(arg0.getKeyChar() == KeyEvent.VK_SPACE) && !(arg0.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+			JOptionPane.showMessageDialog(null, "Solo debe insertar numeros", "Informacion", JOptionPane.WARNING_MESSAGE);
+			return true;
+      }
+		return false;
 	}
 }
