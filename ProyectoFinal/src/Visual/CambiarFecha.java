@@ -5,14 +5,23 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
+
+import logico.Empresa;
+import logico.Proyecto;
+
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class CambiarFecha extends JDialog {
@@ -23,9 +32,9 @@ public class CambiarFecha extends JDialog {
 	private JPanel panel;
 	private JLabel lblNewLabel;
 	private JTextField txtFechaEntregaInicial;
-	private JTextField txtFechaEntregaA;
+	private JFormattedTextField txtFechaEntregaA;
 	private String fechaEntregaInicial;
-
+	private String codigoProyecto;
 	/**
 	 * Launch the application.
 	 */
@@ -43,9 +52,10 @@ public class CambiarFecha extends JDialog {
 	 * Create the dialog.
 	 * @param proyectos 
 	 */
-	public CambiarFecha(String proyectosFecha) {
+	public CambiarFecha(String nombre,String proyectosFecha) {
+		this.codigoProyecto = nombre;
 		this.fechaEntregaInicial = proyectosFecha;
-		setBounds(100, 100, 363, 231);
+		setBounds(100, 100, 386, 231);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(255, 255, 255));
@@ -67,7 +77,7 @@ public class CambiarFecha extends JDialog {
 			txtFechaEntregaInicial = new JTextField();
 			txtFechaEntregaInicial.setEnabled(false);
 			txtFechaEntregaInicial.setText(fechaEntregaInicial);
-			txtFechaEntregaInicial.setBounds(195, 48, 132, 20);
+			txtFechaEntregaInicial.setBounds(195, 48, 155, 20);
 			panel.add(txtFechaEntregaInicial);
 			txtFechaEntregaInicial.setColumns(10);
 			
@@ -75,8 +85,9 @@ public class CambiarFecha extends JDialog {
 			lblNewLabel_1.setBounds(10, 98, 175, 14);
 			panel.add(lblNewLabel_1);
 			
-			txtFechaEntregaA = new JTextField();
-			txtFechaEntregaA.setBounds(195, 95, 132, 20);
+			txtFechaEntregaA = new JFormattedTextField(new SimpleDateFormat("dd/MM/yyyy"));
+			txtFechaEntregaA.setValue(new java.util.Date());
+			txtFechaEntregaA.setBounds(195, 95, 155, 20);
 			panel.add(txtFechaEntregaA);
 			txtFechaEntregaA.setColumns(10);
 		}
@@ -87,6 +98,24 @@ public class CambiarFecha extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnCambiar = new JButton("Procesar");
+				btnCambiar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						Proyecto pro = Empresa.getInstance().buscarProyecto(codigoProyecto);
+						if(pro != null) {
+							Date fechaEntregaA;
+							try {
+								fechaEntregaA = new SimpleDateFormat("dd/MM/yyyy").parse(txtFechaEntregaA.getText());
+								pro.setFechaEntrega(fechaEntregaA);
+								pro.setExtendido(true);		
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								JOptionPane.showMessageDialog(null, "Ocurrio un error", "Informacion", JOptionPane.ERROR_MESSAGE);
+							}
+							JOptionPane.showMessageDialog(null, "Proyecto Modificado con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+							dispose();
+						}
+					}
+				});
 				btnCambiar.setBorderPainted(false);
 				btnCambiar.setForeground(new Color(255, 255, 255));
 				btnCambiar.setBackground(new Color(51, 102, 153));
