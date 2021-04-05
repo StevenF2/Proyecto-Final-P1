@@ -26,6 +26,8 @@ import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MostrarProyecto extends JDialog {
 	private JButton btnCancelar;
@@ -33,11 +35,14 @@ public class MostrarProyecto extends JDialog {
 	private static DefaultTableModel model;
 	private static Object[] rows;
 	private JComboBox cmbEstado;
+	private String[] proyectos;
+	private JButton btnProrroga;
+	private JButton btnFinalizar;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			MostrarProyecto dialog = new MostrarProyecto();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -45,7 +50,7 @@ public class MostrarProyecto extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Create the dialog.
@@ -53,6 +58,7 @@ public class MostrarProyecto extends JDialog {
 	public MostrarProyecto() {
 		setBounds(100, 100, 670, 462);
 		setLocationRelativeTo(null);
+		this.proyectos = new String[5];
 		String columns[] = {"Nombre", "Tipo", "Lenguaje", "Fecha Inicio", "Fecha Terminacion"};
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(columns);
@@ -88,12 +94,12 @@ public class MostrarProyecto extends JDialog {
 				panel_1.setLayout(null);
 				panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)), "Mostrar Usuarios", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 				panel_1.setBackground(Color.WHITE);
-				panel_1.setBounds(10, 11, 538, 358);
+				panel_1.setBounds(10, 11, 634, 358);
 				panel.add(panel_1);
 				{
 					JPanel panel_2 = new JPanel();
 					panel_2.setBackground(Color.WHITE);
-					panel_2.setBounds(10, 63, 518, 284);
+					panel_2.setBounds(10, 63, 614, 284);
 					panel_1.add(panel_2);
 					panel_2.setLayout(new BorderLayout(0, 0));
 					{
@@ -101,6 +107,23 @@ public class MostrarProyecto extends JDialog {
 						panel_2.add(scrollPane, BorderLayout.CENTER);
 						{
 							tblMostrarProyecto = new JTable();
+							tblMostrarProyecto.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent arg0) {
+									int seleccion = -1;
+									seleccion = tblMostrarProyecto.getSelectedRow();
+									if(seleccion > -1) {
+										proyectos[0] = tblMostrarProyecto.getValueAt(seleccion, 0).toString();
+										proyectos[1] = tblMostrarProyecto.getValueAt(seleccion, 1).toString();
+										proyectos[2] = tblMostrarProyecto.getValueAt(seleccion, 2).toString();
+										proyectos[3] = tblMostrarProyecto.getValueAt(seleccion, 3).toString();
+										proyectos[4] = tblMostrarProyecto.getValueAt(seleccion, 4).toString();
+										btnFinalizar.setEnabled(true);
+										btnFinalizar.setEnabled(true);
+										//btnInsertarEmpleado.setEnabled(true);
+									}
+								}
+							});
 							tblMostrarProyecto.setModel(model);
 							tblMostrarProyecto.getTableHeader().setReorderingAllowed(false);
 							scrollPane.setViewportView(tblMostrarProyecto);
@@ -116,6 +139,27 @@ public class MostrarProyecto extends JDialog {
 				cmbEstado.setModel(new DefaultComboBoxModel(new String[] {"Todo", "En Proceso", "Finalizado"}));
 				cmbEstado.setBounds(73, 32, 115, 20);
 				panel_1.add(cmbEstado);
+				
+				btnFinalizar = new JButton("Finalizar");
+				btnFinalizar.setEnabled(false);
+				btnFinalizar.setBorderPainted(false);
+				btnFinalizar.setBackground(new Color(153, 153, 153));
+				btnFinalizar.setBounds(535, 22, 89, 30);
+				panel_1.add(btnFinalizar);
+				
+				btnProrroga = new JButton("Prorroga");
+				btnProrroga.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						CambiarFecha cambiarFecha = new CambiarFecha(proyectos[4]);
+						cambiarFecha.setModal(true);
+						cambiarFecha.setVisible(true);
+					}
+				});
+				btnProrroga.setEnabled(false);
+				btnProrroga.setBorderPainted(false);
+				btnProrroga.setBackground(new Color(153, 153, 153));
+				btnProrroga.setBounds(436, 22, 89, 30);
+				panel_1.add(btnProrroga);
 			}
 		}
 		cargarEmpleados(cmbEstado.getSelectedItem().toString());
