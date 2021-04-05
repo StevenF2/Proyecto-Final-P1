@@ -45,6 +45,7 @@ public class NuevoContrato extends JDialog {
 	private JTextField txtBusqueda;
 	private JTextField txtCedula;
 	private static Boolean cExiste = false;
+	private Cliente cExistente = null;
 
 	/**
 	 * Launch the application.
@@ -172,6 +173,7 @@ public class NuevoContrato extends JDialog {
 					
 					String cedula = txtBusqueda.getText();
 					Cliente c = buscarCliente(cedula);
+					cExistente = c;
 					System.out.println(cedula);
 					if(txtBusqueda.getText().isEmpty()) {
 						
@@ -193,7 +195,8 @@ public class NuevoContrato extends JDialog {
 						txtTelefono.setEditable(false);
 						txtDireccion.setText(""+c.getDireccion());
 						txtDireccion.setEditable(false);
-						txtCantidad.setText(""+c.getCantiProyectos());						
+						txtCantidad.setText(""+c.getCantiProyectos());		
+						cExiste = true;
 						
 					}
 					
@@ -307,11 +310,21 @@ public class NuevoContrato extends JDialog {
 					private Date fechaEntrega;
 					private Date fechaTerminacionReal;
 				 */
+				if(cExiste == true) {
+					
+					clienteNuevoPoyecto(cExistente,p,c);
+					JOptionPane.showMessageDialog(null,  "Se ha agregado un nuevo proyecto satisfactoriamente ", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+					cExiste = false;
+					cExistente = null;
+					dispose();
+					
+				}else {
+				
 				Empresa.getInstance().insertarCliente(cli);
 				Empresa.getInstance().insertarContrato(c);
 				Empresa.getInstance().insertarProyecto(p);
 				
-				
+				}
 				
 				JOptionPane.showMessageDialog(null,  "Se ha agregado un nuevo proyecto satisfactoriamente ", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 				dispose();
@@ -347,4 +360,19 @@ public class NuevoContrato extends JDialog {
 		return c;
 		
 			}
+	
+	public void clienteNuevoPoyecto(Cliente c, Proyecto p, Contrato co) {
+		
+		Empresa.getInstance().insertarProyecto(p);
+		
+		for(Cliente cli : Empresa.getInstance().getClientes()) {
+			
+			if(c == cli) {
+				
+				cli.getContratos().add(co);
+				cli.setCantiProyectos(cli.getCantiProyectos()+1);
+				
+			}
+		}		
+	}
 }
