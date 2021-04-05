@@ -61,9 +61,9 @@ public class AgregarEmpleado extends JDialog {
 	 */
 	public AgregarEmpleado(String string) {
 		this.nombreLenguaje = string;
-		this.empleados = new String[2];
+		this.empleados = new String[3];
 		this.empleadosIndex = 0;
-		String columnas[] = {"Nombre", "Puesto"};
+		String columnas[] = {"Cedula", "Nombre", "Puesto"};
 		model = new DefaultTableModel();
 		modelAceptado = new DefaultTableModel();
 		model.setColumnIdentifiers(columnas);
@@ -101,6 +101,7 @@ public class AgregarEmpleado extends JDialog {
 								if(seleccion > -1) {
 									empleados[0] = tblListaEmpleados.getValueAt(seleccion, 0).toString();
 									empleados[1] = tblListaEmpleados.getValueAt(seleccion, 1).toString();
+									empleados[2] = tblListaEmpleados.getValueAt(seleccion, 2).toString();
 									btnInsertarEmpleado.setEnabled(true);
 								}
 							}
@@ -146,7 +147,8 @@ public class AgregarEmpleado extends JDialog {
 						rowsAceptados = new Object[modelAceptado.getColumnCount()];
 						if(checkElements(empleados[0])) {
 							rowsAceptados[0]= empleados[0];
-							rowsAceptados[1] = empleados[1];
+							rowsAceptados[1]= empleados[1];
+							rowsAceptados[2] = empleados[2];
 							modelAceptado.addRow(rowsAceptados);
 						}
 						btnInsertarEmpleado.setEnabled(false);
@@ -236,8 +238,9 @@ public class AgregarEmpleado extends JDialog {
 		rows = new Object[model.getColumnCount()];
 		model.setRowCount(0);
 		for(int i = 0; i < emp2.size() ; i++) {
-			rows[0] = emp2.get(i).getNombre().toString();
-			rows[1] = emp2.get(i).getClass().getSimpleName().toString();
+			rows[0] = emp2.get(i).getCedula().toString();
+			rows[1] = emp2.get(i).getNombre().toString();
+			rows[2] = emp2.get(i).getClass().getSimpleName().toString();
 			model.addRow(rows);
 		}
 	}
