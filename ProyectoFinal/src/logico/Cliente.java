@@ -9,6 +9,7 @@ public class Cliente {
 	private String telefono;
 	private ArrayList<Contrato> contratos;
 	private int cantiProyectos = 1;
+	
 	public Cliente(String cedula, String nombre, String direccion, String telefono) {
 		super();
 		this.cedula = cedula;

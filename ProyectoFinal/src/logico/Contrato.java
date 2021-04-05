@@ -8,13 +8,16 @@ public class Contrato {
 	private float montoTotal;
 	private float penalidad;
 	private Cliente cliente;
+	private Proyecto proyecto;
 	
-	public Contrato(int numeroContrato, String cedulaCliente, String nombreProyecto, Cliente cliente) {
+	public Contrato(int numeroContrato, String cedulaCliente, String nombreProyecto, Cliente cliente, Proyecto proyecto) {
 		super();
 		this.numeroContrato = numeroContrato;
 		this.cedulaCliente = cedulaCliente;
 		this.nombreProyecto = nombreProyecto;
 		this.cliente = cliente; 
+		this.proyecto = proyecto;
+		
 	}
 //	private static int cantidadContrato = 1;
 
@@ -67,6 +70,18 @@ public class Contrato {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+
+
+	public Proyecto getProyecto() {
+		return proyecto;
+	}
+
+
+
+	public void setProyecto(Proyecto proyecto) {
+		this.proyecto = proyecto;
 	}
 	
 }

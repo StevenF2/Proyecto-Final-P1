@@ -27,6 +27,7 @@ public class Proyecto {
 		this.fechaInicio = fechaInicio;
 		this.fechaEntrega = fechaEntrega;
 		this.fechaTerminacionReal = fechaTerminacionReal;
+		this.empleados = new ArrayList <Empleado>();
 	}
 
 	public ArrayList<Empleado> getEmpleados() {

@@ -294,8 +294,8 @@ public class NuevoContrato extends JDialog {
 				
 				
 				Cliente cli = new Cliente(cedula, nombre, direccion, telefono);
-				Contrato c = new Contrato(idContrato, cedula, nombreP, cli);
 				Proyecto p = new Proyecto(nombreP, tipo, true, lenguaje, false, Empresa.getInicio(), Empresa.getFin(), Empresa.getFin(), Empresa.getTemp());
+				Contrato c = new Contrato(idContrato, cedula, nombreP, cli, p);
 				/**
 				 * private ArrayList <Empleado> empleados;
 					private String nombre;
