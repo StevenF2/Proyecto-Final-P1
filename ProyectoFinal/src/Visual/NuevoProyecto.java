@@ -240,17 +240,22 @@ public class NuevoProyecto extends JDialog {
 			spnFinicio.setEditor(editorInicio);
 			spnFinicio.setBounds(136, 69, 118, 20);
 			DateFormatter formatterInicio = (DateFormatter)editorInicio.getTextField().getFormatter();
-			formatterInicio.setAllowsInvalid(false); // this makes what you want
+			formatterInicio.setAllowsInvalid(false); 
 			formatterInicio.setOverwriteMode(true);
 			panel.add(spnFinicio);
 			
+			Date tomorrow = new Date();
+			Calendar c = Calendar.getInstance();
+			c.setTime(tomorrow);
+			c.add(Calendar.DATE, 1);
+			tomorrow = c.getTime();
 			spnFentrega = new JSpinner();
-			spnFentrega.setModel(new SpinnerDateModel(today, null, null, Calendar.MONTH));
+			spnFentrega.setModel(new SpinnerDateModel(tomorrow, null, null, Calendar.MONTH));
 			JSpinner.DateEditor editorEntrega = new JSpinner.DateEditor(spnFentrega, "dd/MM/yyyy");
 			spnFentrega.setEditor(editorEntrega);
 			spnFentrega.setBounds(345, 69, 118, 20);
 			DateFormatter formatterEntrega = (DateFormatter)editorEntrega.getTextField().getFormatter();
-			formatterEntrega.setAllowsInvalid(false); // this makes what you want
+			formatterEntrega.setAllowsInvalid(false); 
 			formatterEntrega.setOverwriteMode(true);
 			panel.add(spnFentrega);
 		}
