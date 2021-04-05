@@ -114,6 +114,13 @@ public class Principal extends JFrame {
 		mnNewMenu_1.add(menuCProyecto);
 		
 		menuMProyecto = new JMenuItem("Mostrar Proyectos");
+		menuMProyecto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MostrarProyecto mProyecto = new MostrarProyecto();
+				mProyecto.setModal(true);
+				mProyecto.setVisible(true);
+			}
+		});
 		menuMProyecto.setForeground(new Color(51, 102, 153));
 		menuMProyecto.setBackground(new Color(255, 255, 255));
 		mnNewMenu_1.add(menuMProyecto);
