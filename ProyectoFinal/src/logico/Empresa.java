@@ -11,6 +11,7 @@ public class Empresa {
 	private ArrayList <Contrato> contratos;
 	private ArrayList <Empleado> empleados;
 	private ArrayList <Proyecto> proyectos;
+	private ArrayList<User> usuarios;
 	private static Empresa empresa = null;
 	private static int numClientes = 1;
 	private static int numContratos = 1;
@@ -32,6 +33,7 @@ public class Empresa {
 		this.contratos = new ArrayList <Contrato>();
 		this.empleados = new ArrayList <Empleado>();
 		this.proyectos = new ArrayList <Proyecto>();
+		this.usuarios = new ArrayList<User>();
 	}
 	
 	public static Empresa getInstance() {
@@ -74,6 +76,14 @@ public class Empresa {
 
 	public void setProyectos(ArrayList<Proyecto> proyectos) {
 		this.proyectos = proyectos;
+	}
+	
+	public ArrayList<User> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(ArrayList<User> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	public static Empresa getEmpresa() {
@@ -209,6 +219,13 @@ public class Empresa {
 		numClientes++;
 	}
 	
+	public boolean insetarUsuario(User user) {
+		if(checkSiExisteUser(user.getNombreUsuario())) {
+			this.usuarios.add(user);
+			return true;
+		}
+		return false;
+	}
 	/**
 	 * Debo de probar las funciones de buscar y modificarNombreProyecto lo haré mañana 26/3/21
 	 * Att: Tu compañera :3
@@ -277,6 +294,24 @@ public class Empresa {
 		for(Empleado aux: pro.getEmpleados()) {
 			aux.setNombreProyecto(nombre);
 		}
+	}
+	
+	public boolean checkSiExisteUser(String usuario) {
+		for(User aux: this.usuarios) {
+			if(aux.getNombreUsuario().equalsIgnoreCase(usuario)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean checkUserData(String nombreUsuario, String passwordUsuario) {
+		for(User aux: this.usuarios) {
+			if(aux.getNombreUsuario().equalsIgnoreCase(nombreUsuario) && aux.getPasswordUsuario().equalsIgnoreCase(passwordUsuario)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

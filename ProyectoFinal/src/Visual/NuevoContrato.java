@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 import logico.Cliente;
 import logico.Contrato;
+import logico.Empleado;
 import logico.Empresa;
 import logico.Proyecto;
 
@@ -29,6 +30,7 @@ import javax.swing.JComponent;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 
 public class NuevoContrato extends JDialog {
@@ -47,7 +49,7 @@ public class NuevoContrato extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			NuevoContrato dialog = new NuevoContrato();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -55,7 +57,7 @@ public class NuevoContrato extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-	}
+	}*/
 
 	/**
 	 * Create the dialog.
@@ -293,8 +295,18 @@ public class NuevoContrato extends JDialog {
 				
 				Cliente cli = new Cliente(cedula, nombre, direccion, telefono);
 				Contrato c = new Contrato(idContrato, cedula, nombreP, cli);
-				Proyecto p = new Proyecto(nombreP, tipo, true, lenguaje, false, Empresa.getInicio(), Empresa.getFin(), Empresa.getFin());
-				
+				Proyecto p = new Proyecto(nombreP, tipo, true, lenguaje, false, Empresa.getInicio(), Empresa.getFin(), Empresa.getFin(), Empresa.getTemp());
+				/**
+				 * private ArrayList <Empleado> empleados;
+					private String nombre;
+					private String tipo;
+					private Boolean estado;
+					private String lenguaje;
+					private Boolean extendido;
+					private Date fechaInicio;
+					private Date fechaEntrega;
+					private Date fechaTerminacionReal;
+				 */
 				Empresa.getInstance().insertarCliente(cli);
 				Empresa.getInstance().insertarContrato(c);
 				Empresa.getInstance().insertarProyecto(p);
