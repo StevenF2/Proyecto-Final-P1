@@ -16,9 +16,9 @@ public class Proyecto {
 	private Date fechaTerminacionReal;
 	
 	public Proyecto(String nombre, String tipo, Boolean estado, String lenguaje, Boolean extendido,
-			Date fechaInicio, Date fechaEntrega, Date fechaTerminacionReal) {
+			Date fechaInicio, Date fechaEntrega, Date fechaTerminacionReal, ArrayList <Empleado> empleados) {
 		super();
-		this.empleados = new ArrayList <Empleado>();
+		this.empleados =  empleados;
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.estado = estado;
