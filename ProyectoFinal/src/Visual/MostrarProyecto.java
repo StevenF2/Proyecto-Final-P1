@@ -1,0 +1,151 @@
+package Visual;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+
+import logico.Disenador;
+import logico.Empresa;
+import logico.Jefe;
+import logico.Planificador;
+import logico.Programador;
+import logico.Secretario;
+
+import javax.swing.border.EtchedBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+
+public class MostrarProyecto extends JDialog {
+	private JButton btnCancelar;
+	private JTable tblMostrarProyecto;
+	private static DefaultTableModel model;
+	private static Object[] rows;
+	private JComboBox cmbEstado;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			MostrarProyecto dialog = new MostrarProyecto();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public MostrarProyecto() {
+		setBounds(100, 100, 670, 462);
+		setLocationRelativeTo(null);
+		String columns[] = {"Nombre", "Tipo", "Lenguaje", "Fecha Inicio", "Fecha Terminacion"};
+		model = new DefaultTableModel();
+		model.setColumnIdentifiers(columns);
+		getContentPane().setLayout(null);
+		{
+			JPanel panel_1 = new JPanel();
+			panel_1.setBounds(0, 380, 654, 43);
+			getContentPane().add(panel_1);
+			panel_1.setLayout(null);
+			panel_1.setBackground(new Color(51, 102, 153));
+			{
+				btnCancelar = new JButton("Cancelar");
+				btnCancelar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();
+					}
+				});
+				btnCancelar.setForeground(Color.WHITE);
+				btnCancelar.setBackground(new Color(51, 102, 153));
+				btnCancelar.setBounds(565, 0, 89, 43);
+				panel_1.add(btnCancelar);
+			}
+		}
+		{
+			JPanel panel = new JPanel();
+			panel.setLayout(null);
+			panel.setBorder(null);
+			panel.setBackground(Color.WHITE);
+			panel.setBounds(0, 0, 654, 380);
+			getContentPane().add(panel);
+			{
+				JPanel panel_1 = new JPanel();
+				panel_1.setLayout(null);
+				panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)), "Mostrar Usuarios", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				panel_1.setBackground(Color.WHITE);
+				panel_1.setBounds(10, 11, 538, 358);
+				panel.add(panel_1);
+				{
+					JPanel panel_2 = new JPanel();
+					panel_2.setBackground(Color.WHITE);
+					panel_2.setBounds(10, 63, 518, 284);
+					panel_1.add(panel_2);
+					panel_2.setLayout(new BorderLayout(0, 0));
+					{
+						JScrollPane scrollPane = new JScrollPane();
+						panel_2.add(scrollPane, BorderLayout.CENTER);
+						{
+							tblMostrarProyecto = new JTable();
+							tblMostrarProyecto.setModel(model);
+							tblMostrarProyecto.getTableHeader().setReorderingAllowed(false);
+							scrollPane.setViewportView(tblMostrarProyecto);
+						}
+					}
+				}
+				
+				JLabel lblNewLabel = new JLabel("Estado:");
+				lblNewLabel.setBounds(10, 38, 74, 14);
+				panel_1.add(lblNewLabel);
+				
+				cmbEstado = new JComboBox();
+				cmbEstado.setModel(new DefaultComboBoxModel(new String[] {"Todo", "En Proceso", "Finalizado"}));
+				cmbEstado.setBounds(73, 32, 115, 20);
+				panel_1.add(cmbEstado);
+			}
+		}
+		cargarEmpleados(cmbEstado.getSelectedItem().toString());
+	}
+	public static void cargarEmpleados(String selectedItem) {
+		model.setRowCount(0);
+		for(int i = 0; i < Empresa.getInstance().getProyectos().size(); i++) {
+			if(selectedItem.equalsIgnoreCase("En Proceso")) {
+				if(Empresa.getInstance().getProyectos().get(i).getEstado()) {
+					model.addRow(insertInRow(i));
+				}
+			} else if (selectedItem.equalsIgnoreCase("Finalizado")) {
+				if(!(Empresa.getInstance().getProyectos().get(i).getEstado())) {
+					model.addRow(insertInRow(i));
+				}
+			}else if (selectedItem.equalsIgnoreCase("Todo")) {
+				model.addRow(insertInRow(i));
+			}
+		}
+	}
+	
+	private static Object[] insertInRow(int index) {
+		rows = new Object[model.getColumnCount()];
+		rows[0] = Empresa.getInstance().getProyectos().get(index).getNombre();
+		rows[1] = Empresa.getInstance().getProyectos().get(index).getTipo();
+		rows[2] = Empresa.getInstance().getProyectos().get(index).getLenguaje();
+		rows[3] = Empresa.getInstance().getProyectos().get(index).getFechaInicio();
+		rows[4] = Empresa.getInstance().getProyectos().get(index).getFechaEntrega();
+		
+		return rows;
+		
+	}
+}
