@@ -28,6 +28,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ScrollPaneConstants;
 
 public class MostrarProyecto extends JDialog {
 	private JButton btnCancelar;
@@ -104,7 +105,8 @@ public class MostrarProyecto extends JDialog {
 					panel_2.setLayout(new BorderLayout(0, 0));
 					{
 						JScrollPane scrollPane = new JScrollPane();
-						panel_2.add(scrollPane, BorderLayout.CENTER);
+						scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+						panel_2.add(scrollPane, BorderLayout.NORTH);
 						{
 							tblMostrarProyecto = new JTable();
 							tblMostrarProyecto.addMouseListener(new MouseAdapter() {
@@ -119,7 +121,7 @@ public class MostrarProyecto extends JDialog {
 										proyectos[3] = tblMostrarProyecto.getValueAt(seleccion, 3).toString();
 										proyectos[4] = tblMostrarProyecto.getValueAt(seleccion, 4).toString();
 										btnFinalizar.setEnabled(true);
-										btnFinalizar.setEnabled(true);
+										btnProrroga.setEnabled(true);
 										//btnInsertarEmpleado.setEnabled(true);
 									}
 								}
@@ -142,22 +144,25 @@ public class MostrarProyecto extends JDialog {
 				
 				btnFinalizar = new JButton("Finalizar");
 				btnFinalizar.setEnabled(false);
+				btnFinalizar.setForeground(new Color(0, 0, 0));
 				btnFinalizar.setBorderPainted(false);
-				btnFinalizar.setBackground(new Color(153, 153, 153));
+				btnFinalizar.setBackground(new Color(204, 204, 204));
 				btnFinalizar.setBounds(535, 22, 89, 30);
 				panel_1.add(btnFinalizar);
 				
 				btnProrroga = new JButton("Prorroga");
+				btnProrroga.setForeground(new Color(0, 0, 0));
 				btnProrroga.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						CambiarFecha cambiarFecha = new CambiarFecha(proyectos[4]);
+						CambiarFecha cambiarFecha = new CambiarFecha(proyectos[0],proyectos[4]);
 						cambiarFecha.setModal(true);
 						cambiarFecha.setVisible(true);
+						cargarEmpleados(cmbEstado.getSelectedItem().toString());
 					}
 				});
 				btnProrroga.setEnabled(false);
 				btnProrroga.setBorderPainted(false);
-				btnProrroga.setBackground(new Color(153, 153, 153));
+				btnProrroga.setBackground(new Color(204, 204, 204));
 				btnProrroga.setBounds(436, 22, 89, 30);
 				panel_1.add(btnProrroga);
 			}
