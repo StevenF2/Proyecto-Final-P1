@@ -288,10 +288,14 @@ public class NuevoContrato extends JDialog {
 		}
 				
 				//Si el cliente ya existe, no se puede agregar un nuevo cliente
+				//Hacer que cantiPoyectos aumente cada vez que un mismo cliente hace un contrato nuevo
+				//Limitar a 5 la cantidad de proyectos
+				//Automatizar los codigos id de proyectos y contratos
+				
 				
 				Cliente cli = new Cliente(cedula, nombre, direccion, telefono);
-				Contrato c = new Contrato(idContrato, cedula, nombreP, cli);
 				Proyecto p = new Proyecto(nombreP, tipo, true, lenguaje, false, Empresa.getInicio(), Empresa.getFin(), Empresa.getFin(), Empresa.getTemp());
+				Contrato c = new Contrato(idContrato, cedula, nombreP, cli, p);
 				/**
 				 * private ArrayList <Empleado> empleados;
 					private String nombre;
