@@ -137,7 +137,7 @@ public class NuevoContrato extends JDialog {
 			txtCantidad.setBounds(443, 81, 37, 20);
 			panel_3.add(txtCantidad);
 			txtCantidad.setColumns(10);
-			txtCantidad.setText(""+1);
+			txtCantidad.setText("");
 			
 			txtCedula = new JTextField();
 			txtCedula.setColumns(10);
@@ -198,6 +198,7 @@ public class NuevoContrato extends JDialog {
 						txtCantidad.setText(""+c.getCantiProyectos());		
 						cExiste = true;
 						
+						
 					}
 					
 					
@@ -245,8 +246,26 @@ public class NuevoContrato extends JDialog {
 				String cedula = txtCedula.getText();
 				String telefono = txtTelefono.getText();
 				String direccion = txtDireccion.getText();
-				int cantidad = Integer.parseInt(txtCantidad.getText());
+				int cantidad = 0;
 				
+				if(cExiste == true) {
+					
+					cantidad = Integer.parseInt(txtCantidad.getText());
+					
+				}else {
+					
+					cantidad = 1;
+					
+				}
+				
+				
+				
+				if(cExiste == true && cantidad == 5 ) {
+					
+					JOptionPane.showMessageDialog(null,  "No es posible completar la accion, el cliente cuenta con la cantidad maxima de proyectos activos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+					
+					
+				}
 				
 				String tipo = null;
 				String lenguaje = null;
