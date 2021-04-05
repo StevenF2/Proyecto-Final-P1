@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DateFormatter;
 
 import logico.Empresa;
 import logico.Empleado;
@@ -189,7 +190,7 @@ public class NuevoProyecto extends JDialog {
 			}
 			{
 				JLabel label = new JLabel("Fecha Inicio");
-				label.setBounds(91, 72, 86, 14);
+				label.setBounds(66, 72, 86, 14);
 				panel.add(label);
 			}
 			{
@@ -228,14 +229,27 @@ public class NuevoProyecto extends JDialog {
 			panel.add(txtCodigo);
 			txtCodigo.setColumns(10);
 			
-			spnFinicio = new JSpinner();
-			spnFinicio.setModel(new SpinnerDateModel(new Date(1617436800000L), new Date(1617436800000L), null, Calendar.DAY_OF_YEAR));
-			spnFinicio.setBounds(162, 69, 92, 20);
+			/**
+			 *	Decidi modificar esta minima parte de tu programacion para que las fechas se vean en formato de dia/mes/año 
+			 * */
+			Date today = new Date();
+			spnFinicio = new JSpinner(new SpinnerDateModel(today, null, null, Calendar.MONTH));
+			JSpinner.DateEditor editorInicio = new JSpinner.DateEditor(spnFinicio, "dd/MM/yyyy");
+			spnFinicio.setEditor(editorInicio);
+			spnFinicio.setBounds(136, 69, 118, 20);
+			DateFormatter formatterInicio = (DateFormatter)editorInicio.getTextField().getFormatter();
+			formatterInicio.setAllowsInvalid(false); // this makes what you want
+			formatterInicio.setOverwriteMode(true);
 			panel.add(spnFinicio);
 			
 			spnFentrega = new JSpinner();
-			spnFentrega.setModel(new SpinnerDateModel(new Date(1617523200000L), new Date(1617523200000L), null, Calendar.DAY_OF_YEAR));
-			spnFentrega.setBounds(345, 69, 92, 20);
+			spnFentrega.setModel(new SpinnerDateModel(today, null, null, Calendar.MONTH));
+			JSpinner.DateEditor editorEntrega = new JSpinner.DateEditor(spnFentrega, "dd/MM/yyyy");
+			spnFentrega.setEditor(editorEntrega);
+			spnFentrega.setBounds(345, 69, 118, 20);
+			DateFormatter formatterEntrega = (DateFormatter)editorEntrega.getTextField().getFormatter();
+			formatterEntrega.setAllowsInvalid(false); // this makes what you want
+			formatterEntrega.setOverwriteMode(true);
 			panel.add(spnFentrega);
 		}
 		
