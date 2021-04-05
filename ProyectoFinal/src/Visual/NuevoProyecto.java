@@ -12,7 +12,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import logico.Empresa;
-
+import logico.Empleado;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,6 +26,7 @@ import javax.swing.JTable;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import java.util.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class NuevoProyecto extends JDialog {
@@ -46,7 +47,7 @@ public class NuevoProyecto extends JDialog {
 	 * Launch the application.
 	 */
 	//hola
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			NuevoProyecto dialog = new NuevoProyecto();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -54,7 +55,7 @@ public class NuevoProyecto extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Create the dialog.
@@ -99,15 +100,26 @@ public class NuevoProyecto extends JDialog {
 			 //   System.out.println(input);
 			 //   if(input == 0) {
 				
-				Empresa.setCodigo(Integer.parseInt(txtCodigo.getText()));
+				Empresa.setCodigo(Integer.valueOf(txtCodigo.getText()));
 				Empresa.setNombre(txtNombre.getText());
 				Empresa.setInicio((Date) spnFinicio.getValue());
 				Empresa.setFin((Date) spnFentrega.getValue());
 				Empresa.setTipo(cbxTipo.getSelectedIndex());
 				Empresa.setLenguaje(cmbLenguajes.getSelectedIndex());
 				
+				/**
+				 * Agregando arrayList de Empleado
+				 * */
+				Empresa.setTemp(insertarEmpleadoProyecto(model));
 				
-				
+				/**
+				 * Te recomiendo que agregues esa parte ..... 
+				 * */
+				//int input = JOptionPane.showConfirmDialog(null, "Desea continuar?", "Eliga una opción ...",JOptionPane.YES_NO_OPTION);
+
+			    // 0=yes, 1=no, 2=cancel
+			 //   System.out.println(input);
+			 //   if(input == 0) {
 					setVisible(false);
 					NuevoContrato cont = new NuevoContrato();
 					cont.setModal(true);
@@ -233,13 +245,14 @@ public class NuevoProyecto extends JDialog {
 		//Proyecto.class.getClass().setVisible(true);
 	}
 	public static void agregarLenguajeProgramador(DefaultTableModel modelProyecto) {
-		String[] empleados = {"Nombre", "Puesto"};
+		String[] empleados = {"Cedula", "Nombre", "Puesto"};
 		model.setColumnIdentifiers(empleados);
 		rows = new Object[model.getColumnCount()];
 		for(int i = 0; i < modelProyecto.getRowCount(); i++) {
-			if(checkElements(modelProyecto.getValueAt(i, 0).toString())) {
+			if(checkElements(modelProyecto.getValueAt(i, 1).toString())) {
 				rows[0] = modelProyecto.getValueAt(i, 0).toString();
 				rows[1] = modelProyecto.getValueAt(i, 1).toString();
+				rows[2] = modelProyecto.getValueAt(i, 2).toString();
 				model.addRow(rows);
 			}
 		}
@@ -257,20 +270,42 @@ public class NuevoProyecto extends JDialog {
 	}
 	
 	public static void datosAnteriores() {
-		
-		if(Empresa.getEnable() == true) {
-			
+		if(Empresa.getEnable() == true) {	
 			txtCodigo.setText(""+Empresa.getCodigo());
 			txtNombre.setText(""+Empresa.getNombre());
 			spnFinicio.setValue(Empresa.getInicio());
 			cbxTipo.setSelectedIndex(Empresa.getTipo());
 			cmbLenguajes.setSelectedIndex(Empresa.getLenguaje());
 			spnFentrega.setValue(Empresa.getFin());
+			cargarDatosTabla();
 			Empresa.setEnable(false);
-			
-			
-		
-	}
-		
+			}
 	} 
+	private ArrayList<Empleado> insertarEmpleadoProyecto(DefaultTableModel model) {
+		ArrayList<Empleado> arrayEmpleados= new ArrayList<Empleado>();
+		Empleado empProv = null;
+		if(model.getRowCount() < 0) {
+			return arrayEmpleados;
+		}
+		for(int i = 0; i < model.getRowCount(); i++) {
+			empProv = Empresa.getInstance().buscarEmpleado(model.getValueAt(i, 0).toString());
+			arrayEmpleados.add(empProv);
+			empProv = null;
+		}
+		return arrayEmpleados;  
+	}
+	/**
+	 * Esto es para cuando se regrese a la ventana siguiente
+	 */
+	private static void cargarDatosTabla() {
+		String[] empleados = {"Cedula", "Nombre", "Puesto"};
+		model.setColumnIdentifiers(empleados);
+		rows = new Object[model.getColumnCount()];
+		for(int i = 0; i < Empresa.getTemp().size(); i++) {
+				rows[0] = Empresa.getTemp().get(i).getCedula();
+				rows[1] = Empresa.getTemp().get(i).getNombre();
+				rows[2] = Empresa.getTemp().get(i).getClass().getSimpleName().toString();
+				model.addRow(rows);
+		}
+	}
 }
