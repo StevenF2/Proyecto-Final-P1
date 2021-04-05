@@ -39,6 +39,10 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.ImageIcon;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Empleado extends JDialog {
 
@@ -61,11 +65,9 @@ public class Empleado extends JDialog {
 	private JButton btnCancelar;
 	private JTextField txtApellido;
 	private JSpinner spnAnExperiencia;
-	private JSpinner spnAnExperienciaS;
 	private JScrollPane scrollPane;
 	private JPanel panel_8;
 	private JPanel panel_9;
-	private JPanel panel_10;
 	private JPanel panel_7;
 	private JFormattedTextField formattedTextField;
 
@@ -129,28 +131,68 @@ public class Empleado extends JDialog {
 		panel_1.setLayout(null);
 		
 		rdbMasculino = new JRadioButton("Masculino");
+		rdbMasculino.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(rdbMasculino.isSelected()) {
+					rdbFemenino.setSelected(false);
+				}
+			}
+		});
 		rdbMasculino.setBackground(new Color(255, 255, 255));
 		rdbMasculino.setForeground(new Color(0, 0, 0));
 		rdbMasculino.setBounds(50, 14, 109, 23);
 		panel_1.add(rdbMasculino);
 		
 		rdbFemenino = new JRadioButton("Femenino");
+		rdbFemenino.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(rdbFemenino.isSelected()) {
+					rdbMasculino.setSelected(false);
+				}
+			}
+		});
 		rdbFemenino.setBackground(new Color(255, 255, 255));
 		rdbFemenino.setForeground(new Color(0, 0, 0));
 		rdbFemenino.setBounds(50, 51, 109, 23);
 		panel_1.add(rdbFemenino);
 		
 		txtCedulaEmp = new JTextField();
+		txtCedulaEmp.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (prevenirLetras(e)) {
+					e.consume();
+		      }
+			}
+		});
 		txtCedulaEmp.setBounds(91, 21, 135, 20);
 		panel.add(txtCedulaEmp);
 		txtCedulaEmp.setColumns(10);
 		
 		txtNombreEmp = new JTextField();
+		txtNombreEmp.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				if (prevenirDigitos(arg0)) {
+					arg0.consume();
+		      }
+			}
+		});
 		txtNombreEmp.setBounds(302, 21, 123, 20);
 		panel.add(txtNombreEmp);
 		txtNombreEmp.setColumns(10);
 		
 		txtTelefonoEmp = new JTextField();
+		txtTelefonoEmp.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (prevenirLetras(e)) {
+					e.consume();
+		      }
+			}
+		});
 		txtTelefonoEmp.setBounds(66, 71, 173, 20);
 		panel.add(txtTelefonoEmp);
 		txtTelefonoEmp.setColumns(10);
@@ -169,6 +211,14 @@ public class Empleado extends JDialog {
 		panel_3.setLayout(null);
 		
 		spnSalarioHora = new JSpinner();
+		spnSalarioHora.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (prevenirLetras(e)) {
+					e.consume();
+		      }
+			}
+		});
 		spnSalarioHora.setBackground(new Color(255, 255, 255));
 		spnSalarioHora.setForeground(new Color(0, 0, 0));
 		spnSalarioHora.setModel(new SpinnerNumberModel(new Integer(100), new Integer(100), null, new Integer(1)));
@@ -184,6 +234,14 @@ public class Empleado extends JDialog {
 		panel.add(lblNewLabel_7);
 		
 		txtApellido = new JTextField();
+		txtApellido.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (prevenirDigitos(e)) {
+					e.consume();
+		      }
+			}
+		});
 		txtApellido.setBounds(501, 21, 123, 20);
 		panel.add(txtApellido);
 		txtApellido.setColumns(10);
@@ -210,19 +268,17 @@ public class Empleado extends JDialog {
 		panel_5.add(lblNewLabel_4);
 		
 		txtTrabajadoresEmp = new JTextField();
+		txtTrabajadoresEmp.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (prevenirLetras(e)) {
+					e.consume();
+		      }
+			}
+		});
 		txtTrabajadoresEmp.setBounds(337, 38, 86, 20);
 		panel_5.add(txtTrabajadoresEmp);
 		txtTrabajadoresEmp.setColumns(10);
-		
-		NumberFormat longFormat = NumberFormat.getIntegerInstance();
-
-		NumberFormatter numberFormatter = new NumberFormatter(longFormat);
-		numberFormatter.setValueClass(Long.class); //optional, ensures you will always get a long value
-		numberFormatter.setAllowsInvalid(false); //this is the key!!
-
-		formattedTextField = new JFormattedTextField(numberFormatter);
-		formattedTextField.setBounds(503, 38, 57, 20);
-		panel_5.add(formattedTextField);
 		
 		panel_7 = new JPanel();
 		panel_7.setBackground(new Color(255, 255, 255));
@@ -273,6 +329,14 @@ public class Empleado extends JDialog {
 		panel_8.add(lblNewLabel_6);
 		
 		txtReunionEmp = new JTextField();
+		txtReunionEmp.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (prevenirLetras(e)) {
+					e.consume();
+		      }
+			}
+		});
 		txtReunionEmp.setBounds(346, 48, 86, 20);
 		panel_8.add(txtReunionEmp);
 		txtReunionEmp.setColumns(10);
@@ -294,34 +358,19 @@ public class Empleado extends JDialog {
 		panel_11.add(lblNewLabel_8);
 		
 		spnAnExperiencia = new JSpinner();
+		spnAnExperiencia.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (prevenirLetras(e)) {
+					e.consume();
+		      }
+			}
+		});
 		spnAnExperiencia.setBackground(new Color(255, 255, 255));
 		spnAnExperiencia.setModel(new SpinnerNumberModel(0, 0, 40, 1));
 		spnAnExperiencia.setForeground(new Color(0, 0, 0));
 		spnAnExperiencia.setBounds(303, 45, 70, 20);
 		panel_11.add(spnAnExperiencia);
-		
-		panel_10 = new JPanel();
-		panel_10.setBackground(new Color(255, 255, 255));
-		tabbedPane.addTab("Secretaria/o", null, panel_10, null);
-		tabbedPane.setBackgroundAt(4, new Color(255, 255, 255));
-		panel_10.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel_12 = new JPanel();
-		panel_12.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)));
-		panel_12.setBackground(new Color(255, 255, 255));
-		panel_10.add(panel_12, BorderLayout.CENTER);
-		panel_12.setLayout(null);
-		
-		JLabel label = new JLabel("A\u00F1os de Experiencia");
-		label.setBounds(194, 48, 155, 14);
-		panel_12.add(label);
-		
-		spnAnExperienciaS = new JSpinner();
-		spnAnExperienciaS.setModel(new SpinnerNumberModel(0, 0, 40, 1));
-		spnAnExperienciaS.setForeground(new Color(0, 0, 0));
-		spnAnExperienciaS.setBackground(new Color(255, 255, 255));
-		spnAnExperienciaS.setBounds(312, 45, 70, 20);
-		panel_12.add(spnAnExperienciaS);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(new Color(51, 102, 153));
@@ -375,9 +424,6 @@ public class Empleado extends JDialog {
 				} else if(tabbedPane.getSelectedIndex() == 3){
 					emp3 = new Disenador(txtCedulaEmp.getText(), txtNombreEmp.getText(), txtApellido.getText(), txtDireccionEmp.getText(), txtTelefonoEmp.getText(), auxRadio, Float.valueOf(spnSalarioHora.getValue().toString()), "","",Float.valueOf(0), Integer.valueOf(spnAnExperiencia.getValue().toString()));
 					Empresa.getInstance().insertarEmpleado(emp3);
-				} else if(tabbedPane.getSelectedIndex() == 4) {
-					emp5 = new Secretario(txtCedulaEmp.getText(), txtNombreEmp.getText(), txtApellido.getText(), txtDireccionEmp.getText(), txtTelefonoEmp.getText(), auxRadio, Float.valueOf(spnSalarioHora.getValue().toString()), "","",Float.valueOf(0), Integer.valueOf(spnAnExperienciaS.getValue().toString()));
-					Empresa.getInstance().insertarEmpleado(emp5);
 				}
 				
 				JOptionPane.showMessageDialog(null, "Operacion Satisfactoria", "Informacion", JOptionPane.INFORMATION_MESSAGE);
@@ -447,10 +493,23 @@ public class Empleado extends JDialog {
 			rdbFemenino.setSelected(false);
 			rdbMasculino.setSelected(true);
 		}
-		spnSalarioHora.setValue(0);
+		spnSalarioHora.setValue(100);
 		txtApellido.setText("");
 		spnAnExperiencia.setValue(0);
-		spnAnExperienciaS.setValue(0);
 
+	}
+	private boolean prevenirDigitos(KeyEvent arg0) {
+		if (!Character.isLetter(arg0.getKeyChar()) && !(arg0.getKeyChar() == KeyEvent.VK_SPACE) && !(arg0.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+			JOptionPane.showMessageDialog(null, "Solo debe insertar Letras", "Informacion", JOptionPane.WARNING_MESSAGE);
+			return true;
+      }
+		return false;
+	}
+	private boolean prevenirLetras(KeyEvent arg0) {
+		if (!Character.isDigit(arg0.getKeyChar()) && !(arg0.getKeyChar() == KeyEvent.VK_SPACE) && !(arg0.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+			JOptionPane.showMessageDialog(null, "Solo debe insertar numeros", "Informacion", JOptionPane.WARNING_MESSAGE);
+			return true;
+      }
+		return false;
 	}
 }
