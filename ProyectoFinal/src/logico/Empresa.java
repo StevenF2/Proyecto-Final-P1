@@ -250,6 +250,17 @@ public class Empresa {
 		}
 		return cont;
 	}
+	
+	public Contrato buscarContratoProyecto(String codigo) {
+		Contrato cont = null;
+		for(Contrato aux: this.contratos) {
+			if(aux.getProyecto().getNombre().equalsIgnoreCase(codigo)) {
+				cont = aux;
+				return cont;
+			}
+		}
+		return cont;
+	}
 	public Proyecto buscarProyecto(String nombre) {
 		Proyecto pro = null;
 		for(Proyecto aux: this.proyectos) {
