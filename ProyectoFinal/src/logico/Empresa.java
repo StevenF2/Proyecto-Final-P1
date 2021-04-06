@@ -314,4 +314,23 @@ public class Empresa {
 		return false;
 	}
 	
+	/*
+	 * cantidad de personas * el precio por hora de cada persona*8 horas de trabajo que tiene un día* la cantidad de días del proyecto 
+	 * eso es el costo ahora a ese costo hay que sumarle un 30% de ganancia
+	 * */
+	
+	public float calcularMontoTotalContrato(long daysBetween, ArrayList<Empleado> emp) {
+		float total = 0;
+		
+		for(int i = 0; i < emp.size(); i++) {			
+			
+			total += emp.get(i).getSalario();						
+		}				
+		total = total * emp.size() * 8 * daysBetween;
+		
+		//ganancia de 30 %
+		total += (total*0.30);
+		return total;
+	}
+	
 }
