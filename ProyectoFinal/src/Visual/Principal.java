@@ -126,6 +126,13 @@ public class Principal extends JFrame {
 		mnNewMenu_1.add(menuMProyecto);
 		
 		menuMContrato = new JMenuItem("Mostrar Contratos");
+		menuMContrato.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				MostrarContrato mCont = new MostrarContrato();
+				mCont.setModal(true);
+				mCont.setVisible(true);
+			}
+		});
 		menuMContrato.setForeground(new Color(51, 102, 153));
 		menuMContrato.setBackground(new Color(255, 255, 255));
 		mnNewMenu_1.add(menuMContrato);
