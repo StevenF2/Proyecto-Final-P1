@@ -103,7 +103,7 @@ public class MostrarContrato extends JDialog {
 	private static void cargarContratos() {
 		model.setRowCount(0);
 		rows = new Object[model.getColumnCount()];
-		DateFormat dtf = new SimpleDateFormat("dd MM yyyy");
+		DateFormat dtf = new SimpleDateFormat("dd/MM/yyyy");
 		String inicio ,finalFecha = "";
 		for(int i = 0; i < Empresa.getInstance().getContratos().size(); i++) {
 			rows[0] = Empresa.getInstance().getContratos().get(i).getNumeroContrato();
