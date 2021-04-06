@@ -104,7 +104,7 @@ public class MostrarProyecto extends JDialog {
 			{
 				JPanel panel_1 = new JPanel();
 				panel_1.setLayout(null);
-				panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)), "Mostrar Usuarios", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)), "Mostrar Proyectos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 				panel_1.setBackground(Color.WHITE);
 				panel_1.setBounds(10, 11, 634, 358);
 				panel.add(panel_1);
