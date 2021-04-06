@@ -10,13 +10,14 @@ public class Contrato {
 	private Cliente cliente;
 	private Proyecto proyecto;
 	
-	public Contrato(int numeroContrato, String cedulaCliente, String nombreProyecto, Cliente cliente, Proyecto proyecto) {
+	public Contrato(int numeroContrato, String cedulaCliente, String nombreProyecto, Cliente cliente, Proyecto proyecto, float montoTotal) {
 		super();
 		this.numeroContrato = numeroContrato;
 		this.cedulaCliente = cedulaCliente;
 		this.nombreProyecto = nombreProyecto;
 		this.cliente = cliente; 
 		this.proyecto = proyecto;
+		this.montoTotal = montoTotal;
 		
 	}
 //	private static int cantidadContrato = 1;
