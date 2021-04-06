@@ -9,13 +9,18 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
 
+import logico.Contrato;
 import logico.Empresa;
 import logico.Proyecto;
 
@@ -101,12 +106,26 @@ public class CambiarFecha extends JDialog {
 				btnCambiar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						Proyecto pro = Empresa.getInstance().buscarProyecto(codigoProyecto);
+						float montoTotal = 0;
 						if(pro != null) {
+							Contrato cont = Empresa.getInstance().buscarContratoProyecto(pro.getNombre());
 							Date fechaEntregaA;
 							try {
 								fechaEntregaA = new SimpleDateFormat("dd/MM/yyyy").parse(txtFechaEntregaA.getText());
 								pro.setFechaEntrega(fechaEntregaA);
-								pro.setExtendido(true);		
+								pro.setExtendido(true);
+								montoTotal = cont.getMontoTotal();
+								
+								DateFormat dtf = new SimpleDateFormat("dd MM yyyy");
+								String inicio = dtf.format(pro.getFechaInicio());
+								String finalFecha = dtf.format(pro.getFechaEntrega());
+								DateTimeFormatter dtF = DateTimeFormatter.ofPattern("dd MM yyyy");
+								LocalDate fecha1 = LocalDate.parse(inicio, dtF);
+								LocalDate fecha2 = LocalDate.parse(finalFecha, dtF);
+								long daysBetween = ChronoUnit.DAYS.between(fecha1, fecha2);
+								int days = (int)daysBetween;
+								cont.setMontoTotal(montoTotal -= (montoTotal * (days/100)));
+								
 							} catch (ParseException e) {
 								// TODO Auto-generated catch block
 								JOptionPane.showMessageDialog(null, "Ocurrio un error", "Informacion", JOptionPane.ERROR_MESSAGE);
