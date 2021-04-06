@@ -11,11 +11,13 @@ import java.awt.Color;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import logico.Contrato;
 import logico.Disenador;
 import logico.Empresa;
 import logico.Jefe;
 import logico.Planificador;
 import logico.Programador;
+import logico.Proyecto;
 import logico.Secretario;
 
 import javax.swing.border.EtchedBorder;
@@ -24,10 +26,19 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+
 import javax.swing.ScrollPaneConstants;
 
 public class MostrarProyecto extends JDialog {
@@ -138,11 +149,30 @@ public class MostrarProyecto extends JDialog {
 				panel_1.add(lblNewLabel);
 				
 				cmbEstado = new JComboBox();
+				cmbEstado.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						cargarEmpleados(cmbEstado.getSelectedItem().toString());
+					}
+				});
 				cmbEstado.setModel(new DefaultComboBoxModel(new String[] {"Todo", "En Proceso", "Finalizado"}));
 				cmbEstado.setBounds(73, 32, 115, 20);
 				panel_1.add(cmbEstado);
 				
 				btnFinalizar = new JButton("Finalizar");
+				btnFinalizar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						Proyecto pro = Empresa.getInstance().buscarProyecto(proyectos[0]);
+						if(pro != null) {
+							try {
+								pro.setEstado(false);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								JOptionPane.showMessageDialog(null, "Ocurrio un error", "Informacion", JOptionPane.ERROR_MESSAGE);
+							}
+							JOptionPane.showMessageDialog(null, "Proyecto Finalizado con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+						}
+					}
+				});
 				btnFinalizar.setEnabled(false);
 				btnFinalizar.setForeground(new Color(0, 0, 0));
 				btnFinalizar.setBorderPainted(false);
@@ -173,11 +203,11 @@ public class MostrarProyecto extends JDialog {
 		model.setRowCount(0);
 		for(int i = 0; i < Empresa.getInstance().getProyectos().size(); i++) {
 			if(selectedItem.equalsIgnoreCase("En Proceso")) {
-				if(Empresa.getInstance().getProyectos().get(i).getEstado()) {
+				if(Empresa.getInstance().getProyectos().get(i).getEstado() == true) {
 					model.addRow(insertInRow(i));
 				}
 			} else if (selectedItem.equalsIgnoreCase("Finalizado")) {
-				if(!(Empresa.getInstance().getProyectos().get(i).getEstado())) {
+				if(Empresa.getInstance().getProyectos().get(i).getEstado() == false) {
 					model.addRow(insertInRow(i));
 				}
 			}else if (selectedItem.equalsIgnoreCase("Todo")) {
