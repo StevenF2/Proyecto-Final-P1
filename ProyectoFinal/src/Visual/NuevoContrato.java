@@ -52,7 +52,6 @@ public class NuevoContrato extends JDialog {
 	private JTextField txtCantidad;
 	private JTextField txtId;
 	private JTextField txtNombreP;
-	private JTextField txtBusqueda;
 	private JTextField txtCedula;
 	private static Boolean cExiste = false;
 	private Cliente cExistente = null;
@@ -121,24 +120,20 @@ public class NuevoContrato extends JDialog {
 			JPanel panel_3 = new JPanel();
 			panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)), "Informacion Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			panel_3.setBackground(new Color(255, 255, 255));
-			panel_3.setBounds(62, 115, 490, 145);
+			panel_3.setBounds(60, 77, 490, 145);
 			panel_1.add(panel_3);
 			panel_3.setLayout(null);
 
 			JLabel lblNewLabel_2 = new JLabel("Cedula");
-			lblNewLabel_2.setBounds(251, 36, 61, 14);
+			lblNewLabel_2.setBounds(10, 36, 61, 14);
 			panel_3.add(lblNewLabel_2);
-
-			JLabel lblNewLabel_3 = new JLabel("Nombre");
-			lblNewLabel_3.setBounds(10, 36, 61, 14);
-			panel_3.add(lblNewLabel_3);
 
 			JLabel lblNewLabel_4 = new JLabel("Telefono");
 			lblNewLabel_4.setBounds(10, 84, 61, 14);
 			panel_3.add(lblNewLabel_4);
 
 			JLabel lblNewLabel_5 = new JLabel("Direccion");
-			lblNewLabel_5.setBounds(251, 84, 61, 14);
+			lblNewLabel_5.setBounds(296, 81, 61, 14);
 			panel_3.add(lblNewLabel_5);
 
 			JLabel lblNewLabel_6 = new JLabel("Proyectos Activos");
@@ -146,6 +141,7 @@ public class NuevoContrato extends JDialog {
 			panel_3.add(lblNewLabel_6);
 
 			txtTelefono = new JTextField();
+			txtTelefono.setEditable(false);
 			txtTelefono.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
@@ -159,6 +155,7 @@ public class NuevoContrato extends JDialog {
 			txtTelefono.setColumns(10);
 
 			txtDireccion = new JTextField();
+			txtDireccion.setEditable(false);
 			txtDireccion.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
@@ -167,22 +164,9 @@ public class NuevoContrato extends JDialog {
 					}
 				}
 			});
-			txtDireccion.setBounds(312, 81, 123, 20);
+			txtDireccion.setBounds(357, 78, 123, 20);
 			panel_3.add(txtDireccion);
 			txtDireccion.setColumns(10);
-
-			txtNombre = new JTextField();
-			txtNombre.addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyTyped(KeyEvent e) {
-					if (prevenirDigitos(e)) {
-						e.consume();
-					}
-				}
-			});
-			txtNombre.setBounds(68, 33, 125, 20);
-			panel_3.add(txtNombre);
-			txtNombre.setColumns(10);
 
 			txtCantidad = new JTextField();
 			txtCantidad.setEditable(false);
@@ -201,8 +185,73 @@ public class NuevoContrato extends JDialog {
 				}
 			});
 			txtCedula.setColumns(10);
-			txtCedula.setBounds(310, 33, 125, 20);
+			txtCedula.setBounds(68, 33, 125, 20);
 			panel_3.add(txtCedula);
+			
+						JLabel lblNewLabel_3 = new JLabel("Nombre");
+						lblNewLabel_3.setBounds(296, 33, 61, 14);
+						panel_3.add(lblNewLabel_3);
+						
+									txtNombre = new JTextField();
+									txtNombre.setEditable(false);
+									txtNombre.setBounds(355, 30, 125, 20);
+									panel_3.add(txtNombre);
+									txtNombre.addKeyListener(new KeyAdapter() {
+										@Override
+										public void keyTyped(KeyEvent e) {
+											if (prevenirDigitos(e)) {
+												e.consume();
+											}
+										}
+									});
+									txtNombre.setColumns(10);
+									
+												JButton btnNewButton = new JButton("Buscar");
+												btnNewButton.setBounds(203, 28, 83, 31);
+												panel_3.add(btnNewButton);
+												btnNewButton.addActionListener(new ActionListener() {
+													public void actionPerformed(ActionEvent arg0) {
+
+														String cedula = txtCedula.getText();
+														Cliente c = buscarCliente(cedula);
+														cExistente = c;
+														
+														if(txtCedula.getText().isEmpty()) {
+
+															JOptionPane.showMessageDialog(null,  "Favor introducir el identificador del cliente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+
+														} 
+
+														if(c == null && !txtCedula.getText().isEmpty()) {
+
+															JOptionPane.showMessageDialog(null,  "El cliente no se encuentra registrado en la base de datos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+															txtNombre.setEditable(true);
+															txtTelefono.setEditable(true);
+															txtDireccion.setEditable(true);
+															txtCantidad.setText(""+0);
+															
+															
+														}else {
+
+															txtNombre.setText(""+c.getNombre());
+															txtNombre.setEditable(false);
+															txtCedula.setText(""+c.getCedula());
+															txtCedula.setEditable(false);
+															txtTelefono.setText(""+c.getTelefono());
+															txtTelefono.setEditable(false);
+															txtDireccion.setText(""+c.getDireccion());
+															txtDireccion.setEditable(false);
+															txtCantidad.setText(""+c.getCantiProyectos());		
+															cExiste = true;
+
+
+														}
+
+
+													}
+												});
+												btnNewButton.setBorderPainted(false);
+												btnNewButton.setBackground(new Color(204, 204, 204));
 
 			txtId = new JTextField();
 			txtId.setBounds(101, 39, 160, 20);
@@ -225,57 +274,6 @@ public class NuevoContrato extends JDialog {
 			txtNombreP.setColumns(10);
 			txtNombreP.setBounds(409, 39, 160, 20);
 			panel_1.add(txtNombreP);
-
-			JLabel lblNewLabel_1 = new JLabel("Busqueda Cliente");
-			lblNewLabel_1.setBounds(101, 92, 130, 14);
-			panel_1.add(lblNewLabel_1);
-
-			txtBusqueda = new JTextField();
-			txtBusqueda.setColumns(10);
-			txtBusqueda.setBounds(205, 89, 160, 20);
-			panel_1.add(txtBusqueda);
-
-			JButton btnNewButton = new JButton("Buscar");
-			btnNewButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-
-					String cedula = txtBusqueda.getText();
-					Cliente c = buscarCliente(cedula);
-					cExistente = c;
-					System.out.println(cedula);
-					if(txtBusqueda.getText().isEmpty()) {
-
-						JOptionPane.showMessageDialog(null,  "Favor introducir el identificador del cliente deseado", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-
-					} 
-
-					if(c == null && !txtBusqueda.getText().isEmpty()) {
-
-						JOptionPane.showMessageDialog(null,  "No se ha encontrado un cliente con el identificador introducido", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-
-					}else {
-
-						txtNombre.setText(""+c.getNombre());
-						txtNombre.setEditable(false);
-						txtCedula.setText(""+c.getCedula());
-						txtCedula.setEditable(false);
-						txtTelefono.setText(""+c.getTelefono());
-						txtTelefono.setEditable(false);
-						txtDireccion.setText(""+c.getDireccion());
-						txtDireccion.setEditable(false);
-						txtCantidad.setText(""+c.getCantiProyectos());		
-						cExiste = true;
-
-
-					}
-
-
-				}
-			});
-			btnNewButton.setBounds(375, 84, 96, 31);
-			panel_1.add(btnNewButton);
-			btnNewButton.setBorderPainted(false);
-			btnNewButton.setBackground(new Color(204, 204, 204));
 
 			JLabel lblNewLabel_7 = new JLabel("Monto Total");
 			lblNewLabel_7.setBounds(355, 281, 90, 14);
@@ -320,6 +318,8 @@ public class NuevoContrato extends JDialog {
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				if(!txtNombreP.getText().isEmpty() && !txtId.getText().isEmpty() && !txtCedula.getText().isEmpty() && !txtTelefono.getText().isEmpty() && !txtDireccion.getText().isEmpty() && !txtCantidad.getText().isEmpty()) {
+								
 				int idContrato = Integer.parseInt(txtId.getText());
 				String nombreP = txtNombreP.getText();
 				String nombre = txtNombre.getText();
@@ -419,7 +419,14 @@ public class NuevoContrato extends JDialog {
 				dispose();
 
 				System.out.println(Empresa.getInstance().getClientes().get(0).getNombre());
-
+				
+			}else {
+				
+				JOptionPane.showMessageDialog(null,  "Debe llenar todas las casillas", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+				
+				
+			}
+			
 			}
 		});
 		btnFinalizar.setForeground(Color.WHITE);
