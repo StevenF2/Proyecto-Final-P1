@@ -64,7 +64,7 @@ public class NuevoContrato extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		try {
 			NuevoContrato dialog = new NuevoContrato();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -72,7 +72,7 @@ public class NuevoContrato extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-	} */
+	} 
 
 	/**
 	 * Create the dialog.
@@ -287,7 +287,7 @@ public class NuevoContrato extends JDialog {
 			txtTotal.setBounds(440, 271, 129, 35);
 			panel_1.add(txtTotal);
 			txtTotal.setColumns(10);
-			txtTotal.setText("$RD "+this.montoTotalContrato);
+			txtTotal.setText(""+this.montoTotalContrato+"$RD");
 		}
 
 		JPanel panel = new JPanel();
