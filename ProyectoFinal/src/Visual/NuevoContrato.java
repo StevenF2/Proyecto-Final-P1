@@ -56,7 +56,6 @@ public class NuevoContrato extends JDialog {
 	private static Boolean cExiste = false;
 	private Cliente cExistente = null;
 	private JTextField txtTotal;
-	private static float total = 0;
 	private long daysBetween;
 	private float montoTotalContrato;
 
