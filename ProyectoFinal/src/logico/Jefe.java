@@ -1,7 +1,10 @@
 package logico;
 
-public class Jefe extends Empleado {
+import java.io.Serializable;
 
+public class Jefe extends Empleado implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private int cantiTrabajadores;
 	
 	public Jefe(String cedula, String nombre, String apellido, String direccion,String telefono, String sexo, float salario,

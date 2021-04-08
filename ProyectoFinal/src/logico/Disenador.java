@@ -1,7 +1,10 @@
 package logico;
 
-public class Disenador extends Empleado {
+import java.io.Serializable;
+
+public class Disenador extends Empleado implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private int experiencia;
 	public Disenador(String cedula, String nombre, String apellido, String direccion,String telefono, String sexo, float salario,
 			String nombreProyecto, String evaluacion, float precioHora, int experiencia) {
