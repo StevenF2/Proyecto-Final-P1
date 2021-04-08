@@ -19,7 +19,6 @@ import logico.Empresa;
 import logico.Jefe;
 import logico.Planificador;
 import logico.Programador;
-import logico.Secretario;
 
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
@@ -402,7 +401,6 @@ public class Empleado extends JDialog {
 				Programador emp2;
 				Disenador emp3;
 				Planificador emp4;
-				Secretario emp5;
 				int aux = 0, auxText = 0;
 				String auxRadio = "";
 				ArrayList<String> lenguajeProg = new ArrayList<String>();
