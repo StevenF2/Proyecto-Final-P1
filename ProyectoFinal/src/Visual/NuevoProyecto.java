@@ -103,6 +103,10 @@ public class NuevoProyecto extends JDialog {
 			 //   System.out.println(input);
 			 //   if(input == 0) {
 				
+				if(!txtNombre.getText().isEmpty() ) {
+					
+				//	if(Empresa.getTemp() != null || Empresa.getTemp().size() >= 1) {
+				
 				Empresa.setCodigo(Integer.valueOf(txtCodigo.getText()));
 				Empresa.setNombre(txtNombre.getText());
 				Empresa.setInicio((Date) spnFinicio.getValue());
@@ -129,6 +133,15 @@ public class NuevoProyecto extends JDialog {
 					cont.setVisible(true);
 					
 			    //} 
+	/*		}else {
+				
+				JOptionPane.showMessageDialog(null,  "Debe agregar Empleados al proyecto", "Aviso", JOptionPane.INFORMATION_MESSAGE);			
+			} */
+				}else {
+					
+					JOptionPane.showMessageDialog(null,  "Debe llenar todas las casillas", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+				}
+				
 			}
 		});
 		btnSiguiente.setBorderPainted(false);

@@ -395,6 +395,9 @@ public class Empleado extends JDialog {
 		btnInsertar.setIcon(new ImageIcon(Empleado.class.getResource("/icons/floppy-disk.png")));
 		btnInsertar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				if(informacionClienteLlena() == true && (rdbMasculino.isSelected() || rdbFemenino.isSelected())) {
+				
 				Jefe emp;
 				Programador emp2;
 				Disenador emp3;
@@ -409,28 +412,70 @@ public class Empleado extends JDialog {
 				} else {
 					auxRadio = "Femenino";
 				}
-				if(tabbedPane.getSelectedIndex() == 0) {
+				
+
+				if(tabbedPane.getSelectedIndex() == 0 && !txtTrabajadoresEmp.getText().isEmpty()) {
+					
 					aux = Integer.valueOf(txtTrabajadoresEmp.getText());
 					emp = new Jefe(txtCedulaEmp.getText(), txtNombreEmp.getText(), txtApellido.getText(), txtDireccionEmp.getText(), txtTelefonoEmp.getText(), auxRadio, Float.valueOf(spnSalarioHora.getValue().toString()), "","",Float.valueOf(0), aux);
 					Empresa.getInstance().insertarEmpleado(emp);
-				} else if (tabbedPane.getSelectedIndex() == 1) {
+					
+					JOptionPane.showMessageDialog(null, "Operacion Satisfactoria", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+					clean();
+					
+				} else {
+					
+					JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+				}
+					
+					if (tabbedPane.getSelectedIndex() == 1) {
+						
 					lenguajeProg = collectLanguages();
+				//	lenguajeProg.
 					emp2 = new Programador(txtCedulaEmp.getText(), txtNombreEmp.getText(), txtApellido.getText(), txtDireccionEmp.getText(), txtTelefonoEmp.getText(), auxRadio, Float.valueOf(spnSalarioHora.getValue().toString()), "","",Float.valueOf(0), lenguajeProg);
 					Empresa.getInstance().insertarEmpleado(emp2);
-				} else if (tabbedPane.getSelectedIndex() == 2) {
+					
+					JOptionPane.showMessageDialog(null, "Operacion Satisfactoria", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+					clean();
+					
+				} else {
+					
+					JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+				} 
+					if (tabbedPane.getSelectedIndex() == 2 && !txtReunionEmp.getText().isEmpty()) {
+						
 					auxText = Integer.valueOf(txtReunionEmp.getText().toString());
 					emp4 = new Planificador(txtCedulaEmp.getText(), txtNombreEmp.getText(), txtApellido.getText(), txtDireccionEmp.getText(), txtTelefonoEmp.getText(), auxRadio, Float.valueOf(spnSalarioHora.getValue().toString()), "","",Float.valueOf(0), auxText);
 					Empresa.getInstance().insertarEmpleado(emp4);
-				} else if(tabbedPane.getSelectedIndex() == 3){
+					
+					JOptionPane.showMessageDialog(null, "Operacion Satisfactoria", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+					clean();
+					
+				} else {
+					
+					JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+				} 
+					if(tabbedPane.getSelectedIndex() == 3){
+						
 					emp3 = new Disenador(txtCedulaEmp.getText(), txtNombreEmp.getText(), txtApellido.getText(), txtDireccionEmp.getText(), txtTelefonoEmp.getText(), auxRadio, Float.valueOf(spnSalarioHora.getValue().toString()), "","",Float.valueOf(0), Integer.valueOf(spnAnExperiencia.getValue().toString()));
 					Empresa.getInstance().insertarEmpleado(emp3);
+					
+					JOptionPane.showMessageDialog(null, "Operacion Satisfactoria", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+					clean();
+					
+				} else {
+					
+					JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "Aviso", JOptionPane.INFORMATION_MESSAGE);	
 				}
 				
-				JOptionPane.showMessageDialog(null, "Operacion Satisfactoria", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-				clean();
+				
 				/**
 				 * Agregar JOption Pane y Try Catch
 				 * */
+			}else {
+				
+				JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+			}
 			}
 		});
 		btnInsertar.setBorderPainted(false);
@@ -511,5 +556,15 @@ public class Empleado extends JDialog {
 			return true;
       }
 		return false;
+	}
+	private boolean informacionClienteLlena() {
+		boolean aux = false;
+		
+		if(!txtCedulaEmp.getText().isEmpty() && !txtNombreEmp.getText().isEmpty() && !txtApellido.getText().isEmpty() && !txtTelefonoEmp.getText().isEmpty() && !txtDireccionEmp.getText().isEmpty() ) {
+			
+			aux = true;
+		}
+		
+		return aux;
 	}
 }
