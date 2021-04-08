@@ -1,12 +1,14 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.table.DefaultTableModel;
 
-public class Empresa {
+public class Empresa implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private ArrayList <Cliente> clientes;
 	private ArrayList <Contrato> contratos;
 	private ArrayList <Empleado> empleados;
