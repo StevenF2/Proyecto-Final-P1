@@ -16,7 +16,6 @@ import logico.Empresa;
 import logico.Jefe;
 import logico.Planificador;
 import logico.Programador;
-import logico.Secretario;
 
 import java.awt.Color;
 import javax.swing.JScrollPane;
@@ -142,11 +141,7 @@ public class MostrarEmpleado extends JDialog {
 				if(Empresa.getInstance().getEmpleados().get(i) instanceof Planificador) {
 					model.addRow(insertInRow(i));
 				}
-			}else if (selectedItem.equalsIgnoreCase("Secretario")) {
-				if(Empresa.getInstance().getEmpleados().get(i) instanceof Secretario) {
-					model.addRow(insertInRow(i));
-				}
-			}else if (selectedItem.equalsIgnoreCase("Todo")) {
+			} else if (selectedItem.equalsIgnoreCase("Todo")) {
 				model.addRow(insertInRow(i));
 			}
 			/*rows[0] = Empresa.getInstance().getEmpleados().get(i).getCedula();
