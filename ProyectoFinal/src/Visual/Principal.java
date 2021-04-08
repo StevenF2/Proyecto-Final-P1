@@ -202,7 +202,13 @@ public class Principal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+		if(!Empresa.getLoginUser().getTipo().equalsIgnoreCase("Administrador")) {
+			menuCEmpleado.setEnabled(false);
+			menuMProyecto.setEnabled(false);
+			menuCProyecto.setEnabled(false);
+			menuCUsuarios.setEnabled(false);
+			menuAdministrador.setEnabled(false);
+		}
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
 		contentPane.add(panel, BorderLayout.CENTER);
