@@ -19,7 +19,6 @@ import logico.Empresa;
 import logico.Jefe;
 import logico.Planificador;
 import logico.Programador;
-import logico.Secretario;
 
 import javax.swing.border.EtchedBorder;
 import javax.swing.ScrollPaneConstants;

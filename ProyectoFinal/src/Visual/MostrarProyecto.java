@@ -18,7 +18,7 @@ import logico.Jefe;
 import logico.Planificador;
 import logico.Programador;
 import logico.Proyecto;
-import logico.Secretario;
+
 
 import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
