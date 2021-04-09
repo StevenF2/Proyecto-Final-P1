@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.EtchedBorder;
+import javax.swing.ImageIcon;
 
 public class AgregarLenguaje extends JDialog {
 
@@ -146,7 +147,8 @@ public class AgregarLenguaje extends JDialog {
 				scrollPane_1.setViewportView(tblAceptados);
 			}
 			{
-				btnInsertar = new JButton(">");
+				btnInsertar = new JButton("");
+				btnInsertar.setIcon(new ImageIcon(AgregarLenguaje.class.getResource("/icons/right-arrow (1).png")));
 				btnInsertar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						rowsAceptados = new Object[modelAceptado.getColumnCount()];
@@ -165,7 +167,8 @@ public class AgregarLenguaje extends JDialog {
 				panel.add(btnInsertar);
 			}
 			{
-				btnRegresar = new JButton("<");
+				btnRegresar = new JButton("");
+				btnRegresar.setIcon(new ImageIcon(AgregarLenguaje.class.getResource("/icons/previous.png")));
 				btnRegresar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						modelAceptado.removeRow(lenguajeS);
@@ -187,7 +190,8 @@ public class AgregarLenguaje extends JDialog {
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
-		btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("");
+		btnCancelar.setIcon(new ImageIcon(AgregarLenguaje.class.getResource("/icons/home (2).png")));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -196,10 +200,11 @@ public class AgregarLenguaje extends JDialog {
 		btnCancelar.setBackground(new Color(51, 102, 153));
 		btnCancelar.setBorderPainted(false);
 		btnCancelar.setForeground(new Color(255, 255, 255));
-		btnCancelar.setBounds(556, 0, 89, 45);
+		btnCancelar.setBounds(457, 0, 89, 45);
 		panel.add(btnCancelar);
 		
-		btnInsertarL = new JButton("Insertar");
+		btnInsertarL = new JButton("");
+		btnInsertarL.setIcon(new ImageIcon(AgregarLenguaje.class.getResource("/icons/diskette (1).png")));
 		btnInsertarL.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Empleado.agregarLenguajeProgramador(modelAceptado);
@@ -210,7 +215,7 @@ public class AgregarLenguaje extends JDialog {
 		btnInsertarL.setBorderPainted(false);
 		btnInsertarL.setForeground(new Color(255, 255, 255));
 		btnInsertarL.setBackground(new Color(51, 102, 153));
-		btnInsertarL.setBounds(457, 0, 89, 45);
+		btnInsertarL.setBounds(556, 0, 89, 45);
 		panel.add(btnInsertarL);
 		
 		JLabel lblNewLabel = new JLabel("Lenguajes Disponibles");
