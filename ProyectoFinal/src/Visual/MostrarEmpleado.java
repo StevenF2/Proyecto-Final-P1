@@ -28,6 +28,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class MostrarEmpleado extends JDialog {
 
@@ -105,7 +106,8 @@ public class MostrarEmpleado extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				btnCancelar = new JButton("Cancelar");
+				btnCancelar = new JButton("");
+				btnCancelar.setIcon(new ImageIcon(MostrarEmpleado.class.getResource("/icons/home (2).png")));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
