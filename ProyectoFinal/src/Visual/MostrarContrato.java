@@ -23,6 +23,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class MostrarContrato extends JDialog {
 
@@ -85,7 +86,8 @@ public class MostrarContrato extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				btnCancelar = new JButton("Cancelar");
+				btnCancelar = new JButton("");
+				btnCancelar.setIcon(new ImageIcon(MostrarContrato.class.getResource("/icons/home (2).png")));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
