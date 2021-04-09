@@ -64,7 +64,7 @@ public class NuevoProyecto extends JDialog {
 	 * Create the dialog.
 	 */
 	public NuevoProyecto() {
-		
+
 		datosAnteriores();
 		setBounds(100, 100, 584, 451);
 		setLocationRelativeTo(null);
@@ -74,13 +74,13 @@ public class NuevoProyecto extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
+
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(new Color(51, 102, 153));
 		panel_3.setBounds(0, 368, 568, 44);
 		contentPanel.add(panel_3);
 		panel_3.setLayout(null);
-		
+
 		JButton btnNewButton = new JButton("Cancelar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -92,56 +92,41 @@ public class NuevoProyecto extends JDialog {
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBounds(370, 0, 89, 44);
 		panel_3.add(btnNewButton);
-		
+
 		JButton btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//JOptionPane.showMessageDialog(null, "Operacion Satisfactoria", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-				//] int input = JOptionPane.showConfirmDialog(null, "Desea continuar?", "Eliga una opción ...",JOptionPane.YES_NO_OPTION);
+				try {
+					if(informacionLlena()) {
+						Empresa.setCodigo(Integer.valueOf(txtCodigo.getText()));
+						Empresa.setNombre(txtNombre.getText());
+						Empresa.setInicio((Date) spnFinicio.getValue());
+						Empresa.setFin((Date) spnFentrega.getValue());
+						Empresa.setTipo(cbxTipo.getSelectedIndex());
+						Empresa.setLenguaje(cmbLenguajes.getSelectedIndex());
 
-			    // 0=yes, 1=no, 2=cancel
-			 //   System.out.println(input);
-			 //   if(input == 0) {
-				
-				if(!txtNombre.getText().isEmpty() ) {
-					
-				//	if(Empresa.getTemp() != null || Empresa.getTemp().size() >= 1) {
-				
-				Empresa.setCodigo(Integer.valueOf(txtCodigo.getText()));
-				Empresa.setNombre(txtNombre.getText());
-				Empresa.setInicio((Date) spnFinicio.getValue());
-				Empresa.setFin((Date) spnFentrega.getValue());
-				Empresa.setTipo(cbxTipo.getSelectedIndex());
-				Empresa.setLenguaje(cmbLenguajes.getSelectedIndex());
-				
-				/**
-				 * Agregando arrayList de Empleado
-				 * */
-				Empresa.setTemp(insertarEmpleadoProyecto(model));
-				
-				/**
-				 * Te recomiendo que agregues esa parte ..... 
-				 * */
-				//int input = JOptionPane.showConfirmDialog(null, "Desea continuar?", "Eliga una opción ...",JOptionPane.YES_NO_OPTION);
+						/**
+						 * Agregando arrayList de Empleado
+						 * */
+						Empresa.setTemp(insertarEmpleadoProyecto(model));
 
-			    // 0=yes, 1=no, 2=cancel
-			 //   System.out.println(input);
-			 //   if(input == 0) {
-					setVisible(false);
-					NuevoContrato cont = new NuevoContrato();
-					cont.setModal(true);
-					cont.setVisible(true);
-					
-			    //} 
-	/*		}else {
-				
-				JOptionPane.showMessageDialog(null,  "Debe agregar Empleados al proyecto", "Aviso", JOptionPane.INFORMATION_MESSAGE);			
-			} */
-				}else {
-					
-					JOptionPane.showMessageDialog(null,  "Debe llenar todas las casillas", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+						/**
+						 * Te recomiendo que agregues esa parte ..... 
+						 * */
+						setVisible(false);
+						NuevoContrato cont = new NuevoContrato();
+						cont.setModal(true);
+						cont.setVisible(true);
+					}else {
+
+						JOptionPane.showMessageDialog(null,  "Debe llenar todas las casillas", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}catch(Exception e1) {
+					JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Aviso", JOptionPane.ERROR_MESSAGE);
+					e1.printStackTrace();
+
 				}
-				
+
 			}
 		});
 		btnSiguiente.setBorderPainted(false);
@@ -168,7 +153,7 @@ public class NuevoProyecto extends JDialog {
 					public void keyTyped(KeyEvent e) {
 						if (prevenirDigitos(e)) {
 							e.consume();
-				      }
+						}
 					}
 				});
 				txtNombre.setColumns(10);
@@ -202,10 +187,10 @@ public class NuevoProyecto extends JDialog {
 					panel_2.setBounds(10, 56, 280, 125);
 					panel_1.add(panel_2);
 					panel_2.setLayout(new BorderLayout(0, 0));
-					
+
 					JScrollPane scrollPane = new JScrollPane();
 					panel_2.add(scrollPane, BorderLayout.CENTER);
-					
+
 					tblEmpleadosProyecto = new JTable();
 					tblEmpleadosProyecto.setModel(model);
 					scrollPane.setViewportView(tblEmpleadosProyecto);
@@ -233,17 +218,17 @@ public class NuevoProyecto extends JDialog {
 				cbxTipo.setBounds(168, 116, 86, 20);
 				panel.add(cbxTipo);
 			}
-			
+
 			JLabel lblNewLabel = new JLabel("Lenguaje");
 			lblNewLabel.setBounds(280, 119, 72, 14);
 			panel.add(lblNewLabel);
-			
+
 			cmbLenguajes = new JComboBox();
 			cmbLenguajes.setBackground(new Color(255, 255, 255));
 			cmbLenguajes.setModel(new DefaultComboBoxModel(new String[] {"Python", "C#", "JavaScript", "Ruby", "C++", "C", "Java", "Angular"}));
 			cmbLenguajes.setBounds(345, 116, 86, 20);
 			panel.add(cmbLenguajes);
-			
+
 			JLabel lblNewLabel_1 = new JLabel("Codigo");
 			lblNewLabel_1.setBounds(10, 28, 46, 14);
 			panel.add(lblNewLabel_1);
@@ -253,7 +238,7 @@ public class NuevoProyecto extends JDialog {
 			panel.add(txtCodigo);
 			txtCodigo.setColumns(10);
 			txtCodigo.setText(""+Empresa.getNumProyectos());
-			
+
 			/**
 			 *	Decidi modificar esta minima parte de tu programacion para que las fechas se vean en formato de dia/mes/año 
 			 * */
@@ -266,7 +251,7 @@ public class NuevoProyecto extends JDialog {
 			formatterInicio.setAllowsInvalid(false); 
 			formatterInicio.setOverwriteMode(true);
 			panel.add(spnFinicio);
-			
+
 			Date tomorrow = new Date();
 			Calendar c = Calendar.getInstance();
 			c.setTime(tomorrow);
@@ -282,7 +267,7 @@ public class NuevoProyecto extends JDialog {
 			formatterEntrega.setOverwriteMode(true);
 			panel.add(spnFentrega);
 		}
-		
+
 
 	}
 	public static void reOpen() {
@@ -292,13 +277,18 @@ public class NuevoProyecto extends JDialog {
 		String[] empleados = {"Cedula", "Nombre", "Puesto"};
 		model.setColumnIdentifiers(empleados);
 		rows = new Object[model.getColumnCount()];
-		for(int i = 0; i < modelProyecto.getRowCount(); i++) {
-			if(checkElements(modelProyecto.getValueAt(i, 1).toString())) {
-				rows[0] = modelProyecto.getValueAt(i, 0).toString();
-				rows[1] = modelProyecto.getValueAt(i, 1).toString();
-				rows[2] = modelProyecto.getValueAt(i, 2).toString();
-				model.addRow(rows);
+		try {
+			for(int i = 0; i < modelProyecto.getRowCount(); i++) {
+				if(checkElements(modelProyecto.getValueAt(i, 1).toString())) {
+					rows[0] = modelProyecto.getValueAt(i, 0).toString();
+					rows[1] = modelProyecto.getValueAt(i, 1).toString();
+					rows[2] = modelProyecto.getValueAt(i, 2).toString();
+					model.addRow(rows);
+				}
 			}
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al llenar los datos en la tabla", "Aviso", JOptionPane.ERROR_MESSAGE);
+			e1.printStackTrace();
 		}
 	}
 	private static boolean checkElements(String elemento) {
@@ -306,13 +296,13 @@ public class NuevoProyecto extends JDialog {
 			return true;
 		}
 		for(int i = 0; i < model.getRowCount(); i++) {
-			 if(model.getValueAt(i, 0).toString().equalsIgnoreCase(elemento)) {
-				 return false;
-			 }
+			if(model.getValueAt(i, 0).toString().equalsIgnoreCase(elemento)) {
+				return false;
+			}
 		}
 		return true;
 	}
-	
+
 	public static void datosAnteriores() {
 		if(Empresa.getEnable() == true) {	
 			txtCodigo.setText(""+Empresa.getCodigo());
@@ -323,7 +313,7 @@ public class NuevoProyecto extends JDialog {
 			spnFentrega.setValue(Empresa.getFin());
 			cargarDatosTabla();
 			Empresa.setEnable(false);
-			}
+		}
 	} 
 	private ArrayList<Empleado> insertarEmpleadoProyecto(DefaultTableModel model) {
 		ArrayList<Empleado> arrayEmpleados= new ArrayList<Empleado>();
@@ -346,25 +336,33 @@ public class NuevoProyecto extends JDialog {
 		model.setColumnIdentifiers(empleados);
 		rows = new Object[model.getColumnCount()];
 		for(int i = 0; i < Empresa.getTemp().size(); i++) {
-				rows[0] = Empresa.getTemp().get(i).getCedula();
-				rows[1] = Empresa.getTemp().get(i).getNombre();
-				rows[2] = Empresa.getTemp().get(i).getClass().getSimpleName().toString();
-				model.addRow(rows);
+			rows[0] = Empresa.getTemp().get(i).getCedula();
+			rows[1] = Empresa.getTemp().get(i).getNombre();
+			rows[2] = Empresa.getTemp().get(i).getClass().getSimpleName().toString();
+			model.addRow(rows);
 		}
 	}
-	
+
 	private boolean prevenirDigitos(KeyEvent arg0) {
 		if (!Character.isLetter(arg0.getKeyChar()) && !(arg0.getKeyChar() == KeyEvent.VK_SPACE) && !(arg0.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 			JOptionPane.showMessageDialog(null, "Solo debe insertar Letras", "Informacion", JOptionPane.WARNING_MESSAGE);
 			return true;
-      }
+		}
 		return false;
 	}
 	private boolean prevenirLetras(KeyEvent arg0) {
 		if (!Character.isDigit(arg0.getKeyChar()) && !(arg0.getKeyChar() == KeyEvent.VK_SPACE) && !(arg0.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
 			JOptionPane.showMessageDialog(null, "Solo debe insertar numeros", "Informacion", JOptionPane.WARNING_MESSAGE);
 			return true;
-      }
+		}
 		return false;
+	}
+
+	private boolean informacionLlena() {
+
+		if(txtCodigo.getText().isEmpty() || txtNombre.getText().isEmpty() || tblEmpleadosProyecto.getRowCount() == 0 || spnFinicio.getValue().toString().isEmpty() || spnFentrega.getValue().toString().isEmpty()) {
+			return false;
+		} 
+		return true;
 	}
 }
