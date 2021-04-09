@@ -109,16 +109,16 @@ public class Empleado extends JDialog {
 		panel.add(lblNewLabel);
 
 		JLabel lblNewLabel_2 = new JLabel("Nombre");
-		lblNewLabel_2.setBounds(233, 24, 62, 14);
+		lblNewLabel_2.setBounds(249, 24, 62, 14);
 		panel.add(lblNewLabel_2);
 
 		JLabel lblNewLabel_1 = new JLabel("Telefono");
-		lblNewLabel_1.setFont(new Font("Kartika", Font.PLAIN, 9));
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblNewLabel_1.setBounds(10, 74, 67, 14);
 		panel.add(lblNewLabel_1);
 
 		JLabel lblNewLabel_3 = new JLabel("Direccion");
-		lblNewLabel_3.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 10));
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblNewLabel_3.setBounds(249, 74, 62, 14);
 		panel.add(lblNewLabel_3);
 
@@ -166,7 +166,7 @@ public class Empleado extends JDialog {
 				}
 			}
 		});
-		txtCedulaEmp.setBounds(91, 21, 135, 20);
+		txtCedulaEmp.setBounds(66, 21, 135, 20);
 		panel.add(txtCedulaEmp);
 		txtCedulaEmp.setColumns(10);
 
@@ -229,7 +229,7 @@ public class Empleado extends JDialog {
 		panel_3.add(lblSalario);
 
 		JLabel lblNewLabel_7 = new JLabel("Apellido");
-		lblNewLabel_7.setBounds(432, 24, 62, 14);
+		lblNewLabel_7.setBounds(449, 24, 62, 14);
 		panel.add(lblNewLabel_7);
 
 		txtApellido = new JTextField();
