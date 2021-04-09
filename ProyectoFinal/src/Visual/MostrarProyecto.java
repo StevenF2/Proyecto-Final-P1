@@ -40,6 +40,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 import javax.swing.ScrollPaneConstants;
+import javax.swing.ImageIcon;
 
 public class MostrarProyecto extends JDialog {
 	private JButton btnCancelar;
@@ -82,7 +83,8 @@ public class MostrarProyecto extends JDialog {
 			panel_1.setLayout(null);
 			panel_1.setBackground(new Color(51, 102, 153));
 			{
-				btnCancelar = new JButton("Cancelar");
+				btnCancelar = new JButton("");
+				btnCancelar.setIcon(new ImageIcon(MostrarProyecto.class.getResource("/icons/home (2).png")));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
