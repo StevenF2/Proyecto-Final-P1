@@ -377,7 +377,8 @@ public class Empleado extends JDialog {
 		contentPanel.add(panel_4);
 		panel_4.setLayout(null);
 
-		btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("");
+		btnCancelar.setIcon(new ImageIcon(Empleado.class.getResource("/icons/home (2).png")));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -387,11 +388,11 @@ public class Empleado extends JDialog {
 		btnCancelar.setBorderPainted(false);
 		btnCancelar.setForeground(new Color(255, 255, 255));
 		btnCancelar.setBackground(new Color(51, 102, 153));
-		btnCancelar.setBounds(569, 0, 89, 44);
+		btnCancelar.setBounds(470, 0, 89, 44);
 		panel_4.add(btnCancelar);
 
 		btnInsertar = new JButton("");
-		btnInsertar.setIcon(new ImageIcon(Empleado.class.getResource("/icons/floppy-disk.png")));
+		btnInsertar.setIcon(new ImageIcon(Empleado.class.getResource("/icons/diskette (1).png")));
 		btnInsertar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -446,7 +447,7 @@ public class Empleado extends JDialog {
 		btnInsertar.setBorderPainted(false);
 		btnInsertar.setForeground(new Color(255, 255, 255));
 		btnInsertar.setBackground(new Color(51, 102, 153));
-		btnInsertar.setBounds(480, 0, 89, 44);
+		btnInsertar.setBounds(569, 0, 89, 44);
 		panel_4.add(btnInsertar);
 
 
