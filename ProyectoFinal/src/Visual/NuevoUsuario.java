@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class NuevoUsuario extends JDialog {
 
@@ -107,17 +108,19 @@ public class NuevoUsuario extends JDialog {
 		contentPanel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("");
+		btnCancelar.setIcon(new ImageIcon(NuevoUsuario.class.getResource("/icons/home (2).png")));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
 		btnCancelar.setBackground(new Color(51, 102, 153));
-		btnCancelar.setBounds(339, 0, 89, 43);
+		btnCancelar.setBounds(240, 0, 89, 43);
 		panel_1.add(btnCancelar);
 		
-		btnInsertarUsuario = new JButton("Insertar");
+		btnInsertarUsuario = new JButton("");
+		btnInsertarUsuario.setIcon(new ImageIcon(NuevoUsuario.class.getResource("/icons/diskette (1).png")));
 		btnInsertarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				User nuevoUsuario = null;
@@ -134,7 +137,7 @@ public class NuevoUsuario extends JDialog {
 			}
 		});
 		btnInsertarUsuario.setBackground(new Color(51, 102, 153));
-		btnInsertarUsuario.setBounds(240, 0, 89, 43);
+		btnInsertarUsuario.setBounds(339, 0, 89, 43);
 		panel_1.add(btnInsertarUsuario);
 	}
 	
