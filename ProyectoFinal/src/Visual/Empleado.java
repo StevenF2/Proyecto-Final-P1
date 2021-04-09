@@ -423,10 +423,10 @@ public class Empleado extends JDialog {
 					JOptionPane.showMessageDialog(null, "Operacion Satisfactoria", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 					clean();
 					
-				} else {
+				} /*else {
 					
 					JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-				}
+				} */
 					
 					if (tabbedPane.getSelectedIndex() == 1) {
 						
@@ -438,10 +438,10 @@ public class Empleado extends JDialog {
 					JOptionPane.showMessageDialog(null, "Operacion Satisfactoria", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 					clean();
 					
-				} else {
+				} /*else {
 					
 					JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-				} 
+				} */
 					if (tabbedPane.getSelectedIndex() == 2 && !txtReunionEmp.getText().isEmpty()) {
 						
 					auxText = Integer.valueOf(txtReunionEmp.getText().toString());
@@ -451,10 +451,10 @@ public class Empleado extends JDialog {
 					JOptionPane.showMessageDialog(null, "Operacion Satisfactoria", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 					clean();
 					
-				} else {
+				} /*else {
 					
 					JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-				} 
+				} */
 					if(tabbedPane.getSelectedIndex() == 3){
 						
 					emp3 = new Disenador(txtCedulaEmp.getText(), txtNombreEmp.getText(), txtApellido.getText(), txtDireccionEmp.getText(), txtTelefonoEmp.getText(), auxRadio, Float.valueOf(spnSalarioHora.getValue().toString()), "","",Float.valueOf(0), Integer.valueOf(spnAnExperiencia.getValue().toString()));
@@ -466,7 +466,7 @@ public class Empleado extends JDialog {
 				} else {
 					
 					JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "Aviso", JOptionPane.INFORMATION_MESSAGE);	
-				}
+				} 
 				
 				
 				/**
