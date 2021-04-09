@@ -155,14 +155,6 @@ public class NuevoContrato extends JDialog {
 
 			txtDireccion = new JTextField();
 			txtDireccion.setEditable(false);
-			txtDireccion.addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyTyped(KeyEvent e) {
-					if (prevenirDigitos(e)) {
-						e.consume();
-					}
-				}
-			});
 			txtDireccion.setBounds(357, 78, 123, 20);
 			panel_3.add(txtDireccion);
 			txtDireccion.setColumns(10);
@@ -186,71 +178,71 @@ public class NuevoContrato extends JDialog {
 			txtCedula.setColumns(10);
 			txtCedula.setBounds(68, 33, 125, 20);
 			panel_3.add(txtCedula);
-			
-						JLabel lblNewLabel_3 = new JLabel("Nombre");
-						lblNewLabel_3.setBounds(296, 33, 61, 14);
-						panel_3.add(lblNewLabel_3);
-						
-									txtNombre = new JTextField();
-									txtNombre.setEditable(false);
-									txtNombre.setBounds(355, 30, 125, 20);
-									panel_3.add(txtNombre);
-									txtNombre.addKeyListener(new KeyAdapter() {
-										@Override
-										public void keyTyped(KeyEvent e) {
-											if (prevenirDigitos(e)) {
-												e.consume();
-											}
-										}
-									});
-									txtNombre.setColumns(10);
-									
-												JButton btnNewButton = new JButton("Buscar");
-												btnNewButton.setBounds(203, 28, 83, 31);
-												panel_3.add(btnNewButton);
-												btnNewButton.addActionListener(new ActionListener() {
-													public void actionPerformed(ActionEvent arg0) {
 
-														String cedula = txtCedula.getText();
-														Cliente c = buscarCliente(cedula);
-														cExistente = c;
-														
-														if(txtCedula.getText().isEmpty()) {
+			JLabel lblNewLabel_3 = new JLabel("Nombre");
+			lblNewLabel_3.setBounds(296, 33, 61, 14);
+			panel_3.add(lblNewLabel_3);
 
-															JOptionPane.showMessageDialog(null,  "Favor introducir el identificador del cliente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+			txtNombre = new JTextField();
+			txtNombre.setEditable(false);
+			txtNombre.setBounds(355, 30, 125, 20);
+			panel_3.add(txtNombre);
+			txtNombre.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					if (prevenirDigitos(e)) {
+						e.consume();
+					}
+				}
+			});
+			txtNombre.setColumns(10);
 
-														} 
+			JButton btnNewButton = new JButton("Buscar");
+			btnNewButton.setBounds(203, 28, 83, 31);
+			panel_3.add(btnNewButton);
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
 
-														if(c == null && !txtCedula.getText().isEmpty()) {
+					String cedula = txtCedula.getText();
+					Cliente c = buscarCliente(cedula);
+					cExistente = c;
 
-															JOptionPane.showMessageDialog(null,  "El cliente no se encuentra registrado en la base de datos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-															txtNombre.setEditable(true);
-															txtTelefono.setEditable(true);
-															txtDireccion.setEditable(true);
-															txtCantidad.setText(""+0);
-															
-															
-														}else {
+					if(txtCedula.getText().isEmpty()) {
 
-															txtNombre.setText(""+c.getNombre());
-															txtNombre.setEditable(false);
-															txtCedula.setText(""+c.getCedula());
-															txtCedula.setEditable(false);
-															txtTelefono.setText(""+c.getTelefono());
-															txtTelefono.setEditable(false);
-															txtDireccion.setText(""+c.getDireccion());
-															txtDireccion.setEditable(false);
-															txtCantidad.setText(""+c.getCantiProyectos());		
-															cExiste = true;
+						JOptionPane.showMessageDialog(null,  "Favor introducir el identificador del cliente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+
+					} 
+
+					if(c == null && !txtCedula.getText().isEmpty()) {
+
+						JOptionPane.showMessageDialog(null,  "El cliente no se encuentra registrado en la base de datos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+						txtNombre.setEditable(true);
+						txtTelefono.setEditable(true);
+						txtDireccion.setEditable(true);
+						txtCantidad.setText("0");
 
 
-														}
+					}else {
+
+						txtNombre.setText(""+c.getNombre());
+						txtNombre.setEditable(false);
+						txtCedula.setText(""+c.getCedula());
+						txtCedula.setEditable(false);
+						txtTelefono.setText(""+c.getTelefono());
+						txtTelefono.setEditable(false);
+						txtDireccion.setText(""+c.getDireccion());
+						txtDireccion.setEditable(false);
+						txtCantidad.setText(""+c.getCantiProyectos());		
+						cExiste = true;
 
 
-													}
-												});
-												btnNewButton.setBorderPainted(false);
-												btnNewButton.setBackground(new Color(204, 204, 204));
+					}
+
+
+				}
+			});
+			btnNewButton.setBorderPainted(false);
+			btnNewButton.setBackground(new Color(204, 204, 204));
 
 			txtId = new JTextField();
 			txtId.setBounds(101, 39, 160, 20);
@@ -262,6 +254,8 @@ public class NuevoContrato extends JDialog {
 			panel_1.add(lblIdCliente);
 
 			txtNombreP = new JTextField();
+			txtNombreP.setText(Empresa.getNombre());
+			txtNombreP.setEnabled(false);
 			txtNombreP.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
@@ -316,116 +310,114 @@ public class NuevoContrato extends JDialog {
 		JButton btnFinalizar = new JButton("Finalizar");
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					if(informacionLlena()) {
 
-				if(!txtNombreP.getText().isEmpty() && !txtId.getText().isEmpty() && !txtCedula.getText().isEmpty() && !txtTelefono.getText().isEmpty() && !txtDireccion.getText().isEmpty() && !txtCantidad.getText().isEmpty()) {
-								
-				int idContrato = Integer.parseInt(txtId.getText());
-				String nombreP = txtNombreP.getText();
-				String nombre = txtNombre.getText();
-				String cedula = txtCedula.getText();
-				String telefono = txtTelefono.getText();
-				String direccion = txtDireccion.getText();
-				int cantidad = 0;
+						int idContrato = Integer.parseInt(txtId.getText());
+						String nombreP = txtNombreP.getText();
+						String nombre = txtNombre.getText();
+						String cedula = txtCedula.getText();
+						String telefono = txtTelefono.getText();
+						String direccion = txtDireccion.getText();
+						int cantidad = 0;
 
-				if(cExiste == true) {
+						if(cExiste == true) {
 
-					cantidad = Integer.parseInt(txtCantidad.getText());
+							cantidad = Integer.parseInt(txtCantidad.getText());
 
-				}else {
+						}else {
 
-					cantidad = 1;
+							cantidad = 1;
 
+						}
+						if(cExiste == true && cantidad == 5 ) {
+
+							JOptionPane.showMessageDialog(null,  "No es posible completar la accion, el cliente cuenta con la cantidad maxima de proyectos activos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+
+
+						}
+
+						String tipo = null;
+						String lenguaje = null;
+
+						switch (Empresa.getTipo()) {
+
+						case 0: tipo = "Web";
+						break;
+
+						case 1: tipo = "Desktop";
+						break;
+
+						case 2: tipo = "Movil";
+						break;
+						}
+
+						switch (Empresa.getLenguaje()) {
+
+						case 0: lenguaje = "Python";
+						break;
+
+						case 1: lenguaje = "C#";
+						break;
+
+						case 2: lenguaje = "JavaScrypt";
+						break;
+
+						case 3: lenguaje = "Ruby";
+						break;
+
+						case 4: lenguaje = "C++";
+						break;
+
+						case 5: lenguaje = "C";
+						break;
+
+						case 6: lenguaje = "Java";
+						break;
+
+						case 7: lenguaje = "Angular";
+						break;
+						}
+
+						//Si el cliente ya existe, no se puede agregar un nuevo cliente
+						//Hacer que cantiPoyectos aumente cada vez que un mismo cliente hace un contrato nuevo
+						//Limitar a 5 la cantidad de proyectos
+						//Automatizar los codigos id de proyectos y contratos
+
+
+						Cliente cli = new Cliente(cedula, nombre, direccion, telefono);
+						Proyecto p = new Proyecto(nombreP, tipo, true, lenguaje, false, Empresa.getInicio(), Empresa.getFin(), Empresa.getFin(), Empresa.getTemp());
+						Contrato c = new Contrato(idContrato, cedula, nombreP, cli, p, montoTotalContrato);
+
+						if(cExiste == true) {
+
+							clienteNuevoPoyecto(cExistente,p,c);
+							JOptionPane.showMessageDialog(null,  "Se ha agregado un nuevo proyecto satisfactoriamente ", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+							cExiste = false;
+							cExistente = null;
+							dispose();
+
+						}else {
+
+							Empresa.getInstance().insertarCliente(cli);
+							Empresa.getInstance().insertarContrato(c);
+							Empresa.getInstance().insertarProyecto(p);
+
+						}
+
+						JOptionPane.showMessageDialog(null,  "Se ha agregado un nuevo proyecto satisfactoriamente ", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+						dispose();
+
+						System.out.println(Empresa.getInstance().getClientes().get(0).getNombre());
+
+					}else {
+
+						JOptionPane.showMessageDialog(null,  "Debe llenar todas las casillas", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+					}
+				} catch(Exception e1) {
+					JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Aviso", JOptionPane.ERROR_MESSAGE);
+					e1.printStackTrace();
 				}
-
-
-
-				if(cExiste == true && cantidad == 5 ) {
-
-					JOptionPane.showMessageDialog(null,  "No es posible completar la accion, el cliente cuenta con la cantidad maxima de proyectos activos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-
-
-				}
-
-				String tipo = null;
-				String lenguaje = null;
-
-				switch (Empresa.getTipo()) {
-
-				case 0: tipo = "Web";
-				break;
-
-				case 1: tipo = "Desktop";
-				break;
-
-				case 2: tipo = "Movil";
-				break;
-				}
-
-				switch (Empresa.getLenguaje()) {
-
-				case 0: lenguaje = "Python";
-				break;
-
-				case 1: lenguaje = "C#";
-				break;
-
-				case 2: lenguaje = "JavaScrypt";
-				break;
-
-				case 3: lenguaje = "Ruby";
-				break;
-
-				case 4: lenguaje = "C++";
-				break;
-
-				case 5: lenguaje = "C";
-				break;
-
-				case 6: lenguaje = "Java";
-				break;
-
-				case 7: lenguaje = "Angular";
-				break;
-				}
-
-				//Si el cliente ya existe, no se puede agregar un nuevo cliente
-				//Hacer que cantiPoyectos aumente cada vez que un mismo cliente hace un contrato nuevo
-				//Limitar a 5 la cantidad de proyectos
-				//Automatizar los codigos id de proyectos y contratos
-
-
-				Cliente cli = new Cliente(cedula, nombre, direccion, telefono);
-				Proyecto p = new Proyecto(nombreP, tipo, true, lenguaje, false, Empresa.getInicio(), Empresa.getFin(), Empresa.getFin(), Empresa.getTemp());
-				Contrato c = new Contrato(idContrato, cedula, nombreP, cli, p, montoTotalContrato);
-
-				if(cExiste == true) {
-
-					clienteNuevoPoyecto(cExistente,p,c);
-					JOptionPane.showMessageDialog(null,  "Se ha agregado un nuevo proyecto satisfactoriamente ", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-					cExiste = false;
-					cExistente = null;
-					dispose();
-
-				}else {
-
-					Empresa.getInstance().insertarCliente(cli);
-					Empresa.getInstance().insertarContrato(c);
-					Empresa.getInstance().insertarProyecto(p);
-
-				}
-
-				JOptionPane.showMessageDialog(null,  "Se ha agregado un nuevo proyecto satisfactoriamente ", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-
-				System.out.println(Empresa.getInstance().getClientes().get(0).getNombre());
-				
-			}else {
-				
-				JOptionPane.showMessageDialog(null,  "Debe llenar todas las casillas", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-				
-				
-			}
-			
 			}
 		});
 		btnFinalizar.setForeground(Color.WHITE);
@@ -477,5 +469,12 @@ public class NuevoContrato extends JDialog {
 			return true;
 		}
 		return false;
+	}
+
+	private boolean informacionLlena() {
+		if(txtNombreP.getText().isEmpty() || txtId.getText().isEmpty() || txtCedula.getText().isEmpty() || txtTelefono.getText().isEmpty() || txtDireccion.getText().isEmpty() || txtCantidad.getText().isEmpty()) {
+			return false;
+		} 
+		return true;
 	}
 }
