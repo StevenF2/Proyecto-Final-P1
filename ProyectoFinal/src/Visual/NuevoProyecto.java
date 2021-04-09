@@ -31,6 +31,7 @@ import javax.swing.SpinnerDateModel;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.ImageIcon;
 
 public class NuevoProyecto extends JDialog {
 
@@ -81,7 +82,8 @@ public class NuevoProyecto extends JDialog {
 		contentPanel.add(panel_3);
 		panel_3.setLayout(null);
 
-		JButton btnNewButton = new JButton("Cancelar");
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(NuevoProyecto.class.getResource("/icons/home (2).png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -93,7 +95,8 @@ public class NuevoProyecto extends JDialog {
 		btnNewButton.setBounds(370, 0, 89, 44);
 		panel_3.add(btnNewButton);
 
-		JButton btnSiguiente = new JButton("Siguiente");
+		JButton btnSiguiente = new JButton("");
+		btnSiguiente.setIcon(new ImageIcon(NuevoProyecto.class.getResource("/icons/right-arrow (1).png")));
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -168,7 +171,8 @@ public class NuevoProyecto extends JDialog {
 				panel_1.setBounds(121, 166, 300, 192);
 				panel.add(panel_1);
 				{
-					btnAgregarEmpleado = new JButton("B");
+					btnAgregarEmpleado = new JButton("");
+					btnAgregarEmpleado.setIcon(new ImageIcon(NuevoProyecto.class.getResource("/icons/loupe (2).png")));
 					btnAgregarEmpleado.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
 							AgregarEmpleado emp = new AgregarEmpleado(cmbLenguajes.getSelectedItem().toString());
@@ -177,7 +181,7 @@ public class NuevoProyecto extends JDialog {
 						}
 					});
 					btnAgregarEmpleado.setBorderPainted(false);
-					btnAgregarEmpleado.setBackground(new Color(204, 204, 204));
+					btnAgregarEmpleado.setBackground(Color.WHITE);
 					btnAgregarEmpleado.setBounds(201, 11, 89, 34);
 					panel_1.add(btnAgregarEmpleado);
 				}
