@@ -25,6 +25,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class AgregarEmpleado extends JDialog {
 
@@ -140,7 +141,8 @@ public class AgregarEmpleado extends JDialog {
 				}
 			}
 			{
-				btnInsertarEmpleado = new JButton(">");
+				btnInsertarEmpleado = new JButton("");
+				btnInsertarEmpleado.setIcon(new ImageIcon(AgregarEmpleado.class.getResource("/icons/right-arrow (1).png")));
 				btnInsertarEmpleado.setEnabled(false);
 				btnInsertarEmpleado.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -160,7 +162,8 @@ public class AgregarEmpleado extends JDialog {
 				panel.add(btnInsertarEmpleado);
 			}
 			{
-				btnRegresarEmpleado = new JButton("<");
+				btnRegresarEmpleado = new JButton("");
+				btnRegresarEmpleado.setIcon(new ImageIcon(AgregarEmpleado.class.getResource("/icons/previous.png")));
 				btnRegresarEmpleado.setEnabled(false);
 				btnRegresarEmpleado.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -181,7 +184,8 @@ public class AgregarEmpleado extends JDialog {
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			{
-				btnCancelar = new JButton("Cancelar");
+				btnCancelar = new JButton("");
+				btnCancelar.setIcon(new ImageIcon(AgregarEmpleado.class.getResource("/icons/home (2).png")));
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -190,11 +194,12 @@ public class AgregarEmpleado extends JDialog {
 				btnCancelar.setForeground(new Color(255, 255, 255));
 				btnCancelar.setBackground(new Color(51, 102, 153));
 				btnCancelar.setBorderPainted(false);
-				btnCancelar.setBounds(533, 0, 89, 47);
+				btnCancelar.setBounds(434, 0, 89, 47);
 				panel.add(btnCancelar);
 			}
 			{
-				btnInsertarEmpleados = new JButton("Insertar");
+				btnInsertarEmpleados = new JButton("");
+				btnInsertarEmpleados.setIcon(new ImageIcon(AgregarEmpleado.class.getResource("/icons/diskette (1).png")));
 				btnInsertarEmpleados.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						NuevoProyecto.agregarLenguajeProgramador(modelAceptado);
@@ -205,7 +210,7 @@ public class AgregarEmpleado extends JDialog {
 				btnInsertarEmpleados.setForeground(new Color(255, 255, 255));
 				btnInsertarEmpleados.setBackground(new Color(51, 102, 153));
 				btnInsertarEmpleados.setBorderPainted(false);
-				btnInsertarEmpleados.setBounds(434, 0, 89, 47);
+				btnInsertarEmpleados.setBounds(533, 0, 89, 47);
 				panel.add(btnInsertarEmpleados);
 			}
 		}
