@@ -1,17 +1,20 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.table.DefaultTableModel;
 
-public class Empresa {
+public class Empresa implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private ArrayList <Cliente> clientes;
 	private ArrayList <Contrato> contratos;
 	private ArrayList <Empleado> empleados;
 	private ArrayList <Proyecto> proyectos;
 	private ArrayList<User> usuarios;
+	private static User loginUser;
 	private static Empresa empresa = null;
 	private static int numClientes = 1;
 	private static int numContratos = 1;
@@ -139,6 +142,14 @@ public class Empresa {
 
 	public static void setNombre(String nombre) {
 		Empresa.nombre = nombre;
+	}
+	
+	public static User getLoginUser() {
+		return loginUser;
+	}
+
+	public static void setLoginUser(User loginUser) {
+		Empresa.loginUser = loginUser;
 	}
 
 	public static Date getInicio() {
@@ -319,6 +330,7 @@ public class Empresa {
 	public boolean checkUserData(String nombreUsuario, String passwordUsuario) {
 		for(User aux: this.usuarios) {
 			if(aux.getNombreUsuario().equalsIgnoreCase(nombreUsuario) && aux.getPasswordUsuario().equalsIgnoreCase(passwordUsuario)) {
+				Empresa.loginUser = aux;
 				return true;
 			}
 		}

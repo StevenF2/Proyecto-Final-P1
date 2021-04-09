@@ -1,8 +1,10 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Programador extends Empleado {
+public class Programador extends Empleado implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	private ArrayList<String> lenguaje;
 

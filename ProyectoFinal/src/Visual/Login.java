@@ -8,6 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.EventQueue;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -17,6 +19,12 @@ import logico.Empresa;
 import logico.User;
 
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 
 public class Login extends JDialog {
@@ -31,13 +39,49 @@ public class Login extends JDialog {
 	 */
 	//hola
 	public static void main(String[] args) {
-		try {
-			Login dialog = new Login();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				FileInputStream empresa;
+				FileOutputStream empresa2;
+				ObjectInputStream empresaRead;
+				ObjectOutputStream empresaWrite;
+				try {
+					empresa = new FileInputStream ("empresa.dat");
+					empresaRead = new ObjectInputStream(empresa);
+					Empresa temp = (Empresa)empresaRead.readObject();
+					Empresa.setEmpresa(temp);
+					empresa.close();
+					empresaRead.close();
+				} catch (FileNotFoundException e) {
+					try {
+						empresa2 = new  FileOutputStream("empresa.dat");
+						empresaWrite = new ObjectOutputStream(empresa2);
+						User aux = new User("USER-1","Administrador", "Admin", "Admin");
+						Empresa.getInstance().insetarUsuario(aux);
+						empresaWrite.writeObject(Empresa.getInstance());
+						empresa2.close();
+						empresaWrite.close();
+					} catch (FileNotFoundException e1) {
+						
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+					}
+				} catch (IOException e) {
+
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					Login dialog = new Login();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
@@ -90,15 +134,15 @@ public class Login extends JDialog {
 				btnIngresar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						if(!(Empresa.getInstance().checkUserData(txtNombreUsuario.getText(), txtPassword.getText()))) {
-							JOptionPane.showMessageDialog(null, "Usuario no encontrado", "Informacion", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Usuario no encontrado o datos incorrectos", "Informacion", JOptionPane.ERROR_MESSAGE);
 						} else {
 							Principal ventanaPrincipal = new Principal();
 							ventanaPrincipal.setVisible(true);
 							setVisible(false);
-							
+
 						}
-						
-						
+
+
 					}
 				});
 				btnIngresar.setBorderPainted(false);
