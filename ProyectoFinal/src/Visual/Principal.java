@@ -202,7 +202,7 @@ public class Principal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		if(!Empresa.getLoginUser().getTipo().equalsIgnoreCase("Administrador")) {
+		if(Empresa.getLoginUser().getTipo().equalsIgnoreCase("Secretario")) {
 			menuCEmpleado.setEnabled(false);
 			menuMProyecto.setEnabled(false);
 			menuCProyecto.setEnabled(false);
