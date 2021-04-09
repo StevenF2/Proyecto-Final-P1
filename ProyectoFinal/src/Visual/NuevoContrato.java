@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class NuevoContrato extends JDialog {
 
@@ -197,7 +198,8 @@ public class NuevoContrato extends JDialog {
 			});
 			txtNombre.setColumns(10);
 
-			JButton btnNewButton = new JButton("Buscar");
+			JButton btnNewButton = new JButton("");
+			btnNewButton.setIcon(new ImageIcon(NuevoContrato.class.getResource("/icons/loupe (2).png")));
 			btnNewButton.setBounds(203, 28, 83, 31);
 			panel_3.add(btnNewButton);
 			btnNewButton.addActionListener(new ActionListener() {
@@ -242,7 +244,7 @@ public class NuevoContrato extends JDialog {
 				}
 			});
 			btnNewButton.setBorderPainted(false);
-			btnNewButton.setBackground(new Color(204, 204, 204));
+			btnNewButton.setBackground(Color.WHITE);
 
 			txtId = new JTextField();
 			txtId.setBounds(101, 39, 160, 20);
@@ -287,7 +289,8 @@ public class NuevoContrato extends JDialog {
 		panel.setBounds(0, 337, 634, 45);
 		contentPanel.add(panel);
 
-		JButton btnAtras = new JButton("Atras");
+		JButton btnAtras = new JButton("");
+		btnAtras.setIcon(new ImageIcon(NuevoContrato.class.getResource("/icons/previous.png")));
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//dispose();
@@ -307,7 +310,8 @@ public class NuevoContrato extends JDialog {
 		btnAtras.setBounds(423, 0, 89, 45);
 		panel.add(btnAtras);
 
-		JButton btnFinalizar = new JButton("Finalizar");
+		JButton btnFinalizar = new JButton("");
+		btnFinalizar.setIcon(new ImageIcon(NuevoContrato.class.getResource("/icons/diskette (1).png")));
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
