@@ -28,6 +28,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 
 public class CambiarFecha extends JDialog {
 
@@ -102,7 +103,8 @@ public class CambiarFecha extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				btnCambiar = new JButton("Procesar");
+				btnCambiar = new JButton("");
+				btnCambiar.setIcon(new ImageIcon(CambiarFecha.class.getResource("/icons/diskette (1).png")));
 				btnCambiar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						Proyecto pro = Empresa.getInstance().buscarProyecto(codigoProyecto);
@@ -135,25 +137,26 @@ public class CambiarFecha extends JDialog {
 						}
 					}
 				});
+				{
+					btnCancelar = new JButton("");
+					btnCancelar.setIcon(new ImageIcon(CambiarFecha.class.getResource("/icons/home (2).png")));
+					btnCancelar.setBorderPainted(false);
+					btnCancelar.setForeground(new Color(255, 255, 255));
+					btnCancelar.setBackground(new Color(51, 102, 153));
+					btnCancelar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							dispose();
+						}
+					});
+					btnCancelar.setActionCommand("Cancel");
+					buttonPane.add(btnCancelar);
+				}
 				btnCambiar.setBorderPainted(false);
 				btnCambiar.setForeground(new Color(255, 255, 255));
 				btnCambiar.setBackground(new Color(51, 102, 153));
 				btnCambiar.setActionCommand("OK");
 				buttonPane.add(btnCambiar);
 				getRootPane().setDefaultButton(btnCambiar);
-			}
-			{
-				btnCancelar = new JButton("Cancelar");
-				btnCancelar.setBorderPainted(false);
-				btnCancelar.setForeground(new Color(255, 255, 255));
-				btnCancelar.setBackground(new Color(51, 102, 153));
-				btnCancelar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-					}
-				});
-				btnCancelar.setActionCommand("Cancel");
-				buttonPane.add(btnCancelar);
 			}
 		}
 	}
