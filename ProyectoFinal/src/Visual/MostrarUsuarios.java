@@ -25,6 +25,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class MostrarUsuarios extends JDialog {
 	private JTable tblMostrarUsuarios;
@@ -61,7 +62,8 @@ public class MostrarUsuarios extends JDialog {
 			getContentPane().add(buttonPane);
 			buttonPane.setLayout(null);
 			{
-				JButton btnNewButton = new JButton("Cancelar");
+				JButton btnNewButton = new JButton("");
+				btnNewButton.setIcon(new ImageIcon(MostrarUsuarios.class.getResource("/icons/home (2).png")));
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
