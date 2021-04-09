@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class Login extends JDialog {
 
@@ -130,7 +131,8 @@ public class Login extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				btnIngresar = new JButton("Ingresar");
+				btnIngresar = new JButton("");
+				btnIngresar.setIcon(new ImageIcon(Login.class.getResource("/icons/enter.png")));
 				btnIngresar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						if(!(Empresa.getInstance().checkUserData(txtNombreUsuario.getText(), txtPassword.getText()))) {
