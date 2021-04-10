@@ -58,7 +58,7 @@ public class MostrarCliente extends JDialog {
 		model.setColumnIdentifiers(columns);		
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Mostrar Clientes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)), "Mostrar Usuarios", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(10, 38, 554, 337);
 		contentPanel.add(panel);
 		panel.setLayout(null);
@@ -84,7 +84,7 @@ public class MostrarCliente extends JDialog {
 			
 			{
 				JButton cancelButton = new JButton("");
-				cancelButton.setIcon(new ImageIcon(MostrarCliente.class.getResource("/icons/diskette (1).png")));
+				cancelButton.setIcon(new ImageIcon(MostrarCliente.class.getResource("/icons/home (2).png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
