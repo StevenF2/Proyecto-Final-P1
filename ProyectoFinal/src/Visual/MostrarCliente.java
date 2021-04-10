@@ -20,6 +20,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JScrollPane;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 public class MostrarCliente extends JDialog {
 
@@ -57,14 +58,19 @@ public class MostrarCliente extends JDialog {
 		model.setColumnIdentifiers(columns);		
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel.setBounds(10, 55, 554, 320);
+		panel.setBorder(new TitledBorder(null, "Mostrar Clientes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 38, 554, 337);
 		contentPanel.add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
+		panel.setLayout(null);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(10, 21, 534, 305);
+		panel.add(panel_1);
+		panel_1.setLayout(new BorderLayout(0, 0));
 		{
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			panel.add(scrollPane, BorderLayout.CENTER);
+			panel_1.add(scrollPane, BorderLayout.CENTER);
 			
 			tblMostrarClientes = new JTable();
 			tblMostrarClientes.setModel(model);
@@ -75,6 +81,7 @@ public class MostrarCliente extends JDialog {
 			buttonPane.setBackground(new Color(51, 102, 153));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			
 			{
 				JButton cancelButton = new JButton("");
 				cancelButton.setIcon(new ImageIcon(MostrarCliente.class.getResource("/icons/diskette (1).png")));
