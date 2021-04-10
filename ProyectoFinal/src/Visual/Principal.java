@@ -113,6 +113,7 @@ public class Principal extends JFrame {
 		mnNewMenu.add(menuCEmpleado);
 		
 		menuMEmpleado = new JMenuItem("Mostrar Empleado");
+		menuMEmpleado.setIcon(new ImageIcon(Principal.class.getResource("/icons/list (1).png")));
 		menuMEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MostrarEmpleado emp = new MostrarEmpleado();
@@ -142,6 +143,7 @@ public class Principal extends JFrame {
 		mnNewMenu_1.add(menuCProyecto);
 		
 		menuMProyecto = new JMenuItem("Mostrar Proyectos");
+		menuMProyecto.setIcon(new ImageIcon(Principal.class.getResource("/icons/list (1).png")));
 		menuMProyecto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MostrarProyecto mProyecto = new MostrarProyecto();
@@ -154,6 +156,7 @@ public class Principal extends JFrame {
 		mnNewMenu_1.add(menuMProyecto);
 		
 		menuMContrato = new JMenuItem("Mostrar Contratos");
+		menuMContrato.setIcon(new ImageIcon(Principal.class.getResource("/icons/list (1).png")));
 		menuMContrato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MostrarContrato mCont = new MostrarContrato();
@@ -170,6 +173,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnNewMenu_2);
 		
 		menuMCliente = new JMenuItem("Mostrar Cliente");
+		menuMCliente.setIcon(new ImageIcon(Principal.class.getResource("/icons/list (1).png")));
 		menuMCliente.setForeground(new Color(51, 102, 153));
 		menuMCliente.setBackground(new Color(255, 255, 255));
 		mnNewMenu_2.add(menuMCliente);
@@ -179,6 +183,7 @@ public class Principal extends JFrame {
 		menuBar.add(menuAdministrador);
 		
 		menuCUsuarios = new JMenuItem("Crear Usuarios");
+		menuCUsuarios.setIcon(new ImageIcon(Principal.class.getResource("/icons/add.png")));
 		menuCUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				NuevoUsuario user = new NuevoUsuario();
@@ -189,6 +194,7 @@ public class Principal extends JFrame {
 		menuAdministrador.add(menuCUsuarios);
 		
 		menuMUsuarios = new JMenuItem("Mostrar Usuarios");
+		menuMUsuarios.setIcon(new ImageIcon(Principal.class.getResource("/icons/list (1).png")));
 		menuMUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MostrarUsuarios userMostrar = new MostrarUsuarios();
