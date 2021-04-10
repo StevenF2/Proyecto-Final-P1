@@ -1,0 +1,107 @@
+package Visual;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import logico.Empresa;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import javax.swing.BoxLayout;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JScrollPane;
+import javax.swing.border.EtchedBorder;
+
+public class MostrarCliente extends JDialog {
+
+	private final JPanel contentPanel = new JPanel();
+	private JTable tblMostrarClientes;
+	private DefaultTableModel model;
+	private Object[] rows;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			MostrarCliente dialog = new MostrarCliente();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public MostrarCliente() {
+		setBounds(100, 100, 590, 467);
+		setLocationRelativeTo(null);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		setLocationRelativeTo(null);
+		String columns[] = {"Cedula", "Nombre","Telefono", "Direccion", "Proyectos Activos"};
+		model = new DefaultTableModel();
+		model.setColumnIdentifiers(columns);		
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel.setBounds(10, 55, 554, 320);
+		contentPanel.add(panel);
+		panel.setLayout(new BorderLayout(0, 0));
+		{
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+			panel.add(scrollPane, BorderLayout.CENTER);
+			
+			tblMostrarClientes = new JTable();
+			tblMostrarClientes.setModel(model);
+			tblMostrarClientes.setBackground(new Color(255, 255, 255));
+			tblMostrarClientes.getTableHeader().setReorderingAllowed(false);
+			scrollPane.setViewportView(tblMostrarClientes);
+			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(51, 102, 153));
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			{
+				JButton cancelButton = new JButton("");
+				cancelButton.setIcon(new ImageIcon(MostrarCliente.class.getResource("/icons/diskette (1).png")));
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();
+					}
+				});
+				cancelButton.setActionCommand("Cancel");
+				buttonPane.add(cancelButton);
+			}
+			
+		}
+		
+		cargarClientes();
+	}
+	
+	private void cargarClientes() {
+		rows = new Object[model.getColumnCount()];
+		model.setRowCount(0);
+		for(int i = 0; i < Empresa.getInstance().getClientes().size() ; i++) {
+			rows[0] = Empresa.getInstance().getClientes().get(i).getCedula();
+			rows[1] = Empresa.getInstance().getClientes().get(i).getNombre();
+			rows[2] = Empresa.getInstance().getClientes().get(i).getTelefono();
+			rows[3] = Empresa.getInstance().getClientes().get(i).getDireccion();
+			rows[4] = Empresa.getInstance().getClientes().get(i).getCantiProyectos();
+			model.addRow(rows);
+		}
+	}
+}

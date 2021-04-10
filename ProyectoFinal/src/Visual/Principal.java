@@ -173,6 +173,13 @@ public class Principal extends JFrame {
 		menuBar.add(mnNewMenu_2);
 		
 		menuMCliente = new JMenuItem("Mostrar Cliente");
+		menuMCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				MostrarCliente m = new MostrarCliente();
+				m.setVisible(true);
+				;
+			}
+		});
 		menuMCliente.setIcon(new ImageIcon(Principal.class.getResource("/icons/list (1).png")));
 		menuMCliente.setForeground(new Color(51, 102, 153));
 		menuMCliente.setBackground(new Color(255, 255, 255));
