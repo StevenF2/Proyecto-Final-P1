@@ -34,14 +34,16 @@ import javax.swing.border.EtchedBorder;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 
 public class Principal extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Dimension dimension;
 	private JMenuItem menuCEmpleado;
@@ -53,10 +55,11 @@ public class Principal extends JFrame {
 	private JMenuItem menuCUsuarios;
 	private JMenuItem menuMUsuarios;
 	private JMenu menuAdministrador;
+	private JPanel panel_2;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -67,7 +70,7 @@ public class Principal extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
@@ -226,13 +229,13 @@ public class Principal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		/*if(Empresa.getLoginUser().getTipo().equalsIgnoreCase("Secretario")) {
+		if(Empresa.getLoginUser().getTipo().equalsIgnoreCase("Secretario")) {
 			menuCEmpleado.setEnabled(false);
 			menuMProyecto.setEnabled(false);
 			menuCProyecto.setEnabled(false);
 			menuCUsuarios.setEnabled(false);
 			menuAdministrador.setEnabled(false);
-		}*/
+		}
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
 		contentPane.add(panel, BorderLayout.CENTER);
@@ -318,9 +321,37 @@ public class Principal extends JFrame {
 		chartPanel.setLocation(0, 0);
         panel_1.add(chartPanel);
         
-        JPanel panel_2 = new JPanel();
-        panel_2.setBounds(676, 38, 10, 10);
+        panel_2 = new JPanel();
+        panel_2.setBorder(null);
+        panel_2.setBackground(Color.WHITE);
+        panel_2.setBounds(750, 38, 500, 330);
         panel.add(panel_2);
+        panel_2.setLayout(new BorderLayout(0, 0));
+        
+        DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
+        String meses[] = {"Ene.", "Feb.", "Mar.", "Abr.", "May.", "Jun.", "Jul.", "Ago.", "Sep.", "Oct.", "Nov.", "Dic."};
+        for(int i = 1; i <= 12; i++) {
+        	line_chart_dataset.addValue(Empresa.getInstance().calcularGananciasPorMes(i), "ganacias", meses[i-1]);
+        }
+ 
+
+        JFreeChart chartLine=ChartFactory.createLineChart("Ganancias",
+                "Mes","ganacias",line_chart_dataset,PlotOrientation.VERTICAL,
+                true,true,false); 
+
+        ChartPanel chartLinePanel = new ChartPanel(chartLine);
+        CategoryPlot plot = chartLine.getCategoryPlot();
+        LineAndShapeRenderer renderer = new LineAndShapeRenderer();
+        plot.setRenderer(renderer);
+        renderer.setSeriesPaint(0, Color.BLUE);
+        plot.setBackgroundPaint(Color.WHITE);
+        plot.setRangeGridlinesVisible(true);
+        plot.setRangeGridlinePaint(Color.BLACK);
+         
+        plot.setDomainGridlinesVisible(true);
+        plot.setDomainGridlinePaint(Color.BLACK);
+        
+        panel_2.add(chartLinePanel);
       
 		
 		
