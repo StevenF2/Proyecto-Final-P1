@@ -1,24 +1,24 @@
 package Visual;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import javax.swing.JFrame;
+
 
 import logico.Empresa;
 import logico.Proyecto;
 
 
 import java.awt.SystemColor;
-import java.awt.Color;
+
 import java.awt.Dimension;
+import java.awt.EventQueue;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
-import java.awt.Insets;
-import javax.swing.SwingConstants;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -28,7 +28,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
-import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.border.EtchedBorder;
 
@@ -37,10 +36,12 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
-import graficos.Pastel;
-
 public class Principal extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Dimension dimension;
 	private JMenuItem menuCEmpleado;
@@ -55,7 +56,7 @@ public class Principal extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -66,7 +67,7 @@ public class Principal extends JFrame {
 				}
 			}
 		});
-	}*/
+	}
 
 	/**
 	 * Create the frame.
@@ -225,13 +226,13 @@ public class Principal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		if(Empresa.getLoginUser().getTipo().equalsIgnoreCase("Secretario")) {
+		/*if(Empresa.getLoginUser().getTipo().equalsIgnoreCase("Secretario")) {
 			menuCEmpleado.setEnabled(false);
 			menuMProyecto.setEnabled(false);
 			menuCProyecto.setEnabled(false);
 			menuCUsuarios.setEnabled(false);
 			menuAdministrador.setEnabled(false);
-		}
+		}*/
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
 		contentPane.add(panel, BorderLayout.CENTER);
@@ -316,9 +317,12 @@ public class Principal extends JFrame {
 		chartPanel.setSize(413, 300);
 		chartPanel.setLocation(0, 0);
         panel_1.add(chartPanel);
+        
+        JPanel panel_2 = new JPanel();
+        panel_2.setBounds(676, 38, 10, 10);
+        panel.add(panel_2);
       
 		
 		
 	}
-	
 }
