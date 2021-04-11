@@ -355,5 +355,18 @@ public class Empresa implements Serializable{
 		total += (total*0.30);
 		return total;
 	}
+	public float calcularGananciasPorMes(int mes) {
+		float total = 0;
+		for(Contrato aux: this.contratos) {
+			int mesP = aux.getProyecto().getFechaTerminacionReal().getMonth();
+			System.out.print("Este es mes" + mesP);
+			if(aux.getProyecto().getEstado().equals(false) && mesP == mes) {
+				total += aux.getMontoTotal();
+				
+			}
+		}
+		System.out.print("Este es total" + total);
+		return total;
+	}
 	
 }
