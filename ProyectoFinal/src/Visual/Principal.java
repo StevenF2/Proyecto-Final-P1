@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import logico.Empresa;
+import logico.Proyecto;
 
 import java.awt.SystemColor;
 import java.awt.Color;
@@ -244,9 +245,64 @@ public class Principal extends JFrame {
 		//init();
         
 		DefaultPieDataset data = new DefaultPieDataset();
-        data.setValue("C", 40);
-        data.setValue("Java", 45);
-        data.setValue("Python", 15);
+		float python = 0;
+		float	cnumero = 0;
+		float javascript = 0;
+		float ruby = 0;
+		float cplusplus = 0;
+		float c = 0;
+		float java = 0;
+		float angular = 0;
+		
+		for(Proyecto p : Empresa.getInstance().getProyectos()) {
+			
+			switch(p.getLenguaje()) {
+			
+			case "Python":
+				python++;
+				break;
+		
+			case "C#":
+				cnumero++;
+				break;
+				
+			case "JavaScript":
+				javascript++;
+				break;
+				
+			case "Ruby":
+				ruby++;
+				break;
+				
+			case "C++":
+				cplusplus++;
+				break;
+				
+			case "C":
+				c++;
+				break;
+				
+			case "Java":
+				java++;
+				break;
+				
+			case "Angular":
+				angular++;
+				break;
+			
+			}
+		}
+		
+		int size = Empresa.getInstance().getProyectos().size();
+		
+        data.setValue("Python", (python));
+        data.setValue("C#", (cnumero));
+        data.setValue("JavaScript", (javascript));
+        data.setValue("Ruby", (ruby));
+        data.setValue("C++", (cplusplus));
+        data.setValue("C", (c));
+        data.setValue("Java", (java));
+        data.setValue("Angular", (angular));
  
         // Creando el Grafico
         JFreeChart chart = ChartFactory.createPieChart(
