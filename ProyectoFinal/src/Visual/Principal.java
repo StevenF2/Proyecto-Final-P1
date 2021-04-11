@@ -28,6 +28,14 @@ import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.ImageIcon;
+import javax.swing.border.EtchedBorder;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
+import graficos.Pastel;
 
 public class Principal extends JFrame {
 
@@ -225,5 +233,43 @@ public class Principal extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
 		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setLayout(null);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel_1.setBounds(76, 38, 413, 300);
+		panel.add(panel_1);
+		panel_1.setLayout(null);
+		
+		//init();
+        
+		DefaultPieDataset data = new DefaultPieDataset();
+        data.setValue("C", 40);
+        data.setValue("Java", 45);
+        data.setValue("Python", 15);
+ 
+        // Creando el Grafico
+        JFreeChart chart = ChartFactory.createPieChart(
+         "Proyectos Activos", 
+         data, 
+         true, 
+         true, 
+         false);
+		ChartPanel chartPanel = new ChartPanel(chart);
+		chartPanel.setSize(413, 300);
+		chartPanel.setLocation(0, 0);
+        panel_1.add(chartPanel);
+      
+		
+		
 	}
+	
+	/* private void init() {
+	       
+	        // Fuente de Datos
+	        
+	 
+	        // Crear el Panel del Grafico con ChartPanel
+	        
+	    } */
 }
