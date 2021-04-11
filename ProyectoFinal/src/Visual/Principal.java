@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import logico.Empresa;
 import logico.Proyecto;
 
+
 import java.awt.SystemColor;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -320,12 +321,4 @@ public class Principal extends JFrame {
 		
 	}
 	
-	/* private void init() {
-	       
-	        // Fuente de Datos
-	        
-	 
-	        // Crear el Panel del Grafico con ChartPanel
-	        
-	    } */
 }
