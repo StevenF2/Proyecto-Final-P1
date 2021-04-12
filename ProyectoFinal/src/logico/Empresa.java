@@ -344,7 +344,9 @@ public class Empresa implements Serializable{
 	
 	public float calcularMontoTotalContrato(long daysBetween, ArrayList<Empleado> emp) {
 		float total = 0;
-		
+		if(daysBetween == 0 ) {
+			daysBetween = 1;
+		}
 		for(int i = 0; i < emp.size(); i++) {			
 			
 			total += emp.get(i).getSalario();						
@@ -353,6 +355,17 @@ public class Empresa implements Serializable{
 		
 		//ganancia de 30 %
 		total += (total*0.30);
+		return total;
+	}
+	public float calcularGananciasPorMes(int mes) {
+		float total = 0;
+		for(Contrato aux: this.contratos) {
+			int mesP = aux.getProyecto().getFechaTerminacionReal().getMonth();
+			if(aux.getProyecto().getEstado().equals(false) && mesP == mes) {
+				total += aux.getMontoTotal();
+				
+			}
+		}
 		return total;
 	}
 	
