@@ -1,4 +1,4 @@
-package Visual;
+package visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -237,11 +237,11 @@ public class NuevoProyecto extends JDialog {
 			lblNewLabel_1.setBounds(10, 28, 46, 14);
 			panel.add(lblNewLabel_1);
 			txtCodigo = new JTextField();
+			txtCodigo.setText(String.valueOf(Empresa.getInstance().getProyectos().size() + 1));
 			txtCodigo.setEditable(false);
 			txtCodigo.setBounds(52, 25, 150, 20);
 			panel.add(txtCodigo);
 			txtCodigo.setColumns(10);
-			txtCodigo.setText(""+Empresa.getNumProyectos());
 
 			/**
 			 *	Decidi modificar esta minima parte de tu programacion para que las fechas se vean en formato de dia/mes/año 
