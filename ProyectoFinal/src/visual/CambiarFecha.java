@@ -1,4 +1,4 @@
-package Visual;
+package visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -108,25 +108,12 @@ public class CambiarFecha extends JDialog {
 				btnCambiar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						Proyecto pro = Empresa.getInstance().buscarProyecto(codigoProyecto);
-						float montoTotal = 0;
 						if(pro != null) {
-							Contrato cont = Empresa.getInstance().buscarContratoProyecto(pro.getNombre());
 							Date fechaEntregaA;
 							try {
 								fechaEntregaA = new SimpleDateFormat("dd/MM/yyyy").parse(txtFechaEntregaA.getText());
 								pro.setFechaEntrega(fechaEntregaA);
 								pro.setExtendido(true);
-								montoTotal = cont.getMontoTotal();
-								
-								DateFormat dtf = new SimpleDateFormat("dd MM yyyy");
-								String inicio = dtf.format(pro.getFechaInicio());
-								String finalFecha = dtf.format(pro.getFechaEntrega());
-								DateTimeFormatter dtF = DateTimeFormatter.ofPattern("dd MM yyyy");
-								LocalDate fecha1 = LocalDate.parse(inicio, dtF);
-								LocalDate fecha2 = LocalDate.parse(finalFecha, dtF);
-								long daysBetween = ChronoUnit.DAYS.between(fecha1, fecha2);
-								int days = (int)daysBetween;
-								cont.setMontoTotal(montoTotal -= (montoTotal * (days/100)));
 								
 							} catch (ParseException e) {
 								// TODO Auto-generated catch block
