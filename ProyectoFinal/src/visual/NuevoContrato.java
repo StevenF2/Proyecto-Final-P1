@@ -1,4 +1,4 @@
-package Visual;
+package visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -247,6 +247,8 @@ public class NuevoContrato extends JDialog {
 			btnNewButton.setBackground(Color.WHITE);
 
 			txtId = new JTextField();
+			txtId.setEnabled(false);
+			txtId.setText(String.valueOf(Empresa.getInstance().getContratos().size() + 1));
 			txtId.setBounds(101, 39, 160, 20);
 			panel_1.add(txtId);
 			txtId.setColumns(10);
@@ -396,7 +398,7 @@ public class NuevoContrato extends JDialog {
 						if(cExiste == true) {
 
 							clienteNuevoPoyecto(cExistente,p,c);
-							JOptionPane.showMessageDialog(null,  "Se ha agregado un nuevo proyecto satisfactoriamente ", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+							//JOptionPane.showMessageDialog(null,  "Se ha agregado un nuevo proyecto satisfactoriamente ", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 							cExiste = false;
 							cExistente = null;
 							dispose();
@@ -404,15 +406,17 @@ public class NuevoContrato extends JDialog {
 						}else {
 
 							Empresa.getInstance().insertarCliente(cli);
-							Empresa.getInstance().insertarContrato(c);
-							Empresa.getInstance().insertarProyecto(p);
+							//Empresa.getInstance().insertarContrato(c);
+							//Empresa.getInstance().insertarProyecto(p);
 
 						}
-
+						Empresa.getInstance().insertarContrato(c);
+						Empresa.getInstance().insertarProyecto(p);
 						JOptionPane.showMessageDialog(null,  "Se ha agregado un nuevo proyecto satisfactoriamente ", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 						dispose();
 
 						System.out.println(Empresa.getInstance().getClientes().get(0).getNombre());
+						Principal.cargarProyectosEnFechaEntrega();
 
 					}else {
 
@@ -447,7 +451,7 @@ public class NuevoContrato extends JDialog {
 
 	public void clienteNuevoPoyecto(Cliente c, Proyecto p, Contrato co) {
 
-		Empresa.getInstance().insertarProyecto(p);
+		//Empresa.getInstance().insertarProyecto(p);
 
 		for(Cliente cli : Empresa.getInstance().getClientes()) {
 
