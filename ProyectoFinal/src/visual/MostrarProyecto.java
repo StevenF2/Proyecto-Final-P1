@@ -1,4 +1,4 @@
-package Visual;
+package visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -145,11 +145,11 @@ public class MostrarProyecto extends JDialog {
 						}
 					}
 				}
-				
+
 				JLabel lblNewLabel = new JLabel("Estado:");
 				lblNewLabel.setBounds(10, 38, 74, 14);
 				panel_1.add(lblNewLabel);
-				
+
 				cmbEstado = new JComboBox();
 				cmbEstado.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -159,19 +159,31 @@ public class MostrarProyecto extends JDialog {
 				cmbEstado.setModel(new DefaultComboBoxModel(new String[] {"Todo", "En Proceso", "Finalizado"}));
 				cmbEstado.setBounds(73, 32, 115, 20);
 				panel_1.add(cmbEstado);
-				
+
 				btnFinalizar = new JButton("Finalizar");
 				btnFinalizar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						Proyecto pro = Empresa.getInstance().buscarProyecto(proyectos[0]);
+						float montoTotal = 0;
 						if(pro != null) {
-							try {
-								pro.setEstado(false);
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								JOptionPane.showMessageDialog(null, "Ocurrio un error", "Informacion", JOptionPane.ERROR_MESSAGE);
+							Contrato cont = Empresa.getInstance().buscarContratoProyecto(pro.getNombre());
+							pro.setEstado(false);
+							pro.setFechaTerminacionReal(new Date());
+							if(pro.getFechaEntrega().before(pro.getFechaTerminacionReal())) {
+								montoTotal = cont.getMontoTotal();
+								DateFormat dtf = new SimpleDateFormat("dd MM yyyy");
+								String inicio = dtf.format(pro.getFechaEntrega());
+								String finalFecha = dtf.format(pro.getFechaTerminacionReal());
+								DateTimeFormatter dtF = DateTimeFormatter.ofPattern("dd MM yyyy");
+								LocalDate fecha1 = LocalDate.parse(inicio, dtF);
+								LocalDate fecha2 = LocalDate.parse(finalFecha, dtF);
+								long daysBetween = ChronoUnit.DAYS.between(fecha1, fecha2);
+								float days = (float)daysBetween;
+								montoTotal = montoTotal - (montoTotal * (days/100));
+								cont.setMontoTotal(montoTotal);
 							}
 							JOptionPane.showMessageDialog(null, "Proyecto Finalizado con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+							dispose();
 						}
 					}
 				});
@@ -181,7 +193,7 @@ public class MostrarProyecto extends JDialog {
 				btnFinalizar.setBackground(new Color(204, 204, 204));
 				btnFinalizar.setBounds(535, 22, 89, 30);
 				panel_1.add(btnFinalizar);
-				
+
 				btnProrroga = new JButton("Prorroga");
 				btnProrroga.setForeground(new Color(0, 0, 0));
 				btnProrroga.addActionListener(new ActionListener() {
@@ -217,16 +229,19 @@ public class MostrarProyecto extends JDialog {
 			}
 		}
 	}
-	
+
 	private static Object[] insertInRow(int index) {
+		DateFormat dtf = new SimpleDateFormat("dd/MM/yyyy");
+		String inicio ,finalFecha = "";
+		inicio = dtf.format(Empresa.getInstance().getProyectos().get(index).getFechaInicio());
+		finalFecha = dtf.format(Empresa.getInstance().getProyectos().get(index).getFechaEntrega());
 		rows = new Object[model.getColumnCount()];
 		rows[0] = Empresa.getInstance().getProyectos().get(index).getNombre();
 		rows[1] = Empresa.getInstance().getProyectos().get(index).getTipo();
 		rows[2] = Empresa.getInstance().getProyectos().get(index).getLenguaje();
-		rows[3] = Empresa.getInstance().getProyectos().get(index).getFechaInicio();
-		rows[4] = Empresa.getInstance().getProyectos().get(index).getFechaEntrega();
-		
+		rows[3] = inicio;
+		rows[4] = finalFecha;
 		return rows;
-		
+
 	}
 }
