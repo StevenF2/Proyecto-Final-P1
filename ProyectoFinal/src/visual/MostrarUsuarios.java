@@ -49,6 +49,7 @@ public class MostrarUsuarios extends JDialog {
 	 * Create the dialog.
 	 */
 	public MostrarUsuarios() {
+		setTitle("Mostrar Usuarios");
 		setBounds(100, 100, 494, 361);
 		setLocationRelativeTo(null);
 		String columns[] = {"Nombre Usuario", "Tipo Usuario"};
