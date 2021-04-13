@@ -46,6 +46,7 @@ public class MostrarCliente extends JDialog {
 	 * Create the dialog.
 	 */
 	public MostrarCliente() {
+		setTitle("Mostrar Clientes");
 		setBounds(100, 100, 590, 467);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
@@ -58,7 +59,7 @@ public class MostrarCliente extends JDialog {
 		model.setColumnIdentifiers(columns);		
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)), "Mostrar Clientes", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(51, 102, 153), new Color(51, 102, 153)), "Clientes", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(10, 38, 554, 337);
 		contentPanel.add(panel);
 		panel.setLayout(null);
