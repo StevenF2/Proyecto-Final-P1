@@ -88,6 +88,7 @@ public class Empleado extends JDialog {
 	 * Create the dialog.
 	 */
 	public Empleado() {
+		setTitle("Nuevo Empleado");
 		setBounds(100, 100, 684, 491);
 		setLocationRelativeTo(null);
 		modelProg = new DefaultTableModel();
