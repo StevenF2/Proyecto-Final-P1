@@ -61,6 +61,7 @@ public class AgregarLenguaje extends JDialog {
 	 * Create the dialog.
 	 */
 	public AgregarLenguaje() {
+		setTitle("Agregar Lenguaje");
 		setBounds(100, 100, 671, 443);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
