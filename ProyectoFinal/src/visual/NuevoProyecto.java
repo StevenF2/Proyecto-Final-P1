@@ -65,6 +65,7 @@ public class NuevoProyecto extends JDialog {
 	 * Create the dialog.
 	 */
 	public NuevoProyecto() {
+		setTitle("Nuevo Proyecto");
 
 		datosAnteriores();
 		setBounds(100, 100, 584, 451);
