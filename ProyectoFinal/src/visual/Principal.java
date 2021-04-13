@@ -88,6 +88,7 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
+		setTitle("Interfaz Principal");
 		//>setBounds(100, 100, 1016, 496);
 		addWindowListener(new WindowAdapter() {
 			@Override
