@@ -69,6 +69,7 @@ public class MostrarProyecto extends JDialog {
 	 * Create the dialog.
 	 */
 	public MostrarProyecto() {
+		setTitle("Mostrar Proyectos");
 		setBounds(100, 100, 670, 462);
 		setLocationRelativeTo(null);
 		this.proyectos = new String[5];
