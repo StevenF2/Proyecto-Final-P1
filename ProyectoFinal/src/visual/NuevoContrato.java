@@ -78,6 +78,7 @@ public class NuevoContrato extends JDialog {
 	 * @param actionListener 
 	 */
 	public NuevoContrato() {
+		setTitle("Nuevo Contrato");
 		setBounds(100, 100, 650, 420);
 		setLocationRelativeTo(null);
 		/* Calcular numero de dias entre las fecha inicial e final del contrato */
