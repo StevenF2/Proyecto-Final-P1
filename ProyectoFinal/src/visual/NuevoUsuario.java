@@ -50,6 +50,7 @@ public class NuevoUsuario extends JDialog {
 	 * Create the dialog.
 	 */
 	public NuevoUsuario() {
+		setTitle("Nuevo Usuario");
 		setBounds(100, 100, 454, 330);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
