@@ -51,6 +51,7 @@ public class MostrarContrato extends JDialog {
 	 * Create the dialog.
 	 */
 	public MostrarContrato() {
+		setTitle("Mostrar Contratos");
 		setBounds(100, 100, 723, 422);
 		setLocationRelativeTo(null);
 		String columns[] = {"Num. Contrato", "Cedula Cliente", "Nombre Cliente", "Fecha Inicio", "Fecha Entrega", "Monto Total"};
