@@ -57,6 +57,7 @@ public class MostrarEmpleado extends JDialog {
 	 * Create the dialog.
 	 */
 	public MostrarEmpleado() {
+		setTitle("Mostrar Empleados");
 		setBounds(100, 100, 590, 467);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
